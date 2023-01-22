@@ -39,10 +39,12 @@ class Customer(models.Model):
     user_id = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     current_delivery_address_id = models.ForeignKey(Address, on_delete=models.CASCADE)
     current_billing_address_id = models.ForeignKey(Address, on_delete=models.CASCADE)
+    preferred_payment_method_id= models.ForeignKey(Payment_Method, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=50)
     cart = models.ManyToManyField(Product, through='Cart')
+    product_likes = models.ManyToManyField(Product, through='Product_Likes')
 
 class Product_Availability(models.Model):
     Product_ID = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -75,3 +77,7 @@ class Cart(models.Model):
     Customer_ID = models.ForeignKey(Customer, on_delete=True)
     Product_ID = models.ForeignKey(Product, on_delete=True)
     cart_amount = models.PositiveIntegerField()
+
+class Product_Likes(models.Model):
+    Customer_ID = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    Product_ID = models.ForeignKey(Product, on_delete=models.CASCADE)
