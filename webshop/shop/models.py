@@ -79,6 +79,5 @@ class Cart(models.Model):
     cart_amount = models.PositiveIntegerField()
 
 class Product_Likes(models.Model):
-    # TODO add name
-    Customer_ID = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name=)
+    Customer_ID = models.ForeignKey(Customer, on_delete=models.CASCADE)
     Product_ID = models.ForeignKey(Product, on_delete=models.CASCADE)
