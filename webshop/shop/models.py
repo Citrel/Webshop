@@ -37,14 +37,14 @@ class Warehouse(models.Model):
 class Customer(models.Model):
     Customer_ID = models.BigAutoField(primary_key=True)
     user_id = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    current_delivery_address_id = models.ForeignKey(Address, on_delete=models.CASCADE)
-    current_billing_address_id = models.ForeignKey(Address, on_delete=models.CASCADE)
+    current_delivery_address_id = models.ForeignKey(Address, on_delete=models.CASCADE, related_name='current_delivery_address')
+    current_billing_address_id = models.ForeignKey(Address, on_delete=models.CASCADE, related_name='current_delivery_address')
     preferred_payment_method_id= models.ForeignKey(Payment_Method, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=50)
-    cart = models.ManyToManyField(Product, through='Cart')
-    product_likes = models.ManyToManyField(Product, through='Product_Likes')
+    cart = models.ManyToManyField(Product, through='Cart', related_name='cart')
+    product_likes = models.ManyToManyField(Product, through='Product_Likes', related_name='likes')
 
 class Product_Availability(models.Model):
     Product_ID = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -55,11 +55,11 @@ class Order(models.Model):
     Order_ID = models.BigAutoField(primary_key=True)
     customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE)
     payment_method_id = models.ForeignKey(Payment_Method, on_delete=models.CASCADE)
-    payment_address_id = models.ForeignKey(Address, on_delete=models.CASCADE)
+    payment_address_id = models.ForeignKey(Address, on_delete=models.CASCADE, related_name='payment_address')
     payed = models.BooleanField()
     order_date = models.DateField(auto_now_add=True)
     products_per_order = models.ManyToManyField(Product, through='Products_per_Order')
-    delivery = models.ManyToManyField(Address, through='Delivery')
+    delivery = models.ManyToManyField(Address, through='Delivery', related_name='delivery')
 
 class Products_per_Order(models.Model):
     Order_ID = models.ForeignKey(Order, on_delete=models.CASCADE)
