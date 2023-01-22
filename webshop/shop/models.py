@@ -38,7 +38,7 @@ class Customer(models.Model):
     Customer_ID = models.BigAutoField(primary_key=True)
     user_id = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     current_delivery_address_id = models.ForeignKey(Address, on_delete=models.CASCADE, related_name='current_delivery_address')
-    current_billing_address_id = models.ForeignKey(Address, on_delete=models.CASCADE, related_name='current_delivery_address')
+    current_billing_address_id = models.ForeignKey(Address, on_delete=models.CASCADE, related_name='current_billing_address')
     preferred_payment_method_id= models.ForeignKey(Payment_Method, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
@@ -69,15 +69,16 @@ class Products_per_Order(models.Model):
     
 class Delivery(models.Model):
     Order_ID = models.ForeignKey(Order, on_delete=models.CASCADE)
-    Delivery_Address_ID = models.ForeignKey(Address, on_delete=models.CASCADE)
+    Delivery_Address_ID = models.ForeignKey(Address, on_delete=models.CASCADE, related_name='delivery_address')
     warehouse_id = models.ForeignKey(Warehouse, on_delete=models.CASCADE)
     delivery_date = models.DateField()
 
 class Cart(models.Model):
-    Customer_ID = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    Product_ID = models.ForeignKey(Product, on_delete=models.CASCADE)
+    Customer_ID = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='customer')
+    Product_ID = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product')
     cart_amount = models.PositiveIntegerField()
 
 class Product_Likes(models.Model):
-    Customer_ID = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    # TODO add name
+    Customer_ID = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name=)
     Product_ID = models.ForeignKey(Product, on_delete=models.CASCADE)
