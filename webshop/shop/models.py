@@ -74,8 +74,8 @@ class Delivery(models.Model):
     delivery_date = models.DateField()
 
 class Cart(models.Model):
-    Customer_ID = models.ForeignKey(Customer, on_delete=True)
-    Product_ID = models.ForeignKey(Product, on_delete=True)
+    Customer_ID = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    Product_ID = models.ForeignKey(Product, on_delete=models.CASCADE)
     cart_amount = models.PositiveIntegerField()
 
 class Product_Likes(models.Model):
