@@ -48,7 +48,7 @@ class Customer(models.Model):
 
 class Product_Availability(models.Model):
     Product_ID = models.ForeignKey(Product, on_delete=models.CASCADE)
-    Warehouse_ID = models.ForeignKey(Warehouse, on_delete=models.CASCADE)
+    Warehouse_ID = models.ForeignKey(Warehouse, on_delete=models.CASCADE, related_name='in_warehouse')
     available_amount = models.PositiveIntegerField()
 
 class Order(models.Model):
@@ -62,13 +62,13 @@ class Order(models.Model):
     delivery = models.ManyToManyField(Address, through='Delivery', related_name='delivery')
 
 class Products_per_Order(models.Model):
-    Order_ID = models.ForeignKey(Order, on_delete=models.CASCADE)
+    Order_ID = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='in_the_order')
     Product_ID = models.ForeignKey(Product, on_delete=models.CASCADE)
     order_amount = models.PositiveIntegerField()
     product_price_at_order_time = models.FloatField()
     
 class Delivery(models.Model):
-    Order_ID = models.ForeignKey(Order, on_delete=models.CASCADE)
+    Order_ID = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='deliverys_order_id')
     Delivery_Address_ID = models.ForeignKey(Address, on_delete=models.CASCADE, related_name='delivery_address')
     warehouse_id = models.ForeignKey(Warehouse, on_delete=models.CASCADE)
     delivery_date = models.DateField()
@@ -79,5 +79,5 @@ class Cart(models.Model):
     cart_amount = models.PositiveIntegerField()
 
 class Product_Likes(models.Model):
-    Customer_ID = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    Customer_ID = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='liking_customer')
     Product_ID = models.ForeignKey(Product, on_delete=models.CASCADE)
