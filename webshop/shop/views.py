@@ -9,7 +9,7 @@ class Homepage:
         
         products = Product.objects.all()
         
-        return render (request, 'homepage.html', {'products' : products})
+        return render (request, 'index.html', {'products' : products})
     
 
 class Categories:
