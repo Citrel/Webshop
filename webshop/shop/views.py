@@ -42,3 +42,12 @@ class AGB:
     def show_AGB():
         
         return render('AGB.html')
+
+
+class Profile:
+
+    def show_profile(request):
+
+        customer = Customer.objects.all()
+
+        return render(request, 'profile.html', {'customer' : customer})
