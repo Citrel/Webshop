@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import *
-from django.db.models import Q
+from django.db.models import Q, Sum
 
 
 class Homepage:
@@ -12,6 +12,17 @@ class Homepage:
         
         return render (request, 'index.html', {'products' : products})
     
+
+class Article:
+    
+    def show_information(request, pk):
+        
+        products = Product.objects.all()
+        
+        product_likes = Product_Likes.objects.filter(pk = Product_Likes.Product_ID).count()
+        
+        return render(request, 'product_details.html', {'products' : products, 'product_likes' : product_likes})
+
 
 class Categories:
     
@@ -51,7 +62,20 @@ class Cart:
         
         return render(request, 'cart.html', {'product' : product, 'customer' : customer, 'cart_objects' : cart_objects})
     
-            
+    
+    def payment_sum(request, pk):
+        
+        cart_objects = get_object_or_404(Cart, pk = Cart.Customer_ID)
+        
+        total_cost = cart_objects.objects.aggregate(Sum('cart_objects.Product.price') * cart_objects.cart_amount)
+        
+        
+        
+        
+        return render(request, 'cart.html', {'total_cost' : total_cost})
+        
+    
+    
         
     
 class About_Us:
