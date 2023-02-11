@@ -2,7 +2,19 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
 
+class Creditcard_Information(models.Model):
+    Creditcard_ID = models.BigAutoField(primary_key=True)
+    credit_card_number = models.CharField(max_length=16)
+    expiration_date = models.DateField()
 
+class Paypal_Information(models.Model):
+    Paypal_ID = models.BigAutoField(primary_key=True)
+    email = models.CharField(max_length=100)
+
+class Debitcard_Information(models.Model):
+    Debitcard_ID = models.BigAutoField(primary_key=True)
+    debitcard_number = models.CharField(max_length=16)
+    
 class Category(models.Model):
     Category_ID = models.BigAutoField(primary_key=True)
     category_name = models.CharField(max_length=100)
@@ -97,16 +109,5 @@ class Product_Likes(models.Model):
     Customer_ID = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='liking_customer')
     Product_ID = models.ForeignKey(Product, on_delete=models.CASCADE)
 
-class Creditcard_Information(models.Model):
-    Creditcard_ID = models.BigAutoField(primary_key=True)
-    credit_card_number = models.CharField(max_length=16)
-    expiration_date = models.DateField()
 
-class Paypal_Information(models.Model):
-    Paypal_ID = models.BigAutoField(primary_key=True)
-    email = models.CharField(max_length=100)
-
-class Debitcard_Information(models.Model):
-    Debitcard_ID = models.BigAutoField(primary_key=True)
-    debitcard_number = models.CharField(max_length=16)
     
