@@ -45,7 +45,10 @@ class Customer(models.Model):
     user_id = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     current_delivery_address_id = models.ForeignKey(Address, on_delete=models.CASCADE, related_name='current_delivery_address')
     current_billing_address_id = models.ForeignKey(Address, on_delete=models.CASCADE, related_name='current_billing_address')
-    preferred_payment_method_id= models.ForeignKey(Payment_Method, on_delete=models.CASCADE)
+    preferred_payment_method_id = models.ForeignKey(Payment_Method, on_delete=models.CASCADE)
+    creditcard_id = models.ForeignKey(Creditcard_Information, on_delete=models.CASCADE)
+    paypal_id = models.ForeignKey(Paypal_Information, on_delete=models.CASCADE)
+    debitcard_id = models.ForeignKey(Debitcard_Information, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=50)
@@ -93,3 +96,17 @@ class Cart(models.Model):
 class Product_Likes(models.Model):
     Customer_ID = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='liking_customer')
     Product_ID = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+class Creditcard_Information(models.Model):
+    Creditcard_ID = models.BigAutoField(primary_key=True)
+    credit_card_number = models.CharField(max_length=16)
+    expiration_date = models.DateField()
+
+class Paypal_Information(models.Model):
+    Paypal_ID = models.BigAutoField(primary_key=True)
+    email = models.CharField(max_length=100)
+
+class Debitcard_Information(models.Model):
+    Debitcard_ID = models.BigAutoField(primary_key=True)
+    debitcard_number = models.CharField(max_length=16)
+    
