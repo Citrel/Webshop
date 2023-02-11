@@ -31,7 +31,17 @@
     
     <p>{% product.product_description %}</p>
 
-
+    <form action="/shop/views.py">
+        <button class="btn btn-light" type="button" id="button-like">
+            <p style="color: #2de7de;">
+                {% if product_is_liked() %}
+                    &#9825;
+                {% else %}
+                    &#9829;
+                {% endif %}
+            </p>
+        </button>
+    </form>
 
     <form href="/webshop/shop/views.py">
         <!-- col.// -->
