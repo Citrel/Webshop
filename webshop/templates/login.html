@@ -16,17 +16,20 @@
           <div class="card-body">
           <h4 class="card-title mb-4">Sign in</h4>
           <!-- TODO fehlt noch action und damit wohin es geschickt wird?-->
-          <form>
-              <div class="form-group">
-                 <input type="email" class="form-control" placeholder="Email Address" >
-              </div> <!-- form-group// -->
-              <div class="form-group">
-                <input type="password" class="form-control" placeholder="Password" >
-              </div> <!-- form-group// -->
-              
-              <div class="form-group">
+          <form> 
+                
+                <div class="form-group">
+                    <!--<input type="email" class="form-control" placeholder="Email Address" >-->#
+                    {{  login_form.email   }}
+                </div> <!-- form-group// -->
+                <div class="form-group">
+                    {{  login_form.password   }}
+                    <!--<input type="password" class="form-control" placeholder="Password" >-->
+                </div> <!-- form-group// -->
+                
+                <div class="form-group">
                 <!-- TODO was machen wir damit-->
-                  <a href="#" class="float-right">Passwort vergessen?</a> 
+                <a href="#" class="float-right">Passwort vergessen?</a> 
                
               </div> <!-- form-group form-check .// -->
               <div class="form-group">

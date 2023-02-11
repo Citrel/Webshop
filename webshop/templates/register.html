@@ -18,25 +18,30 @@
                     <div class="form-row">
                         <div class="col form-group">
                             <label>Vorname</label>
-                              <input type="text" class="form-control" placeholder="">
+                                {{  register_form.first_name    }}
+                                <!--<input type="text" class="form-control" placeholder="">-->
                         </div> <!-- form-group end.// -->
                         <div class="col form-group">
                             <label>Nachname</label>
-                              <input type="text" class="form-control" placeholder="">
+                                <!--<input type="text" class="form-control" placeholder="">-->
+                                {{    register_form.last_name }}
                         </div> <!-- form-group end.// -->
                     </div> <!-- form-row end.// -->
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="email" class="form-control" placeholder="">
+                            {{  register_form.email }}
+                        <!--<input type="email" class="form-control" placeholder="">-->
                     </div> <!-- form-group end.// -->
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label>Passwort</label>
-                            <input class="form-control" type="password">
+                            {{  register_form.password  }}
+                            <!--<input class="form-control" type="password">-->
                         </div> <!-- form-group end.// --> 
                         <div class="form-group col-md-6">
                             <label>Wiederhole das Passwort</label>
-                            <input class="form-control" type="password">
+                            <!--<input class="form-control" type="password">-->
+                            {{  register_form.repeated_password }}
                         </div> <!-- form-group end.// -->  
                     </div>
                     <div class="form-group">

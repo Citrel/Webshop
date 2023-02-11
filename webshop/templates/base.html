@@ -92,10 +92,11 @@
                         <a href="./myprofil.html" class="btn btn-outline-primary">Mein Profil</a>
                     {% endif %}
                     <div class="col-lg  col-md-6 col-sm-12 col">
-                        <form action="#" class="search">
+                        <form action="/webshop/shop/views.py" class="search"">
                             <div class="input-group w-100">
-                                <input type="text" class="form-control" style="width:60%;" placeholder="Suche">
-
+                                <!-- TODO aktueller Test zu Forms-->
+                                <!-- input type="text" class="form-control" style="width:60%;" placeholder="Suche" -->
+                                {{ search_form }}
                                 <div class="input-group-append">
                                     <button class="btn btn-primary" type="submit">
                                         <i class="fa fa-search"></i>
