@@ -10,3 +10,6 @@ class RegisterForm(forms.Form):
     email = forms.EmailInput(label="Email Addresse")
     password = forms.PasswordInput(label="Passwort")
     repeated_password = forms.PasswordInput(label="Wiederhole das Passwort")
+
+class SearchForm(forms.Form):
+    searched_word = forms.TextInput(attrs="style='width:60%;' placeholder='Suchen'")
