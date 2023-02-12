@@ -80,23 +80,17 @@ class Cart:
     
 class About_Us:
     
-    def show_Abouts():
+    def show_abouts():
         
-        return render('About_Us.html')
+        return render('about_us.html')
     
 
-class Impressum:
+class Imprint:
     
-    def show_Impressum():
+    def show_imprint():
         
-        return render('Impressum.html')
+        return render('imprint.html')
     
-
-class AGB:
-    
-    def show_AGB():
-        
-        return render('AGB.html')
 
 
 class Profile:
@@ -105,4 +99,4 @@ class Profile:
 
         customer = Customer.objects.all()
 
-        return render(request, 'profile.html', {'customer' : customer})
+        return render(request, 'myprofil.html', {'customer' : customer})
