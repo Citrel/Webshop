@@ -1,5 +1,4 @@
 from django import forms
-from .models import Payment_Method
 
 class Login_Form(forms.Form):
     email = forms.EmailInput(label="Email Addresse")

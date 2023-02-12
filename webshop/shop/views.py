@@ -80,9 +80,9 @@ class Cart:
     
 class About_Us:
     
-    def show_abouts():
+    def show_abouts(request):
         
-        return render('about_us.html')
+        return render(request, 'about_us.html')
     
 
 class Imprint:
