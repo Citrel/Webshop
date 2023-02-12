@@ -40,7 +40,7 @@ class Product(models.Model):
     category_id = models.ForeignKey(Category, on_delete=models.CASCADE)
     product_name = models.CharField(max_length=200)
     product_description = models.CharField(max_length=800)
-    product_image_path = models.ImageField(upload_to='products/')
+    product_image_path = models.ImageField(upload_to='/webshop/static/images')
     price = models.FloatField()
     date_last_change = models.DateField(auto_now=True)
     delivery_time = models.PositiveIntegerField(min)
