@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'shop',
+    'profiles'
 ]
 
 MIDDLEWARE = [
@@ -73,6 +74,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'webshop.wsgi.application'
 
+AUTH_USER_MODEL = 'profiles.Profile'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
