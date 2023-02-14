@@ -11,8 +11,9 @@ class Homepage:
     def show_products(request):
         
         products = Product.objects.all()
+        categories = Category.objects.all()
         
-        return render (request, 'index.html', {'products' : products})
+        return render (request, 'index.html', {'products' : products, 'categories' : categories})
     
 
 class Article():
@@ -45,11 +46,11 @@ class Categories:
     
     def show_categories(request, pk):
         
-        category = Category.objects.all()
+        category = get_object_or_404(Category, pk=pk)
         
         productList = get_object_or_404(Product, pk = pk)
         
-        return render(request,'categories.html', {'category' : category, 'productList' : productList})
+        return render(request,'category.html', {'category' : category, 'productList' : productList})
     
 
 class Search:
