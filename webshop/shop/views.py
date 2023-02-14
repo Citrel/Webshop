@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .models import *
 from .forms import *
 from django.db.models import Q, Sum
+import random
 
 
 class Homepage:
@@ -19,9 +20,10 @@ class Article():
     def show_information(request, pk):
         
         product = get_object_or_404(Product, pk=pk)
+        eyes = random.randint(14, 3507)
         
         
-        return render(request, 'product_detail.html',{'product' : product})
+        return render(request, 'product_detail.html',{'product' : product, 'they_are_watching_us' : eyes})
     
     def like_product(request, pkProduct, pkCustomer):
         
@@ -39,7 +41,7 @@ class Article():
         likes = Product_Likes.objects.filter(Product_ID = pkProduct).count() 
         
         return render(request, 'product_detail.html', {'likes':likes})
-            
+                
 
 class Categories:
     
