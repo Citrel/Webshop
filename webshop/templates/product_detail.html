@@ -32,8 +32,8 @@
     <p>{{ product.product_description }}</p>
 
     <form action="/webshop/shop/views.py">
-        <button class="btn btn-light" type="button" id="button-like">
-            <p style="color: #2de7de;">
+        <button class="btn btn-light" type="submit" id="button-like" onclick="like();">
+            <p style="color: #2de7de;" id="button-like-text">
                 {% if likes > 0 %}
                     &#9825;
                 {% else %}
@@ -48,11 +48,11 @@
         <div class="col"> 
             <div class="input-group input-spinner">
                 <div class="input-group-prepend">
-                <button class="btn btn-light" type="button" id="button-plus"> <i class="fa fa-minus"></i> </button>
+                <button class="btn btn-light" type="button" id="button-plus" onclick="minus();"> <i class="fa fa-minus"></i> </button>
                 </div>
-                <input type="text" class="form-control"  value="1">
+                <input type="text" id="quantity" class="form-control"  value="1">
                 <div class="input-group-append">
-                <button class="btn btn-light" type="button" id="button-minus"> <i class="fa fa-plus"></i> </button>
+                <button class="btn btn-light" type="button" id="button-minus" onclick="plus();"> <i class="fa fa-plus"></i> </button>
                 </div>
             </div> <!-- input-group.// -->
             <input type="submit"><span class="text">In den Einkaufswagen</span> <i class="fas fa-shopping-cart"></i></input>
