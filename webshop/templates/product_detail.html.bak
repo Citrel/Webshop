@@ -15,7 +15,7 @@
             <aside class="col-md-6">
     <article class="gallery-wrap"> 
         <div class="img-big-wrap">
-           <a href="#"><img src={{static product.product_image_path }}></a>
+           <a href="#"><img src={% static product.product_image_path %}></a>
         </div> <!-- img-big-wrap.// -->
         
     </article> <!-- gallery-wrap .end// -->
@@ -31,7 +31,17 @@
     
     <p>{{ product.product_description }}</p>
 
-
+    <form action="/webshop/shop/views.py">
+        <button class="btn btn-light" type="button" id="button-like">
+            <p style="color: #2de7de;">
+                {% if product_is_liked() %}
+                    &#9825;
+                {% else %}
+                    &#9829;
+                {% endif %}
+            </p>
+        </button>
+    </form>
 
     <!-- TODO abändern des Forms notwendig? eventuell nicht haha -->
     <form action="/webshop/shop/views.py">
