@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from .models import *
-from .forms import Search_Form
+from .forms import *
 from django.db.models import Q, Sum
 
 
@@ -28,13 +28,15 @@ class Article():
         likes = Product_Likes.objects.filter(Product_ID = pkProduct).count()       
         liked = get_object_or_404(Product_Likes, Customer_ID = pkCustomer, Product_ID = pkProduct)
         
-        if request.method == 'POST':
+        if request.method == 'GET':
             
             if liked == None:
                 
                 Product_Likes.objects.create(pkCustomer, pkProduct)
             
             return redirect('product_detail', pk=pkProduct)
+        
+        likes = Product_Likes.objects.filter(Product_ID = pkProduct).count() 
         
         return render(request, 'product_detail.html', {'likes':likes})
             
@@ -56,14 +58,13 @@ class Search:
             
             results = []
             
-            if request.method == "POST":
-                form = Search_Form
-                query = form.searched_word()
+            if request.method == "GET":
+                query = request.GET.get('search')
                 
                 if query == '':
                     query = 'None'
                     
-                result = Product.objects.filter(Q(product_name__icontains=query) | Q(product_description_icontains=query))
+                result = Product.objects.filter(Q(product_name__icontains=query) | Q(product_description__icontains=query))
                 
                 return render(request, 'search.html', {'query' : query, 'result' : result})
             

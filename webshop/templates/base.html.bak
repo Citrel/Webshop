@@ -72,7 +72,7 @@
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-2 col-md-3 col-6">
-                        <a href={% url '' %} class="brand-wrap">
+                        <a href={% url 'index' %} class="brand-wrap">
                             <img class="logo" src={% static '/images/logo.png' %}>
                         </a> <!-- brand-wrap.// -->
                     </div>
@@ -91,11 +91,11 @@
                     <a href="./myprofil.html" class="btn btn-outline-primary"  >Mein Profil</a>
 
                     <div class="col-lg  col-md-6 col-sm-12 col">
-                        <form action="/webshop/shop/views.py" class="search"">
+                        <form name='Search_Form'  method='GET' action={% url 'searching' %}>
                             <div class="input-group w-100">
+								{%csrf_token%}
                                 <!-- TODO aktueller Test zu Forms-->
-                                <!-- input type="text" class="form-control" style="width:60%;" placeholder="Suche" -->
-                                {{ search_form }}
+                                <input type="text" class="form-control" style="width:60%;" placeholder="Suche"/>
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-primary" type="submit" >
                                         <i class="fa fa-search"></i>

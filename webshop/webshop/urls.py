@@ -23,6 +23,6 @@ urlpatterns = [
     , path('', views.Homepage.show_products, name = 'index')
     , path('search', views.Search.show_searched_products, name = "searching")
     , path('details/<slug:pk>', views.Article.show_information, name = 'details')
-    , path('details/<slug:pk>', views.Article.like_product, name = 'like')
+    , path('details/<slug:pkProduct>', views.Article.like_product, name = 'like')
     , path('about_us', views.About_Us.show_abouts, name = 'about_us')
 ]
