@@ -6,7 +6,7 @@ from .models import Profile
 
 class ProfileAdmin(UserAdmin):
     list_display = ('email', 'first_name', 'last_name', 'username', 'is_active')
-    list_display_links = ('email', 'first_name', 'last')
+    list_display_links = ('email', 'first_name', 'last_name')
     filter_horizontal = ()
     list_filter = ()
     fieldsets = ()
