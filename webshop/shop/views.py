@@ -20,11 +20,10 @@ class Article():
     def show_information(request, pk):
         
         product = get_object_or_404(Product, pk=pk)
-        eyes = random.randint(14, 3507)
         likes = Product_Likes.objects.filter(Product_ID = pk).count() 
         
         
-        return render(request, 'product_detail.html',{'product' : product, 'they_are_watching_us' : eyes, 'likes' : likes})
+        return render(request, 'product_detail.html',{'product' : product, 'likes' : likes})
     
     def like_product(request, pkProduct, pkCustomer):
         
