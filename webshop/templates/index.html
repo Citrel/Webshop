@@ -11,7 +11,7 @@
     <div class="container">
 
         <div class="intro-banner-wrap">
-            <img src={% static 'images/banners/1.jpg' %} class="img-fluid rounded">
+            <img src={% static 'images/banners/1.png' %} class="img-fluid rounded">
         </div>
 
     </div> <!-- container //  -->
@@ -27,15 +27,15 @@
             <h3 class="section-title">Popular products</h3>
         </header><!-- sect-heading -->
 
+
         <div class="row">
             {% for product in products %}
             <div class="col-md-3">
                 <div class="card card-product-grid">
-                    <!-- TODO Produkt-Bild -->
-                    <a href="./product_detail.html" class="img-wrap"> <img src="{{ product.product_image_path }}"> </a>
+                    <a href="./product_detail.html" class="img-wrap"> <img src={% static product.product_image_path %}> </a>
                     <figcaption class="info-wrap">
                         <a href="./product_detail.html" class="title">{{ product.product_name }}</a>
-                        <div class="price mt-1">{{ product.price }}</div> <!-- price-wrap.// -->
+                        <div class="price mt-1">{{ product.price|floatformat:2 }}€</div> <!-- price-wrap.// -->
                     </figcaption>
                 </div>
             </div> <!-- col.// -->
