@@ -21,9 +21,10 @@ class Article():
         
         product = get_object_or_404(Product, pk=pk)
         eyes = random.randint(14, 3507)
+        likes = Product_Likes.objects.filter(Product_ID = pk).count() 
         
         
-        return render(request, 'product_detail.html',{'product' : product, 'they_are_watching_us' : eyes})
+        return render(request, 'product_detail.html',{'product' : product, 'they_are_watching_us' : eyes, 'likes' : likes})
     
     def like_product(request, pkProduct, pkCustomer):
         
@@ -37,8 +38,6 @@ class Article():
                 Product_Likes.objects.create(pkCustomer, pkProduct)
             
             return redirect('product_detail', pk=pkProduct)
-        
-        likes = Product_Likes.objects.filter(Product_ID = pkProduct).count() 
         
         return render(request, 'product_detail.html', {'likes':likes})
                 
