@@ -20,7 +20,8 @@ from shop import views
 
 urlpatterns = [
     path('admin/', admin.site.urls)
-    , path('', views.Homepage.show_products)
+    , path('', views.Homepage.show_products, name = 'index')
     , path('details/<slug:pk>', views.Article.show_information, name = 'details')
+    , path('details/<slug:pk>', views.Article.like_product, name = 'like')
     , path('about_us', views.About_Us.show_abouts, name = 'about_us')
 ]
