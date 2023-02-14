@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 # Create your models here.
 
+
 class ProfileManager(BaseUserManager):
     def create_user(self, first_name, last_name, username, email, password=None):
         if not email:
@@ -12,10 +13,10 @@ class ProfileManager(BaseUserManager):
             raise ValueError('Benutzer muss username haben')
 
         user = self.model(
-            email = self.normalize_email(email),
-            username = username,
-            first_name = first_name,
-            last_name = last_name
+            email=self.normalize_email(email),
+            username=username,
+            first_name=first_name,
+            last_name=last_name
         )
 
         user.set_password(password)
@@ -24,11 +25,11 @@ class ProfileManager(BaseUserManager):
 
     def create_superuser(self, first_name, last_name, email, username, password):
         user = self.create_user(
-            email = self.normalize_email(email),
-            username = username,
-            password = password,
-            first_name = first_name,
-            last_name = last_name
+            email=self.normalize_email(email),
+            username=username,
+            password=password,
+            first_name=first_name,
+            last_name=last_name
         )
 
         user.is_admin = True
@@ -39,6 +40,8 @@ class ProfileManager(BaseUserManager):
         return user
 
 # todo add required
+
+
 class Profile(AbstractBaseUser):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
@@ -54,7 +57,7 @@ class Profile(AbstractBaseUser):
     REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
 
     objects = ProfileManager()
-    
+
     def __str__(self):
         return self.email
 
