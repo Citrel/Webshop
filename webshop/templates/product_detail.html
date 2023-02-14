@@ -31,7 +31,17 @@
     
     <p>{{ product.product_description }}</p>
 
-
+    <form action="/webshop/shop/views.py">
+        <button class="btn btn-light" type="button" id="button-like">
+            <p style="color: #2de7de;">
+                {% if likes > 0 %}
+                    &#9825;
+                {% else %}
+                    &#9829;
+                {% endif %}
+            </p>
+        </button>
+    </form>
 
     <form action="/webshop/shop/views.py">
         <!-- col.// -->
