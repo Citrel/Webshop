@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+
+{% block content %}
+
+<section class="section-content padding-y bg">
+    <div class="col-md-6">
+        <h1>
+            {{ category.name }}
+        </h1>
+        <br>
+        <i>
+            {{ category.description }}
+        </i>
+    </div>
+    <div class="container">
+        <div class="row">
+            {% for product in result %}
+                <div class="col-md">
+                    <div class="card card-product-grid">
+                        <a href={% url 'details' product.Product_ID %} class="img-wrap"> <img src={% static product.product_image_path %}> </a>
+                        <figcaption class="info-wrap">
+                            <a href={% url 'details' product.Product_ID %} class="title">{{ product.product_name }}</a>
+                            <div class="price mt-1">{{ product.price|floatformat:2 }}€</div> <!-- price-wrap.// -->
+                        </figcaption>
+                    </div>
+                </div> <!-- col.// -->
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}
