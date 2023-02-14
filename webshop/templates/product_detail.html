@@ -32,8 +32,8 @@
     <p>{{ product.product_description }}</p>
 
     <form action="/webshop/shop/views.py">
-        <button class="btn btn-light" type="button" id="button-like">
-            <p style="color: #2de7de;">
+        <button class="btn btn-light" type="submit" id="button-like" onclick="like();">
+            <p style="color: #2de7de;" id="button-like-text">
                 {% if likes > 0 %}
                     &#9825;
                 {% else %}
