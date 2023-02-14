@@ -13,15 +13,14 @@ class Homepage:
         return render (request, 'index.html', {'products' : products})
     
 
-class Article:
+class Article():
     
     def show_information(request, pk):
         
-        products = Product.objects.all()
+        product = get_object_or_404(Product, pk=pk)
         
-        product_likes = Product_Likes.objects.filter(pk = Product_Likes.Product_ID).count()
         
-        return render(request, 'product_details.html', {'products' : products, 'product_likes' : product_likes})
+        return render(request, 'product_detail.html',{'product' : product})
 
 
 class Categories:
@@ -32,7 +31,7 @@ class Categories:
         
         productList = get_object_or_404(Product, pk = pk)
         
-        return render(request, 'categories.html', {'category' : category, 'productList' : productList})
+        return render(request,'categories.html', {'category' : category, 'productList' : productList})
     
 
 class Search:
