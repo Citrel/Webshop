@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from .models import *
-from .forms import Search_Form
+from .forms import *
 from django.db.models import Q, Sum
 
 
@@ -56,9 +56,8 @@ class Search:
             
             results = []
             
-            if request.method == "POST":
-                form = Search_Form
-                query = form.searched_word()
+            if request.method == "GET":
+                query = request.GET.get('search')
                 
                 if query == '':
                     query = 'None'
