@@ -1412,4 +1412,8 @@ a[class*=card]:hover .title {
   display: block;
 }
 
+form {
+  width: fit-content !important;
+}
+
 /*# sourceMappingURL=ui.css.map */
