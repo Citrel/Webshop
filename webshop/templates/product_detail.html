@@ -31,7 +31,7 @@
     
     <p>{{ product.product_description }}</p>
 
-    <form action="/webshop/shop/views.py">
+    <form method="GET" action={% url 'like' pkProduct=product.Product_ID%}>
         <button class="btn btn-light" type="submit" id="button-like" onclick="like();">
             <p style="color: #2de7de;" id="button-like-text">
                 {% if likes > 0 %}
@@ -41,6 +41,7 @@
                 {% endif %}
             </p>
         </button>
+		{{ likes }}
     </form>
 
     <form action="/webshop/shop/views.py">
