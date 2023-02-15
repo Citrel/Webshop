@@ -82,7 +82,6 @@
                         <form name='Search_Form'  method='GET' action={% url 'searching' %}>
                             <div class="input-group w-100">
 								{%csrf_token%}
-                                <!-- TODO aktueller Test zu Forms-->
                                 <input type="text" name='search' class="form-control" style="width:60%;" placeholder="Suche"/>
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-primary" type="submit" >
