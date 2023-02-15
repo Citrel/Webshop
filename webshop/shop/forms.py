@@ -32,19 +32,19 @@ class Billing_Address_Form(forms.Form):
     billing_address_plz = forms.TextInput(attrs={
                                           'placeholder': ' {{ billing_address.plz }} '})
     billing_address_city = forms.TextInput(
-        label="Stadt", attrs={'placeholder': ' {{ billing_address.city }} '})
+        attrs={'placeholder': ' {{ billing_address.city }} '})
     billing_address_street = forms.TextInput(
-        label="Straßenname", attrs={'placeholder': ' {{ billing_address.street }} '})
-    billing_address_house_number = forms.TextInput(label="Hausnummer", attrs={
+        attrs={'placeholder': ' {{ billing_address.street }} '})
+    billing_address_house_number = forms.TextInput(attrs={
                                                    'placeholder': ' {{ billing_address.house_number }} '})
 
 
 class Payment_Address_Form(forms.Form):
-    payment_address_plz = forms.TextInput(label="Postleitzahl", attrs={
+    payment_address_plz = forms.TextInput(attrs={
                                           'placeholder': ' {{ payment_address.plz }} '})
     payment_address_city = forms.TextInput(
-        label="Stadt", attrs={'placeholder': ' {{ payment_address.city }} '})
+        attrs={'placeholder': ' {{ payment_address.city }} '})
     payment_address_street = forms.TextInput(
-        label="Straßenname", attrs={'placeholder': ' {{ payment_address.street }} '})
-    payment_address_house_number = forms.TextInput(label="Hausnummer", attrs={
+        attrs={'placeholder': ' {{ payment_address.street }} '})
+    payment_address_house_number = forms.TextInput(attrs={
                                                    'placeholder': ' {{ payment_address.house_number }} '})
