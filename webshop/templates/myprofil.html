@@ -8,10 +8,87 @@
 
 <div class="row">
     <div class="col-md-6">
+        <h1>Mein Profil</h1>
+
         <h2>Profilinformationen</h2>
-        <form>
-            
+        <form action="/webshop/shop/views.py" >
+            {% for field in profil_form %}
+            <div class="form-group col-sm-6">
+                {{ field }}
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">Speichern</button>
         </form>
+
+        <h2>Passwort ändern</h2>
+        <form action="/webshop/shop/views.py" >
+            {% for field in change_password_form %}
+            <div class="form-group col-sm-6">
+                {{ field }}
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">Speichern</button>
+        </form>
+    </div>
+
+    <div class="col-md-6">
+        <h1>Zahlungsinformationen</h1>
+
+        <h2>Paypal</h2>
+        <form action="/webshop/shop/views.py" >
+            {% for field in paypal_form %}
+            <div class="form-group col-sm-6">
+                {{ field }}
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">Speichern</button>
+        </form>
+
+        <h2>Kreditkarte</h2>
+        <form action="/webshop/shop/views.py" >
+            {% for field in creditcard_form %}
+            <div class="form-group col-sm-6">
+                {{ field }}
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">Speichern</button>
+        </form>
+
+        <h2>Lastschrift</h2>
+        <form action="/webshop/shop/views.py" >
+            {% for field in debitcard_form %}
+            <div class="form-group col-sm-6">
+                {{ field }}
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">Speichern</button>
+        </form>
+
+    </div>
+    <div class="col-md-6">
+
+        <h1>Addressen</h1>
+
+        <h2>Lieferaddresse</h2>
+        <form action="/webshop/shop/views.py" >
+            {% for field in delivery_address_form %}
+            <div class="form-group col-sm-6">
+                {{ field }}
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">Speichern</button>
+        </form>
+
+        <h2>Rechnungsaddresse</h2>
+        <form action="/webshop/shop/views.py" >
+            {% for field in billing_address_form %}
+            <div class="form-group col-sm-6">
+                {{ field }}
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">Speichern</button>
+        </form>
+
     </div>
 
 </div>

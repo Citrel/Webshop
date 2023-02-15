@@ -83,10 +83,8 @@
                     <div class="col-lg  col-md-6 col-sm-12 col">
                         <form name='Search_Form' method='GET' action={% url 'searching' %}>
                             <div class="input-group w-100">
-                                {%csrf_token%}
-                                <!-- TODO aktueller Test zu Forms-->
-                                <input type="text" name='search' class="form-control" style="width:60%;"
-                                    placeholder="Suche" />
+								{%csrf_token%}
+                                <input type="text" name='search' class="form-control" style="width:60%;" placeholder="Suche"/>
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-primary" type="submit">
                                         <i class="fa fa-search"></i>
