@@ -47,3 +47,8 @@ def logout(request):
     auth.logout(request)
     messages.success(request, 'Du bist jetzt abgemeldet.')
     return redirect('login')
+
+
+@login_required(login_url='login')
+def myprofile(request):
+    return render(request, 'profiles/myprofile.html')
