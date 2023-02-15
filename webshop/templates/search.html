@@ -6,23 +6,5 @@
 
 {% block content %}
 
-<section class="section-content padding-y bg">
-    <div class="container">
-        <h1>Suchergebnisse für '{{ query }}'</h1>
-        <div class="row">
-            {% for product in result %}
-                <div class="col-md-3">
-                    <div class="card card-product-grid">
-                        <a href={% url 'details' product.Product_ID %} class="img-wrap"> <img src={% static product.product_image_path %}> </a>
-                        <figcaption class="info-wrap">
-                            <a href={% url 'details' product.Product_ID %} class="title">{{ product.product_name }}</a>
-                            <div class="price mt-1">{{ product.price|floatformat:2 }}€</div> <!-- price-wrap.// -->
-                        </figcaption>
-                    </div>
-                </div> <!-- col.// -->
-            {% endfor %}
-        </div>
-    </div>
-</section>
 
 {% endblock %}

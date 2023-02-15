@@ -447,13 +447,13 @@ p:last-child {
   position: relative;
 }
 .widget-header a {
-  color: #ffffff;
+  color: #343a40;
 }
 .widget-header a:hover {
-  color: #ffffff;
+  color: #3167eb;
 }
 .widget-header i {
-  color: #ffffff;
+  color: #969696;
 }
 .widget-header form {
   min-width: 280px;
@@ -467,7 +467,7 @@ p:last-child {
   right: -10px;
 }
 .widget-header:hover i {
-  color: #fffb00;
+  color: #3167eb;
 }
 
 /* desktop only */
@@ -1410,10 +1410,6 @@ a[class*=card]:hover .title {
   font-weight: bold;
   margin-right: 5px;
   display: block;
-}
-
-form {
-  width: fit-content !important;
 }
 
 /*# sourceMappingURL=ui.css.map */
