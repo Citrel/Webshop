@@ -9,7 +9,7 @@ import random
 class Homepage:
 
     def show_products(request):
-        
+
         products = Product.objects.all()
         categories = Category.objects.all()
         
@@ -43,7 +43,7 @@ class Article():
                 
 
 class Categories:
-    
+
     def show_categories(request, pk):
         
         category = get_object_or_404(Category, pk=pk)
@@ -71,50 +71,34 @@ class Search:
             
            
 class Cart:
-    
+
     def show_cart(request, pk):
-        
+
         product = Product.objects.all()
         customer = Customer.objects.all()
-        cart_objects = get_object_or_404(Cart, pk = Cart.Customer_ID)
-        
-        return render(request, 'cart.html', {'product' : product, 'customer' : customer, 'cart_objects' : cart_objects})
-    
-    
+        cart_objects = get_object_or_404(Cart, pk=Cart.Customer_ID)
+
+        return render(request, 'cart.html', {'product': product, 'customer': customer, 'cart_objects': cart_objects})
+
     def payment_sum(request, pk):
-        
-        cart_objects = get_object_or_404(Cart, pk = Cart.Customer_ID)
-        
-        total_cost = cart_objects.objects.aggregate(Sum('cart_objects.Product.price') * cart_objects.cart_amount)
-        
-        
-        
-        
-        return render(request, 'cart.html', {'total_cost' : total_cost})
-        
-    
-    
-        
-    
+
+        cart_objects = get_object_or_404(Cart, pk=Cart.Customer_ID)
+
+        total_cost = cart_objects.objects.aggregate(
+            Sum('cart_objects.Product.price') * cart_objects.cart_amount)
+
+        return render(request, 'cart.html', {'total_cost': total_cost})
+
+
 class About_Us:
-    
+
     def show_abouts(request):
-        
+
         return render(request, 'about_us.html')
-    
+
 
 class Imprint:
-    
+
     def show_imprint():
-        
+
         return render('imprint.html')
-    
-
-
-class Profile:
-
-    def show_profile(request):
-
-        customer = Customer.objects.all()
-
-        return render(request, 'myprofil.html', {'customer' : customer})
