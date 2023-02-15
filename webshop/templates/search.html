@@ -11,7 +11,7 @@
         <h1>Suchergebnisse für '{{ query }}'</h1>
         <div class="row">
             {% for product in result %}
-                <div class="col-md">
+                <div class="col-md-3">
                     <div class="card card-product-grid">
                         <a href={% url 'details' product.Product_ID %} class="img-wrap"> <img src={% static product.product_image_path %}> </a>
                         <figcaption class="info-wrap">
