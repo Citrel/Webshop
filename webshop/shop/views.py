@@ -86,12 +86,3 @@ class Imprint:
     def show_imprint():
 
         return render('imprint.html')
-
-
-class Profile:
-
-    def show_profile(request):
-
-        customer = Customer.objects.all()
-
-        return render(request, 'myprofil.html', {'customer': customer})
