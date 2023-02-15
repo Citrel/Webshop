@@ -48,7 +48,7 @@ class Categories:
         
         category = get_object_or_404(Category, pk=pk)
         
-        product_list = get_object_or_404(Product, pk = pk)
+        product_list = Product.objects.filter(category_id__Category_ID__contains=pk)
         
         return render(request,'category.html', {'category' : category, 'product_list' : product_list})
     
