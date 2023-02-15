@@ -447,13 +447,13 @@ p:last-child {
   position: relative;
 }
 .widget-header a {
-  color: #343a40;
+  color: #ffffff;
 }
 .widget-header a:hover {
-  color: #3167eb;
+  color: #ffffff;
 }
 .widget-header i {
-  color: #969696;
+  color: #ffffff;
 }
 .widget-header form {
   min-width: 280px;
@@ -467,7 +467,7 @@ p:last-child {
   right: -10px;
 }
 .widget-header:hover i {
-  color: #3167eb;
+  color: #fffb00;
 }
 
 /* desktop only */
@@ -1410,6 +1410,10 @@ a[class*=card]:hover .title {
   font-weight: bold;
   margin-right: 5px;
   display: block;
+}
+
+form {
+  width: fit-content !important;
 }
 
 /*# sourceMappingURL=ui.css.map */
