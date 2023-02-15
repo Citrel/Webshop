@@ -45,28 +45,14 @@
 
 <body>
 
-    <header class="section-header" >
+    <header class="section-header">
         <nav class="navbar p-md-0 navbar-expand-sm navbar-light border-bottom">
             <div class="container">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTop4"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarTop4">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item dropdown">
-                            <a href="#" class="nav-link"> Deutsch </a>
 
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a href="#" class="nav-link"> EUR </a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav">
-                        <li><a href="#" class="nav-link"> <i class="fa fa-envelope"></i> Email </a></li>
-                        <li><a href="#" class="nav-link"> <i class="fa fa-phone"></i> Anrufen </a></li>
-                    </ul> <!-- list-inline //  -->
-                </div> <!-- navbar-collapse .// -->
             </div> <!-- container //  -->
         </nav>
 
@@ -80,26 +66,27 @@
                     </div>
                     <div class="col-lg col-sm col-md col-6 flex-grow-0">
                         <div class="category-wrap dropdown d-inline-block float-right">
-                            <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" >
+                            <button type="button" class="btn btn-outline-primary dropdown-toggle"
+                                data-toggle="dropdown">
                                 <i class="fa fa-bars"></i> Alle Kategorien
                             </button>
                             <div class="dropdown-menu">
-                                {% for category in categories %} 
-                                    <a class="dropdown-item" href="#">{{ category.category_name }} </a>
+                                {% for category in categories %}
+                                <a class="dropdown-item" href={% url 'categories' pk=category.Category_ID %}>{{
+                                    category.category_name }} </a>
                                 {% endfor %}
                             </div>
                         </div> <!-- category-wrap.// -->
                     </div> <!-- col.// -->
-                    <a href="./myprofil.html" class="btn btn-outline-primary"  >Mein Profil</a>
+                    <a href="./myprofil.html" class="btn btn-outline-primary">Mein Profil</a>
 
                     <div class="col-lg  col-md-6 col-sm-12 col">
-                        <form name='Search_Form'  method='GET' action={% url 'searching' %}>
+                        <form name='Search_Form' method='GET' action={% url 'searching' %}>
                             <div class="input-group w-100">
 								{%csrf_token%}
-                                <!-- TODO aktueller Test zu Forms-->
                                 <input type="text" name='search' class="form-control" style="width:60%;" placeholder="Suche"/>
                                 <div class="input-group-append">
-                                    <button class="btn btn-outline-primary" type="submit" >
+                                    <button class="btn btn-outline-primary" type="submit">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </div>
@@ -108,22 +95,32 @@
                     </div> <!-- col.// -->
                     <div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
                         <div class="d-flex justify-content-end mb-3 mb-lg-0">
-                            <div class="widget-header" style="color:#ffffff">
-                                <small class="title text-muted" >Willkommen!</small>
+                            {% if user.id is None %}
+                            <div class="widget-header">
+                                <small class="title text-muted">Willkommen!</small>
                                 <div>
-                                    <a href="./login.html" style="color:#ffffff">Anmelden</a> <span class="dark-transp"> | </span>
-                                    <a href="./register.html" style="color:#ffffff"> Registrieren</a>
+                                    <a href="{% url 'login' %}">Anmelden</a> <span class="dark-transp"> | </span>
+                                    <a href="{% url 'register' %}"> Registrieren</a>
                                 </div>
                             </div>
-                            <a href="./cart.html" class="widget-header pl-3 ml-3 ">
-                                <div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i>
+                            {% else %}
+                            <div class="widget-header">
+                                <small class="title text-muted">Willkommen {{ user.first_name }}!</small>
+                                <div>
+                                    <a href="#">Mein Profil</a> <span class="dark-transp"> | </span>
+                                    <a href="{% url 'logout' %}"> Abmelden </a>
                                 </div>
-                                <span class="badge badge-pill badge-danger notify">0</span>
-                            </a>
-                        </div> <!-- widgets-wrap.// -->
-                    </div> <!-- col.// -->
-                </div> <!-- row.// -->
-            </div> <!-- container.// -->
+                                {% endif %}
+                                <a href="./cart.html" class="widget-header pl-3 ml-3 ">
+                                    <div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i>
+                                    </div>
+                                    <!-- TODO -->
+                                    <span class="badge badge-pill badge-danger notify">0</span>
+                                </a>
+                            </div> <!-- widgets-wrap.// -->
+                        </div> <!-- col.// -->
+                    </div> <!-- row.// -->
+                </div> <!-- container.// -->
         </section> <!-- header-main .// -->
 
     </header> <!-- section-header.// -->
@@ -156,4 +153,5 @@
     <!-- ========================= FOOTER END // ========================= -->
 
 </body>
+
 </html>

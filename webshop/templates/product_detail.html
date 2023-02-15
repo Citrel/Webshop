@@ -34,7 +34,7 @@
 
         <div class="mb-3" style="width:fit-content !important">
             <br>
-            <form action="/webshop/shop/views.py" style="grid-row: auto;">
+            <form action={% url 'like' pkProduct=product.Product_ID %} style="grid-row: auto;">
                 <button class="btn btn-light" type="submit" id="button-like" onclick="like();">
                     <p style="color: #2de7de;" id="button-like-text">
                         {% if likes > 0 %}
