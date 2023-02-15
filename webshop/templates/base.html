@@ -83,7 +83,7 @@
                             </button>
                             <div class="dropdown-menu">
                                 {% for category in categories %}
-                                    <a class="dropdown-item" href="#">{{ category.category_name }} </a>
+                                <a class="dropdown-item" href="#">{{ category.category_name }} </a>
                                 {% endfor %}
                             </div>
                         </div> <!-- category-wrap.// -->
@@ -92,35 +92,35 @@
 
                     <div class="col-lg  col-md-6 col-sm-12 col">
                         <form action="/webshop/shop/views.py" class="search"">
-                            <div class="input-group w-100">
-                                <!-- TODO aktueller Test zu Forms-->
-                                <!-- input type="text" class="form-control" style="width:60%;" placeholder="Suche" -->
-                                {{ search_form }}
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="submit">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </div>
+                            <div class=" input-group w-100">
+                            <!-- TODO aktueller Test zu Forms-->
+                            <!-- input type="text" class="form-control" style="width:60%;" placeholder="Suche" -->
+                            {{ search_form }}
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
                             </div>
-                        </form> <!-- search-wrap .end// -->
-                    </div> <!-- col.// -->
-                    <div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
-                        <div class="d-flex justify-content-end mb-3 mb-lg-0">
-                            <div class="widget-header">
-                                <small class="title text-muted">Willkommen!</small>
-                                <div>
-                                    <a href="./login.html">Anmelden</a> <span class="dark-transp"> | </span>
-                                    <a href="./register.html"> Registrieren</a>
-                                </div>
+                    </div>
+                    </form> <!-- search-wrap .end// -->
+                </div> <!-- col.// -->
+                <div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
+                    <div class="d-flex justify-content-end mb-3 mb-lg-0">
+                        <div class="widget-header">
+                            <small class="title text-muted">Willkommen!</small>
+                            <div>
+                                <a href="{% url 'login' %}">Anmelden</a> <span class="dark-transp"> | </span>
+                                <a href="{% url 'register' %}"> Registrieren</a>
                             </div>
-                            <a href="./cart.html" class="widget-header pl-3 ml-3">
-                                <div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i>
-                                </div>
-                                <span class="badge badge-pill badge-danger notify">0</span>
-                            </a>
-                        </div> <!-- widgets-wrap.// -->
-                    </div> <!-- col.// -->
-                </div> <!-- row.// -->
+                        </div>
+                        <a href="./cart.html" class="widget-header pl-3 ml-3">
+                            <div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i>
+                            </div>
+                            <span class="badge badge-pill badge-danger notify">0</span>
+                        </a>
+                    </div> <!-- widgets-wrap.// -->
+                </div> <!-- col.// -->
+            </div> <!-- row.// -->
             </div> <!-- container.// -->
         </section> <!-- header-main .// -->
 
@@ -154,4 +154,5 @@
     <!-- ========================= FOOTER END // ========================= -->
 
 </body>
+
 </html>
