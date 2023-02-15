@@ -48,9 +48,9 @@ class Categories:
         
         category = get_object_or_404(Category, pk=pk)
         
-        productList = get_object_or_404(Product, pk = pk)
+        product_list = get_object_or_404(Product, pk = pk)
         
-        return render(request,'category.html', {'category' : category, 'productList' : productList})
+        return render(request,'category.html', {'category' : category, 'product_list' : product_list})
     
 
 class Search:

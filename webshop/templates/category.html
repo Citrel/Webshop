@@ -9,16 +9,16 @@
 <section class="section-content padding-y bg">
     <div class="col-md-6">
         <h1>
-            {{ category.name }}
+            {{ category.category_name }}
         </h1>
         <br>
         <i>
-            {{ category.description }}
+            {{ category.category_description }}
         </i>
     </div>
     <div class="container">
         <div class="row">
-            {% for product in products_per_category %}
+            {% for product in product_list %}
                 <div class="col-md">
                     <div class="card card-product-grid">
                         <a href={% url 'details' product.Product_ID %} class="img-wrap"> <img src={% static product.product_image_path %}> </a>
