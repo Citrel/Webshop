@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from .models import *
 from .forms import *
-from django.db.models import Q, Sum
+from django.db.models import Q, Sum, Count
 import random
 
 
@@ -12,8 +12,9 @@ class Homepage:
 
         products = Product.objects.all()
         categories = Category.objects.all()
+        cart_item_count = Cart.objects.filter(Customer_id=request.user).Count()
         
-        return render (request, 'index.html', {'products' : products, 'categories' : categories})
+        return render (request, 'index.html', {'products' : products, 'categories' : categories, 'cart_item_count' : cart_item_count})
     
 
 class Article():
