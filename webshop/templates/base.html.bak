@@ -72,19 +72,19 @@
                             </button>
                             <div class="dropdown-menu">
                                 {% for category in categories %}
-                                <a class="dropdown-item" href={% url 'categories' pk=category.Category_ID %}>{{
-                                    category.category_name }} </a>
+                                <a class="dropdown-item" href={% url 'categories' pk=category.Category_ID %}>
+                                    {{ category.category_name }} </a>
                                 {% endfor %}
                             </div>
                         </div> <!-- category-wrap.// -->
                     </div> <!-- col.// -->
-                    <a href="./myprofil.html" class="btn btn-outline-primary">Mein Profil</a>
 
                     <div class="col-lg  col-md-6 col-sm-12 col">
                         <form name='Search_Form' method='GET' action={% url 'searching' %}>
                             <div class="input-group w-100">
-								{%csrf_token%}
-                                <input type="text" name='search' class="form-control" style="width:60%;" placeholder="Suche"/>
+                                {%csrf_token%}
+                                <input type="text" name='search' class="form-control" style="width:60%;"
+                                    placeholder="Suche" />
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-primary" type="submit">
                                         <i class="fa fa-search"></i>
@@ -107,7 +107,7 @@
                             <div class="widget-header">
                                 <small class="title text-muted">Willkommen {{ user.first_name }}!</small>
                                 <div>
-                                    <a href="#">Mein Profil</a> <span class="dark-transp"> | </span>
+                                    <a href="{% url 'myprofile' %}">Mein Profil</a> <span class="dark-transp"> | </span>
                                     <a href="{% url 'logout' %}"> Abmelden </a>
                                 </div>
                                 {% endif %}

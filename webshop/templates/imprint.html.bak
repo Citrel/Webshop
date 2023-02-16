@@ -4,7 +4,7 @@
 
 {% block title %}
 <title>
-Impressum - Enten Company
+Imprint
 </title
 {% endblock %}
 

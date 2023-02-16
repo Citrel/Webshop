@@ -99,6 +99,6 @@ class About_Us:
 
 class Imprint:
 
-    def show_imprint():
+    def show_imprint(request):
 
-        return render('imprint.html')
+        return render(request, 'imprint.html')

@@ -26,5 +26,6 @@ urlpatterns = [
     path('details/<slug:pkProduct>', views.Article.like_product, name='like'),
     path('categories/<slug:pk>', views.Categories.show_categories, name='categories'),
     path('about_us', views.About_Us.show_abouts, name='about_us'),
+    path('imprint', views.Imprint.show_imprint, name='imprint'),
     path('profiles/', include('profiles.urls'))
 ]
