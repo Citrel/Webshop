@@ -83,12 +83,13 @@ class Cart_View:
         
         cart_item_count = Cart.objects.filter(Customer_ID=request.user.id).count()
 
-        cart_objects = Cart.objects.filter(Customer_ID = request.user)
+        cart_objects = Cart.objects.filter(Customer_ID = request.user.id)
         
         payment_sum = 0
+        product = []
         
         for cart_object in cart_objects:
-            product = Product.objects.filter(Product_ID=cart_object.Product_ID)
+            product = [Product.objects.filter(Product_ID=cart_object.Product_ID)]
             
     
         
