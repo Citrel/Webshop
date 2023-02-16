@@ -26,18 +26,18 @@ class Article():
         
         return render(request, 'product_detail.html',{'product' : product, 'likes' : likes})
     
-    def like_product(request, pkProduct):
+    def like_product(request, pk):
               
-        liked = get_object_or_404(Product_Likes, Customer_ID = request.user.id, Product_ID = pkProduct)
+        liked = get_object_or_404(Product_Likes, Customer_ID = request.user.id, Product_ID = pk)
         
         if request.method == 'GET':
             
             if liked == None:
                 
-                liked = Product_Likes(Customer_ID=request.user.id, Product_ID=pkProduct)
+                liked = Product_Likes(Customer_ID=request.user.id, Product_ID=pk)
                 liked.save()
             
-            return redirect('product_detail', pk=pkProduct)
+            return redirect('product_detail', pk=pk)
         
         return render(request, 'product_detail.html')
                 
