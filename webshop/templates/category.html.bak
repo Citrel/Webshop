@@ -4,7 +4,7 @@
 
 {% block title %}
 <title>
-{{ category.category_name }}
+{{ category.category.name }}
 </title
 {% endblock %}
 
