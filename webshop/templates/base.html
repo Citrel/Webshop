@@ -73,12 +73,11 @@
                             <div class="dropdown-menu">
                                 {% for category in categories %}
                                 <a class="dropdown-item" href={% url 'categories' pk=category.Category_ID %}>
-								{{ category.category_name }} </a>
+                                    {{ category.category_name }} </a>
                                 {% endfor %}
                             </div>
                         </div> <!-- category-wrap.// -->
                     </div> <!-- col.// -->
-                    <a href="./myprofil.html" class="btn btn-outline-primary">Mein Profil</a>
 
                     <div class="col-lg  col-md-6 col-sm-12 col">
                         <form name='Search_Form' method='GET' action={% url 'searching' %}>
