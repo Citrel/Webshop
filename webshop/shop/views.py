@@ -73,22 +73,12 @@ class Search:
            
 class Cart_View:
 
-    def show_cart(request, pk):
+    def show_cart(request):
 
-        product = Product.objects.all()
-        customer = Customer.objects.all()
-        cart_objects = get_object_or_404(Cart, pk=Cart.Customer_ID)
+        cart_objects = Cart.objects.filter(Customer_ID = request.user)
+        product = Product.objects.filter(Product_ID=Cart.Product_ID)
 
-        return render(request, 'cart.html', {'product': product, 'customer': customer, 'cart_objects': cart_objects})
-
-    def payment_sum(request, pk):
-
-        cart_objects = get_object_or_404(Cart, pk=Cart.Customer_ID)
-
-        total_cost = cart_objects.objects.aggregate(
-            Sum('cart_objects.Product.price') * cart_objects.cart_amount)
-
-        return render(request, 'cart.html', {'total_cost': total_cost})
+        return render(request, 'cart.html', {'product': product, 'cart_objects': cart_objects})
 
 
 class About_Us:
