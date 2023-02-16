@@ -12,7 +12,7 @@ class Homepage:
 
         products = Product.objects.all()
         categories = Category.objects.all()
-        cart_item_count = Cart.objects.filter(Customer_id=request.user).Count()
+        cart_item_count = Cart.objects.filter(Customer_ID=request.user).count()
         
         return render (request, 'index.html', {'products' : products, 'categories' : categories, 'cart_item_count' : cart_item_count})
     
@@ -71,7 +71,7 @@ class Search:
                 return render(request, 'search.html', {'query' : query, 'result' : result})
             
            
-class Cart:
+class Cart_View:
 
     def show_cart(request, pk):
 
