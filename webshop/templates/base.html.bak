@@ -116,7 +116,9 @@
                                 <a href="./cart.html" class="widget-header pl-3 ml-3 ">
                                     <div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i>
                                     </div>
-                                    <span class="badge badge-pill badge-danger notify">{% cart_item_count %}</span>
+                                    {% if user.id is not None %}
+                                    <span class="badge badge-pill badge-danger notify">{{ cart_item_count }}</span>
+                                    {% endif %}
                                 </a>
                             </div> <!-- widgets-wrap.// -->
                         </div> <!-- col.// -->
