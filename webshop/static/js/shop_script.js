@@ -1,25 +1,25 @@
-function plus()
+function plus(name)
 {
-    quantity = document.getElementById('quantity').value;
+    quantity = document.getElementById(name).value;
     quantity = parseFloat(quantity);
     result = quantity + 1;
     result = result.toString();
-    document.getElementById('quantity').value = result;
+    document.getElementById(name).value = result;
 }
 
-function minus()
+function minus(name)
 {
-    quantity = document.getElementById('quantity').value;
+    quantity = document.getElementById(name).value;
     quantity = parseFloat(quantity);
 
     if(quantity == 1)
     {
         result = result.toString();
-        document.getElementById('quantity').value = result;
+        document.getElementById(name).value = result;
     } else {
         result = quantity - 1;
         result = result.toString();
-        document.getElementById('quantity').value = result;
+        document.getElementById(name).value = result;
     }
 }
 
