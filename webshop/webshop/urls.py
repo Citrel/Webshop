@@ -27,5 +27,6 @@ urlpatterns = [
     path('categories/<slug:pk>', views.Categories.show_categories, name='categories'),
     path('about_us', views.About_Us.show_abouts, name='about_us'),
     path('imprint', views.Imprint.show_imprint, name='imprint'),
+    path('cart', views.Cart_View.show_cart, name='cart'),
     path('profiles/', include('profiles.urls'))
 ]
