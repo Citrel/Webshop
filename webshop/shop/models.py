@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
+from profiles.models import Profile
 
 
 class Creditcard_Information(models.Model):
@@ -75,9 +76,6 @@ class Customer(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=50)
-    cart = models.ManyToManyField(Product, through='Cart', related_name='cart')
-    product_likes = models.ManyToManyField(
-        Product, through='Product_Likes', related_name='likes')
 
 
 class Product_Availability(models.Model):
@@ -121,7 +119,7 @@ class Delivery(models.Model):
 
 class Cart(models.Model):
     Customer_ID = models.ForeignKey(
-        Customer, on_delete=models.CASCADE, related_name='customer')
+        Profile, on_delete=models.CASCADE, default=None)
     Product_ID = models.ForeignKey(
         Product, on_delete=models.CASCADE, related_name='product')
     cart_amount = models.PositiveIntegerField()
@@ -129,5 +127,5 @@ class Cart(models.Model):
 
 class Product_Likes(models.Model):
     Customer_ID = models.ForeignKey(
-        Customer, on_delete=models.CASCADE, related_name='liking_customer')
+        Profile, on_delete=models.CASCADE, default=None)
     Product_ID = models.ForeignKey(Product, on_delete=models.CASCADE)
