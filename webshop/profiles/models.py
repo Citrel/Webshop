@@ -49,6 +49,7 @@ class Profile(AbstractBaseUser):
     email = models.EmailField(max_length=100, unique=True)
     phone_number = models.CharField(max_length=50)
     is_admin = models.BooleanField(default=False)
+    # change this to false before shipping
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superadmin = models.BooleanField(default=False)

@@ -137,3 +137,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
+
+# SMPT CONFIG
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'dergrosseEnterich@gmail.com'
+EMAIL_HOST_PASSWORD = 'Enterich123'
+EMAIL_USE_TLS = True
