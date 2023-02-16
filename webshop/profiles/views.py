@@ -31,7 +31,7 @@ def register(request):
             current_site = get_current_site(request)
             mail_subject = 'Konto Aktivieren'
             message = render_to_string('profiles/profile_verification_email.html', {
-                'user': user.object,
+                'user': user,
                 'domain': current_site,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                 'token': default_token_generator.make_token(user)
@@ -81,7 +81,7 @@ def activate(request, uidb64, token):
 
     if user is not None and default_token_generator.check_token(user, token):
         user.is_active = True
-        user.safe()
+        user.save()
         messages.success(request, 'Profil erfolgreich aktiviert.')
         return redirect('login')
     else:
@@ -98,7 +98,7 @@ def forgot_password(request):
             current_site = get_current_site(request)
             mail_subject = 'Passwort zurücksetzen'
             message = render_to_string('profiles/reset_password_email.html', {
-                'user': user.object,
+                'user': user,
                 'domain': current_site,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                 'token': default_token_generator.make_token(user)
