@@ -106,12 +106,12 @@
                             </div>
                             {% else %}
                             <div class="widget-header">
-                                <small class="title text-muted">Willkommen {{ user.first_name }}!</small>
-                                <div>
-                                    <a href="{% url 'myprofile' %}">Mein Profil</a> <span class="dark-transp"> | </span>
+                                <small class="title text-muted">Hey {{ user.first_name }}!</small>
+                                <div style="color:white;">
+                                    <a href="{% url 'myprofile' %}">Mein Profil</a> | 
                                     <a href="{% url 'logout' %}"> Abmelden </a>
                                 </div>
-                                {% endif %}
+                            {% endif %}
                                 <a href="./cart.html" class="widget-header pl-3 ml-3 ">
                                     <div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i>
                                     </div>
