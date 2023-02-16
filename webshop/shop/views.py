@@ -27,19 +27,19 @@ class Article():
         return render(request, 'product_detail.html',{'product' : product, 'likes' : likes})
     
     def like_product(request, pkProduct):
-        
-        likes = Product_Likes.objects.filter(Product_ID = pkProduct).count()       
+              
         liked = get_object_or_404(Product_Likes, Customer_ID = request.user.id, Product_ID = pkProduct)
         
         if request.method == 'GET':
             
             if liked == None:
                 
-                Product_Likes.objects.create(request.user.id, pkProduct)
+                liked = Product_Likes(Customer_ID=request.user.id, Product_ID=pkProduct)
+                liked.save()
             
             return redirect('product_detail', pk=pkProduct)
         
-        return render(request, 'product_detail.html', {'likes':likes})
+        return render(request, 'product_detail.html')
                 
 
 class Categories:
