@@ -10020,6 +10020,10 @@ a.text-gray-light:hover, a.text-gray-light:focus {
   color: #ffff !important;
 }
 
+.text-muted-primary {
+  color: #2de7de !important;
+}
+
 .text-black-50 {
   color: rgba(0, 0, 0, 0.5) !important;
 }
