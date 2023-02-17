@@ -32,11 +32,20 @@ class Article():
         product = get_object_or_404(Product, pk=pk)
         likes = Product_Likes.objects.filter(Product_ID = pk).count() 
         
+        likedProduct = Product.objects.get(Product_ID = pk)
         
-        return render(request, 'product_detail.html',{'product' : product, 'likes' : likes, 'cart_item_count' : cart_item_count})
-    
-                
-class Liking():
+        is_liked = True
+        
+        created = Product_Likes.objects.get_or_create(defaults={'Product_ID': likedProduct}, Customer_ID_id= request.user.id, Product_ID = likedProduct)
+        
+        
+        if not created:
+            is_liked = True
+        else:
+            is_liked = False
+        
+        
+        return render(request, 'product_detail.html',{'product' : product, 'likes' : likes, 'cart_item_count' : cart_item_count, 'is_liked' : is_liked})
     
     def like_product(request, pk):
         
@@ -52,6 +61,19 @@ class Liking():
             
         
         return redirect('details', pk = pk)
+    
+    def add_to_cart(request, pk, amount):
+        
+        new_entry, created = Cart.objects.get_or_create(Customer_ID_id = request.user.id, product_key = pk, cart_amount = amount)
+        
+        if not created:
+            new_entry.cart_amount += amount
+        else:
+            new_entry.save()
+            
+        return redirect('cart')
+    
+    
     
 
 class Categories:
