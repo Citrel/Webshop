@@ -86,17 +86,20 @@ class Cart_View:
 
         cart_items = Cart.objects.filter(Customer_ID = request.user)
         
+        payment = Product.price
+        payment_sum = 0
                 
         product = Product.objects.all()
         for cart_item in cart_items:
             product = Product.objects.filter(Product_ID__contains = cart_item.product_key.Product_ID)
+            payment_sum += Product.objects.get(Product_ID__contains = cart_item.product_key.Product_ID).price * cart_item.cart_amount
         
             
         
         
         
 
-        return render(request, 'cart.html', {'product': product, 'cart_item_count' : cart_item_count})
+        return render(request, 'cart.html', {'product': product, 'cart_item_count' : cart_item_count, 'payment_sum' : payment_sum})
     
     
 
