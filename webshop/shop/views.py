@@ -172,6 +172,13 @@ class Cart_View:
         
         return redirect('cart')
     
+    def delete_from_cart(request, pk):
+        
+        delete_obj = Cart.objects.get(Customer_ID=request.user.id, product_key=pk)
+        delete_obj.delete()
+        
+        return redirect('cart')
+    
 
 
 class About_Us:
