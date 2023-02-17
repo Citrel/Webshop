@@ -10,87 +10,95 @@
 <div class="container" style="margin-top:10px; margin-bottom:300px;">
 	<div class="row">
 		<aside class="col-lg-9">
-	<div class="card">
-	<table class="table table-borderless table-shopping-cart">
-	<thead class="text-muted">
-	<tr class="small text-uppercase">
-	<th scope="col">Produkt</th>
-	<th scope="col" width="120">Menge</th>
-	<th scope="col" width="120">Preis</th>
-	<th scope="col" class="text-right" width="200"> </th>
-	</tr>
-	</thead>
-	<tbody>
-	{% for p in product %}
-		<tr>
-			<td>
-				<figure class="itemside align-items-center">
-					<div class="aside"><img src={% static p.1.product_image_path %} class="img-sm"></div>
-					<figcaption class="info">
-						<a href="#" class="title text-dark">{{ p.1.product_name }}</a>
-					</figcaption>
-				</figure>
-			</td>
-			<td> 
-				<!-- col.// -->
-							<div class="col"> 
-								<div class="input-group input-spinner">
-									<div class="input-group-prepend">
-									<form method = 'POST' action={% url 'decrease' pk=p.1.Product_ID %}>
-									{% csrf_token %}
-									<button class="btn btn-light" type="submit" id="button-plus" value="{{p.product_name}}" onclick="minus(self.value);"> <i class="fa fa-minus"></i> </button>
-									</form>
-									</div>
-									<form method = "POST" action={% url 'change' p.1.Product_ID p.0 %}>
-									<input type="text" class="form-control"  value={{ p.0 }} id="{{p.product_name}}">
-									{% csrf_token %}
-									</form>
-									<div class="input-group-append">
-									<form method = 'POST' action={% url 'increase' pk=p.1.Product_ID %}>
-									{% csrf_token %}
-									<button class="btn btn-light" type="submit" id="button-minus" value="{{p.product_name}}" onclick="plus(self.value)"> <i class="fa fa-plus"></i> </button>
-									</form
-									</div>
-								</div> <!-- input-group.// -->
-							</div> <!-- col.// -->
-			</td>
-			<td> 
-				<div class="price-wrap"> 
-					<!--<var class="price">{{ p.price_total }}</var>--> 
-					<p class="text"> je {{ p.1.price }} </p> 
-				</div> <!-- price-wrap .// -->
-			</td>
-			<td class="text-right"> 
-			<a href="" class="btn btn-danger"> Remove</a>
-			</td>
-		</tr>
-	{% endfor %}
-	</tbody>
-	</table>
-	</div> <!-- card.// -->
+			<div class="card container">
+				<table class="table table-borderless table-shopping-cart">
+					<thead class="text-muted">
+						<tr class="small text-uppercase" style="color:gray;">
+							<th scope="col">Produkt</th>
+							<th scope="col" width="120">Menge</th>
+							<th scope="col" width="120">Preis</th>
+							<th scope="col" class="text-right" width="200"> </th>
+						</tr>
+					</thead>
+					<tbody>
+					{% for p in product %}
+						<div class="vertical-center">
+						<tr>
+							<td>
+								<figure class="itemside align-items-center">
+									<div class="aside"><img src={% static p.1.product_image_path %} class="img-sm" style="border-radius: 20%;"></div>
+									<figcaption class="info">
+										<a href="#" class="title text-dark">{{ p.1.product_name }}</a>
+									</figcaption>
+								</figure>
+							</td>
+							<td> 
+								<!-- col.// -->
+											<div class="col"> 
+												<div class="input-group input-spinner">
+													<div class="input-group-prepend">
+													<form method = 'POST' action={% url 'decrease' pk=p.1.Product_ID %}>
+														<br>
+													{% csrf_token %}
+													<button class="btn btn-light" type="submit" id="button-plus" value="{{p.product_name}}" onclick="minus(self.value);"> <i class="fa fa-minus"></i> </button>
+													</form>
+													</div>
+													<form method = "POST" action={% url 'change' p.1.Product_ID p.0 %}>
+													<br>
+														<input type="text" class="form-control"  value={{ p.0 }} id="{{p.product_name}}">
+													{% csrf_token %}
+													</form>
+													<div class="input-group-append">
+													<form method = 'POST' action={% url 'increase' pk=p.1.Product_ID %}>
+													<br>
+														{% csrf_token %}
+													<button class="btn btn-light" type="submit" id="button-minus" value="{{p.product_name}}" onclick="plus(self.value)"> <i class="fa fa-plus"></i> </button>
+													</form
+													</div>
+												</div> <!-- input-group.// -->
+											</div> <!-- col.// -->
+							</td>
+							<td> 
+								<div class="price-wrap"> 
+									<!--<var class="price">{{ p.price_total }}</var>--> 
+									<br>
+									<br>
+									<p class="text"> je {{ p.1.price }} </p> 
+								</div> <!-- price-wrap .// -->
+							</td>
+							<td class="text-right"> 
+								<br>
+							<a href="" class="btn btn-danger">Entfernen</a>
+							</td>
+						</tr>
+					</div>
+					{% endfor %}
+					</tbody>
+				</table>
+			</div> <!-- card.// -->
 
 		</aside> <!-- col.// -->
 		<aside class="col-lg-3">
 
 			<div class="card">
-			<div class="card-body">
-				<dl class="dlist-align">
-				<dt>Gesamtpreis:</dt>
-				<dd class="text-right">
-				{{ payment_sum }}
-				</dd>
-				</dl>
-				<dl class="dlist-align">
-				<dt>inkl. MwSt</dt>
-				</dl>
-				<hr>
-				<!-- TODO urls -->
-				<a href="" class="btn btn-primary btn-block"> Checkout </a>
-				<a href={% url 'index' %} class="btn btn-light btn-block">Continue Shopping</a>
-			</div> <!-- card-body.// -->
+				<div class="card-body">
+					<dl class="dlist-align">
+					<dt>Gesamtpreis:</dt>
+					<dd class="text-right">
+					{{ payment_sum }}
+					</dd>
+					</dl>
+					<dl class="dlist-align">
+					<dt>inkl. MwSt</dt>
+					</dl>
+					<hr>
+					<!-- TODO urls -->
+					<a href="" class="btn btn-primary btn-block"> Checkout </a>
+					<a href={% url 'index' %} class="btn btn-light btn-block">Continue Shopping</a>
+				</div> <!-- card-body.// -->
 			</div> <!-- card.// -->
 
-	</aside> <!-- col.// -->
+		</aside> <!-- col.// -->
 
 
 	</div> <!-- row.// -->
