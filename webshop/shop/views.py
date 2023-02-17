@@ -15,6 +15,8 @@ class Homepage:
         categories = Category.objects.all()
         cart_item_count = Cart.objects.filter(Customer_ID=request.user.id).count()
         
+        print(products)
+        
         return render (request, 'index.html', {'products' : products, 'categories' : categories, 'cart_item_count' : cart_item_count})
     
 
@@ -84,18 +86,20 @@ class Cart_View:
         
         cart_item_count = Cart.objects.filter(Customer_ID=request.user.id).count()
 
-        cart_items = Cart.objects.filter(Customer_ID = request.user)
+        cart_items = Cart.objects.filter(Customer_ID = request.user.id)
         
-        payment = Product.price
+
         payment_sum = 0
                 
-        product = Product.objects.all()
+        product = []
+        
         for cart_item in cart_items:
-            product = Product.objects.filter(Product_ID__contains = cart_item.product_key.Product_ID)
+           
+            product.append(Product.objects.get(Product_ID__contains = cart_item.product_key.Product_ID))
             payment_sum += Product.objects.get(Product_ID__contains = cart_item.product_key.Product_ID).price * cart_item.cart_amount
         
             
-        
+        print(product)
         
         
 
