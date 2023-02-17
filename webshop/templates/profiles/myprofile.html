@@ -10,16 +10,9 @@
         <div class="card" style="margin: 10px;width:30%" >
             <div style="margin:10px;">
                 <h2>Mein Profil</h2>
-                <form action="/webshop/shop/views.py" >
-                    {% for field in profil_form %}
-                    <div class="form-group col-sm-6">
-                        {{ field }}
-                    </div>
-                    {% endfor %}
-                    <button type="submit" class="btn btn-primary">Speichern</button>
-                </form>
-                <br>
-                <br>
+                <p>Vorname:{{user.first_name}}</p>
+                <p>Nachname:{{user.last_name}}</p>
+                <p>Telefonnummer:{{user.phone_number}}</p>
                 <br>
                 <button class="btn btn-outline-primary" href="{% url 'forgot_password' %}">Passwort ändern</button>
             </div>

@@ -39,8 +39,6 @@ class ProfileManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-# todo add required
-
 
 class Profile(AbstractBaseUser):
     first_name = models.CharField(max_length=50)
@@ -67,3 +65,52 @@ class Profile(AbstractBaseUser):
 
     def has_module_perms(self, add_label):
         return True
+
+
+class User_Delivery_Address(models.Model):
+    user = models.OneToOneField(Profile, on_delete=models.CASCADE)
+    street = models.CharField(blank=True, max_length=100)
+    number = models.CharField(blank=True, max_length=5)
+    city = models.CharField(blank=True, max_length=100)
+    plz = models.CharField(blank=True, max_length=10)
+
+    def __str__(self):
+        return self.user.first_name
+
+
+class User_Payment_Address(models.Model):
+    user = models.OneToOneField(Profile, on_delete=models.CASCADE)
+    street = models.CharField(blank=True, max_length=100)
+    number = models.CharField(blank=True, max_length=5)
+    city = models.CharField(blank=True, max_length=100)
+    plz = models.CharField(blank=True, max_length=10)
+
+    def __str__(self):
+        return self.user.first_name
+
+
+class User_Credit_Card(models.Model):
+    user = models.OneToOneField(Profile, on_delete=models.CASCADE)
+    owner_first_name = models.CharField(blank=True, max_length=100)
+    owner_last_name = models.CharField(blank=True, max_length=100)
+    card_number = models.CharField(blank=True, max_length=100)
+    expiration_date_month = models.CharField(blank=True, max_length=2)
+    expiration_date_year = models.CharField(blank=True, max_length=2)
+    security_code = models.CharField(blank=True, max_length=3)
+
+    def __str__(self):
+        return self.user.first_name
+
+
+class User_Paypal(models.Model):
+    user = models.OneToOneField(Profile, on_delete=models.CASCADE)
+    paypal_mail = models.EmailField(max_length=100, unique=True)
+    paypal_password = models.CharField(max_length=100)
+
+
+class User_Debit(models.Model):
+    user = models.OneToOneField(Profile, on_delete=models.CASCADE)
+    debit_first_name = models.CharField(blank=True, max_length=100)
+    debit_last_name = models.CharField(blank=True, max_length=100)
+    iban = models.CharField(blank=True, max_length=22)
+    bic = models.CharField(blank=True, max_length=11)

@@ -7,6 +7,7 @@ class RegistrationForm(forms.ModelForm):
         'placeholder': 'Passwort eingeben',
         'class': 'form-control',
     }))
+
     confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={
         'placeholder': 'Passwort wiederholen',
         'class': 'form-control'
