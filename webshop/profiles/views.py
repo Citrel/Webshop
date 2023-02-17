@@ -69,6 +69,7 @@ def logout(request):
 
 @login_required(login_url='login')
 def myprofile(request):
+
     return render(request, 'profiles/myprofile.html')
 
 
