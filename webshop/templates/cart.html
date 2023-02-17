@@ -2,7 +2,9 @@
 {% load static %}
 
 
-
+{% block title %}
+<title>Mein Warenkorb</title>
+{% endblock %}
 
 {% block content %}
 
@@ -75,7 +77,7 @@
 			<hr>
 			<!-- TODO urls -->
 			<a href="" class="btn btn-primary btn-block"> Checkout </a>
-			<a href="" class="btn btn-light btn-block">Continue Shopping</a>
+			<a href={% url 'index' %} class="btn btn-light btn-block">Continue Shopping</a>
 		</div> <!-- card-body.// -->
 		</div> <!-- card.// -->
 

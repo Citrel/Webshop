@@ -36,7 +36,7 @@
 								<div class="input-group-prepend">
 								<button class="btn btn-light" type="submit" id="button-plus" value="{{p.product_name}}" onclick="minus(self.value);"> <i class="fa fa-minus"></i> </button>
 								</div>
-								<input type="text" class="form-control"  value={{ p.0.cart_amount }} id="{{p.product_name}}">
+								<input type="text" class="form-control"  value={{ p.0 }} id="{{p.product_name}}">
 								<div class="input-group-append">
 								<button class="btn btn-light" type="submit" id="button-minus" value="{{p.product_name}}" onclick="plus(self.value)"> <i class="fa fa-plus"></i> </button>
 								</div>
@@ -75,7 +75,7 @@
 			<hr>
 			<!-- TODO urls -->
 			<a href="" class="btn btn-primary btn-block"> Checkout </a>
-			<a href="" class="btn btn-light btn-block">Continue Shopping</a>
+			<a href={% url 'index' %} class="btn btn-light btn-block">Continue Shopping</a>
 		</div> <!-- card-body.// -->
 		</div> <!-- card.// -->
 
