@@ -36,22 +36,24 @@
     <p>{{ product.product_description }}</p>
 
 
-        <div class="mb-3" style="width:fit-content !important">
-            <br>
-            <form name="Change_Amount_Form" method='POST' action={% url 'like' pk=product.Product_ID %} style="grid-row: auto;">
-				{%csrf_token %}
-                <button class="btn btn-light" type="submit" id="button-like" onclick="like();">
-                    <p style="color: #2de7de;" id="button-like-text">
-                        {% if likes > 0 %}
-                        &#9825; {{ likes }}
-                        {% else %}
-                        &#9829; {{ likes }}
-                        {% endif %}
-                    </p>
-                </button>
-                <p>Gefällt dir unser Produkt?</p>
-            </form>
+    <br>
+        <div class="grid" style="display: grid; grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: 1fr; grid-column-gap: px; grid-row-gap: 20px;width: 120px;">
+            <div class="grid-row" style="grid-area: 1 / 1 / 2 / 2;">
+                <form name="Change_Amount_Form" method='POST' action={% url 'like' pk=product.Product_ID %} style="grid-row: auto;">
+				    {%csrf_token %}
+                        <button class="btn btn-light" type="submit" id="button-like" onclick="like()">
+                            <p style="color: #2de7de; font-size: x-large;" id="button-like-text">&#9825;</p>
+                        </button>
+                </form>
+            </div>
+            <div class="grid-row" style ="grid-area: 1 / 2 / 2 / 3;">
+                <div class="btn btn-light">
+                    <p style="color: #2de7de;font-size: x-large;" id="button-like-likes">{{likes}}</p>
+                </div>
+            </div>
         </div>
+        <p>Gefällt dir unser Produkt?</p>
 
     <div class="mb-3" style="float: right;">
         <br>
