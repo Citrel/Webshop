@@ -45,7 +45,7 @@
 		</td>
 		<td> 
 			<div class="price-wrap"> 
-				<!--<var class="price">{{ p.price_total }}</var>--> 
+				<var class="price">{{ p.price_total }}</var> 
 				<small class="text-muted"> je {{ p.price }} </small> 
 			</div> <!-- price-wrap .// -->
 		</td>
@@ -65,7 +65,7 @@
 		<div class="card-body">
 			<dl class="dlist-align">
 			  <dt>Gesamtpreis:</dt>
-			  <dd class="text-right">{{ payment_sum }}</dd>
+			  <dd class="text-right">{{ total_price }}</dd>
 			</dl>
 			<dl class="dlist-align">
 			  <dt>inkl. MwSt</dt>
