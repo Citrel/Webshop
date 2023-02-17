@@ -5,7 +5,7 @@
 {% block title %}
 <title>
 {{ product.product_name }}
-</title
+</title>
 {% endblock %}
 
 {% block content %}
@@ -38,11 +38,11 @@
 
         <div class="mb-3" style="width:fit-content !important">
             <br>
-            <form method='GET' action={% url 'like' pk=product.Product_ID %} style="grid-row: auto;">
+            <form method='POST' action={% url 'like' pk=product.Product_ID %} style="grid-row: auto;">
 				{%csrf_token %}
                 <button class="btn btn-light" type="submit" id="button-like" onclick="like();">
                     <p style="color: #2de7de;" id="button-like-text">
-                        {% if likes > 0 %}
+                        {% if is_liked == True %}
                         &#9825; {{ likes }}
                         {% else %}
                         &#9829; {{ likes }}

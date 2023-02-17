@@ -41,9 +41,9 @@
 								<button class="btn btn-light" type="submit" id="button-plus" value="{{p.product_name}}" onclick="minus(self.value);"> <i class="fa fa-minus"></i> </button>
 								</form>
 								</div>
-								<form method = "POST" action={% url 'change' p.1.Product_ID %}>
-								<input type="text" class="form-control"  value={{ p.0 }} id="{{p.product_name}}">
+								<form name='Change_Amount_Form' method = "GET" action={% url 'change' p.1.Product_ID p.0 %}>
 								{% csrf_token %}
+								<input type="text" name='change_amount' class="form-control"  value={{ p.0 }} />
 								</form>
 								<div class="input-group-append">
 								<form method = 'POST' action={% url 'increase' pk=p.1.Product_ID %}>

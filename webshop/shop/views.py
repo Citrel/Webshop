@@ -88,9 +88,7 @@ class Search:
         def show_searched_products(request):
             
             cart_item_count = Cart.objects.filter(Customer_ID=request.user.id).count()
-            
-            results = []
-            
+                        
             if request.method == "GET":
                 query = request.GET.get('search')
                 
@@ -146,7 +144,10 @@ class Cart_View:
         
         return redirect('cart')
     
-    def change_cart_amount(request, pk, new_amount):
+    def change_cart_amount(request, pk):
+        
+        if request.method == 'GET':
+            new_amount = request.GET.get('change_amount')
         
         changing_item = Cart.objects.get(Customer_ID = request.user.id, product_key = pk)
         

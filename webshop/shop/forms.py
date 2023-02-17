@@ -6,8 +6,6 @@ class Search_Form(forms.Form):
         attrs={'style': 'width:60%;', 'placeholder': 'Suchen'})
 
 class Change_Amount_Form(forms.Form):
-    increase = forms.Field()
-    decrease = forms.Field()
     amount = forms.TextInput()
 
 
