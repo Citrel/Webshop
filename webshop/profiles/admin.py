@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Profile
+from .models import Profile, User_Delivery_Address, User_Payment_Address, User_Credit_Card, User_Paypal, User_Debit
 
 # Register your models here.
 
@@ -16,4 +16,33 @@ class ProfileAdmin(UserAdmin):
     fieldsets = ()
 
 
+class User_Delivery_AddressAdmin(admin.ModelAdmin):
+    list_display = ('user', 'street', 'number', 'city', 'plz')
+
+
+class User_Payment_AddressAdmin(admin.ModelAdmin):
+    list_display = ('user', 'street', 'number', 'city', 'plz')
+
+
+class User_Credit_CardAdmin(admin.ModelAdmin):
+    list_display = ('user', 'owner_first_name',
+                    'owner_last_name', 'card_number',
+                    'expiration_date_month', 'expiration_date_year',
+                    'security_code')
+
+
+class User_PaypalAdmin(admin.ModelAdmin):
+    list_display = ('user', 'paypal_mail', 'paypal_password')
+
+
+class User_DebitAmin(admin.ModelAdmin):
+    list_display = ('user', 'debit_first_name',
+                    'debit_last_name', 'iban', 'bic')
+
+
 admin.site.register(Profile, ProfileAdmin)
+admin.site.register(User_Delivery_Address, User_Delivery_AddressAdmin)
+admin.site.register(User_Payment_Address, User_Payment_AddressAdmin)
+admin.site.register(User_Credit_Card, User_Credit_CardAdmin)
+admin.site.register(User_Paypal, User_PaypalAdmin)
+admin.site.register(User_Debit, User_DebitAmin)
