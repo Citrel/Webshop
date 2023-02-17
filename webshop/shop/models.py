@@ -123,6 +123,10 @@ class Cart(models.Model):
     product_key = models.ForeignKey(
         Product, on_delete=models.CASCADE, related_name='product', default = None)
     cart_amount = models.PositiveIntegerField()
+    
+    @property
+    def payment_sum(self):
+        return self.cart_amount * self.product_key.price
 
 
 class Product_Likes(models.Model):
