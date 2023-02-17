@@ -30,6 +30,6 @@ urlpatterns = [
     path('cart', views.Cart_View.show_cart, name = 'cart'),
     path('cart/<slug:pk>/increase', views.Cart_View.increase_cart_amount, name='increase'),
     path('cart/<slug:pk>/decrease', views.Cart_View.decrease_cart_amount, name='decrease'),
-    path('cart/<slug:pk>/change/<slug:new_amount>', views.Cart_View.change_cart_amount, name='change'),
+    path('cart/<slug:pk>/change', views.Cart_View.change_cart_amount, name='change'),
     path('profiles/', include('profiles.urls'))
 ]
