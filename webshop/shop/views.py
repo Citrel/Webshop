@@ -4,6 +4,7 @@ from .models import *
 from .forms import *
 from django.db.models import Q, Sum, Count
 import random
+from django import template
 
 
 class Homepage:
@@ -13,6 +14,8 @@ class Homepage:
         products = Product.objects.all()
         categories = Category.objects.all()
         cart_item_count = Cart.objects.filter(Customer_ID=request.user.id).count()
+        
+        print(products)
         
         return render (request, 'index.html', {'products' : products, 'categories' : categories, 'cart_item_count' : cart_item_count})
     
@@ -83,14 +86,24 @@ class Cart_View:
         
         cart_item_count = Cart.objects.filter(Customer_ID=request.user.id).count()
 
-        cart_objects = Cart.objects.filter(Customer_ID = request.user)
-        product = Product.objects.filter(Product_ID=cart_objects.Product_ID)
+        cart_items = Cart.objects.filter(Customer_ID = request.user.id)
         
-        payment_sum = product.aggregate(Sum(product.price * cart_objects.cart_amount))
+
+        payment_sum = 0
+                
+        product = []
+        
+        for cart_item in cart_items:
+           
+            product.append([cart_item.cart_amount, Product.objects.get(Product_ID__contains = cart_item.product_key.Product_ID)])
+            payment_sum += Product.objects.get(Product_ID__contains = cart_item.product_key.Product_ID).price * cart_item.cart_amount
         
             
+        print(product)
+        
+        
 
-        return render(request, 'cart.html', {'product': product, 'cart_objects': cart_objects, 'cart_item_count' : cart_item_count, 'payment_sum' : payment_sum})
+        return render(request, 'cart.html', {'product': product, 'cart_item_count' : cart_item_count, 'payment_sum' : payment_sum})
     
     
 

@@ -120,9 +120,10 @@ class Delivery(models.Model):
 class Cart(models.Model):
     Customer_ID = models.ForeignKey(
         Profile, on_delete=models.CASCADE, default=None)
-    Product_ID = models.ForeignKey(
-        Product, on_delete=models.CASCADE, related_name='product')
+    product_key = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name='product', default = None)
     cart_amount = models.PositiveIntegerField()
+    
 
 
 class Product_Likes(models.Model):

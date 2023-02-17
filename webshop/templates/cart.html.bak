@@ -2,9 +2,7 @@
 {% load static %}
 
 
-{% block title %}
-<title>Mein Warenkorb</title>
-{% endblock %}
+
 
 {% block content %}
 
