@@ -38,7 +38,8 @@
 
         <div class="mb-3" style="width:fit-content !important">
             <br>
-            <form action={% url 'like' pkProduct=product.Product_ID %} style="grid-row: auto;">
+            <form method='GET' action={% url 'like' pk=product.Product_ID %} style="grid-row: auto;">
+				{%csrf_token %}
                 <button class="btn btn-light" type="submit" id="button-like" onclick="like();">
                     <p style="color: #2de7de;" id="button-like-text">
                         {% if likes > 0 %}
@@ -49,7 +50,6 @@
                     </p>
                 </button>
                 <p>Gefällt dir unser Produkt?</p>
-                <p>{{ they_are_watching_us }}</p>
             </form>
         </div>
 
@@ -64,15 +64,15 @@
             <div class="col"> 
                 <div class="input-group input-spinner">
                     <div class="input-group-prepend">
-                    <button class="btn btn-light" type="button" id="button-plus" onclick="minus();"> <i class="fa fa-minus"></i> </button>
+                    <button class="btn btn-light" type="button" id="button-plus" onclick="minus('quantity');"> <i class="fa fa-minus"></i> </button>
                     </div>
                     <input type="text" id="quantity" class="form-control"  value="1">
                     <div class="input-group-append">
-                    <button class="btn btn-light" type="button" id="button-minus" onclick="plus();"> <i class="fa fa-plus"></i> </button>
+                    <button class="btn btn-light" type="button" id="button-minus" onclick="plus('quantity');"> <i class="fa fa-plus"></i> </button>
                     </div>
                 </div> <!-- input-group.// -->
                 <a href="./product-detail.html" class="btn  btn-primary"> 
-                    <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>  
+                    <span class="text">In den Warenkorb</span> <i class="fas fa-shopping-cart"></i>  
                 </a>
             </div> <!-- col.// -->
         </form> <!-- search-wrap .end// -->

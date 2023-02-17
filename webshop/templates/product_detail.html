@@ -38,7 +38,8 @@
 
         <div class="mb-3" style="width:fit-content !important">
             <br>
-            <form action={% url 'like' pk=product.Product_ID %} style="grid-row: auto;">
+            <form method='POST' action={% url 'like' pk=product.Product_ID %} style="grid-row: auto;">
+				{%csrf_token %}
                 <button class="btn btn-light" type="submit" id="button-like" onclick="like();">
                     <p style="color: #2de7de;" id="button-like-text">
                         {% if likes > 0 %}
@@ -49,7 +50,6 @@
                     </p>
                 </button>
                 <p>Gefällt dir unser Produkt?</p>
-                <p>{{ they_are_watching_us }}</p>
             </form>
         </div>
 
