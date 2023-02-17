@@ -4,6 +4,7 @@ from .models import *
 from .forms import *
 from django.db.models import Q, Sum, Count
 import random
+from django import template
 
 
 class Homepage:
@@ -83,19 +84,19 @@ class Cart_View:
         
         cart_item_count = Cart.objects.filter(Customer_ID=request.user.id).count()
 
-        cart_objects = Cart.objects.filter(Customer_ID = request.user.id)
-        cart_items = Cart.objects.filter(product_key__Product_ID__contains = Product.Product_ID)
+        cart_items = Cart.objects.filter(Customer_ID = request.user)
         
-        payment_sum = 0
                 
         product = Product.objects.all()
         for cart_item in cart_items:
-            product = Product.objects.filter(Product_ID__contains = cart_item)
+            product = Product.objects.filter(Product_ID__contains = cart_item.product_key.Product_ID)
+        
             
         
-               
+        
+        
 
-        return render(request, 'cart.html', {'product': product, 'cart_objects': cart_objects, 'cart_item_count' : cart_item_count, 'payment_sum' : payment_sum})
+        return render(request, 'cart.html', {'product': product, 'cart_item_count' : cart_item_count})
     
     
 
