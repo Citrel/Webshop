@@ -109,6 +109,37 @@ class Cart_View:
 
         return render(request, 'cart.html', {'product': product, 'cart_item_count' : cart_item_count, 'payment_sum' : payment_sum})
     
+    def increase_cart_amount(request, pk):
+        
+        changing_item = Cart.objects.get(Customer_ID = request.user.id, product_key = pk)
+        changing_item.cart_amount +=1        
+        changing_item.save()
+        
+        return redirect('cart')
+    
+    
+    def decrease_cart_amount(request, pk):
+        
+        changing_item = Cart.objects.get(Customer_ID = request.user.id, product_key = pk)
+        
+        if changing_item.cart_amount == 1:
+            changing_item.cart_amount = 1
+        else:
+            changing_item.cart_amount -= 1
+        changing_item.save()
+        
+        return redirect('cart')
+    
+    def change_cart_amount(request, pk, new_amount):
+        
+        changing_item = Cart.objects.get(Customer_ID = request.user.id, product_key = pk)
+        
+        if int(new_amount) > 0:
+            changing_item.cart_amount = int(new_amount)
+        
+        changing_item.save()
+        
+        return redirect('cart')
     
 
 

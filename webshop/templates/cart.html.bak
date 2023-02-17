@@ -2,7 +2,9 @@
 {% load static %}
 
 
-
+{% block title %}
+<title>Mein Warenkorb</title>
+{% endblock %}
 
 {% block content %}
 
@@ -34,11 +36,20 @@
 						<div class="col"> 
 							<div class="input-group input-spinner">
 								<div class="input-group-prepend">
+								<form method = 'POST' action={% url 'decrease' pk=p.1.Product_ID %}>
+								{% csrf_token %}
 								<button class="btn btn-light" type="submit" id="button-plus" value="{{p.product_name}}" onclick="minus(self.value);"> <i class="fa fa-minus"></i> </button>
+								</form>
 								</div>
+								<form method = "POST" action={% url 'change' p.1.Product_ID %}>
 								<input type="text" class="form-control"  value={{ p.0 }} id="{{p.product_name}}">
+								{% csrf_token %}
+								</form>
 								<div class="input-group-append">
+								<form method = 'POST' action={% url 'increase' pk=p.1.Product_ID %}>
+								{% csrf_token %}
 								<button class="btn btn-light" type="submit" id="button-minus" value="{{p.product_name}}" onclick="plus(self.value)"> <i class="fa fa-plus"></i> </button>
+								</form
 								</div>
 							</div> <!-- input-group.// -->
 						</div> <!-- col.// -->
