@@ -18,12 +18,12 @@
   <th scope="col" class="text-right" width="200"> </th>
 </tr>
 </thead>
-{% for p in product %}
 <tbody>
+{% for p in product %}
 	<tr>
 		<td>
 			<figure class="itemside align-items-center">
-				<div class="aside"><img src={% static p.product_image_path %} class="img-sm"></div>
+				<div class="aside"><img src={% static product_image_path %} class="img-sm"></div>
 				<figcaption class="info">
 					<a href="#" class="title text-dark">{{ p.product_name }}</a>
 				</figcaption>
@@ -34,11 +34,11 @@
 						<div class="col"> 
 							<div class="input-group input-spinner">
 								<div class="input-group-prepend">
-								<button class="btn btn-light" type="button" id="button-plus" value="{{p.product_name}}" onclick="minus(self.value);"> <i class="fa fa-minus"></i> </button>
+								<button class="btn btn-light" type="submit" id="button-plus" value="{{p.product_name}}" onclick="minus(self.value);"> <i class="fa fa-minus"></i> </button>
 								</div>
-								<input type="text" class="form-control"  value="1" id="{{p.product_name}}">
+								<input type="text" class="form-control"  value={{ p.cart_amount }} id="{{p.product_name}}">
 								<div class="input-group-append">
-								<button class="btn btn-light" type="button" id="button-minus" value="{{p.product_name}}" onclick="plus(self.value)"> <i class="fa fa-plus"></i> </button>
+								<button class="btn btn-light" type="submit" id="button-minus" value="{{p.product_name}}" onclick="plus(self.value)"> <i class="fa fa-plus"></i> </button>
 								</div>
 							</div> <!-- input-group.// -->
 						</div> <!-- col.// -->
@@ -46,7 +46,7 @@
 		<td> 
 			<div class="price-wrap"> 
 				<!--<var class="price">{{ p.price_total }}</var>--> 
-				<small class="text-muted"> je {{ p.price }} </small> 
+				<p class="text"> je {{ p.price }} </p> 
 			</div> <!-- price-wrap .// -->
 		</td>
 		<td class="text-right"> 

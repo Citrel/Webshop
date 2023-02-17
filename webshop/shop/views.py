@@ -95,7 +95,7 @@ class Cart_View:
         
         for cart_item in cart_items:
            
-            product.append(Product.objects.get(Product_ID__contains = cart_item.product_key.Product_ID))
+            product.append([[cart_item.cart_amount],[Product.objects.get(Product_ID__contains = cart_item.product_key.Product_ID)]])
             payment_sum += Product.objects.get(Product_ID__contains = cart_item.product_key.Product_ID).price * cart_item.cart_amount
         
             
