@@ -1,10 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from .models import *
+from profiles.models import Profile
 from .forms import *
 from django.db.models import Q, Sum, Count
-import random
+from django.http import Http404
 from django import template
+from django.contrib.auth.models import User
+
 
 
 class Homepage:
@@ -32,21 +35,24 @@ class Article():
         
         return render(request, 'product_detail.html',{'product' : product, 'likes' : likes, 'cart_item_count' : cart_item_count})
     
+                
+class Liking():
+    
     def like_product(request, pk):
-              
-        liked = get_object_or_404(Product_Likes, Customer_ID = request.user.id, Product_ID = pk)
         
-        if request.method == 'GET':
-            
-            if liked == None:
-                
-                liked = Product_Likes(Customer_ID=request.user.id, Product_ID=pk)
-                liked.save()
-            
-            return redirect('product_detail', pk=pk)
+        likedProduct = Product.objects.get(Product_ID = pk)
         
-        return render(request, 'product_detail.html')
-                
+        liked, created = Product_Likes.objects.get_or_create(defaults={'Product_ID': likedProduct}, Customer_ID_id= request.user.id, Product_ID = likedProduct)
+        
+        
+        if not created:
+            liked.delete()
+        else:
+            liked.save()
+            
+        
+        return redirect('details', pk = pk)
+    
 
 class Categories:
 
@@ -98,8 +104,6 @@ class Cart_View:
             product.append([cart_item.cart_amount, Product.objects.get(Product_ID__contains = cart_item.product_key.Product_ID)])
             payment_sum += Product.objects.get(Product_ID__contains = cart_item.product_key.Product_ID).price * cart_item.cart_amount
         
-            
-        print(product)
         
         
 
