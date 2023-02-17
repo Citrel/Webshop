@@ -32,35 +32,29 @@ class Article():
         product = get_object_or_404(Product, pk=pk)
         likes = Product_Likes.objects.filter(Product_ID = pk).count() 
         
-        likedProduct = Product.objects.get(Product_ID = pk)
         
-        is_liked = True
-        
-        created = Product_Likes.objects.get_or_create(defaults={'Product_ID': likedProduct}, Customer_ID_id= request.user.id, Product_ID = likedProduct)
-        
-        
-        if not created:
-            is_liked = True
-        else:
-            is_liked = False
-        
-        
-        return render(request, 'product_detail.html',{'product' : product, 'likes' : likes, 'cart_item_count' : cart_item_count, 'is_liked' : is_liked})
+        return render(request, 'product_detail.html',{'product' : product, 'likes' : likes, 'cart_item_count' : cart_item_count})
     
     def like_product(request, pk):
         
-        likedProduct = Product.objects.get(Product_ID = pk)
         
-        liked, created = Product_Likes.objects.get_or_create(defaults={'Product_ID': likedProduct}, Customer_ID_id= request.user.id, Product_ID = likedProduct)
+        if request.method == 'POST':
+            likedProduct = Product.objects.get(Product_ID = pk)
+            is_liked = True
+        
+            liked, created = Product_Likes.objects.get_or_create(defaults={'Product_ID': likedProduct}, Customer_ID_id= request.user.id, Product_ID = likedProduct)
         
         
-        if not created:
-            liked.delete()
-        else:
-            liked.save()
+            if not created:
+                liked.delete()
+                is_liked = False
+            else:
+                liked.save()
+                is_liked = True
             
         
-        return redirect('details', pk = pk)
+            return redirect('details', pk = pk)
+        return render(request,'product_detail.html' , {'is_liked' : is_liked})
     
     def add_to_cart(request, pk, amount):
         
