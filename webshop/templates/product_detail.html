@@ -61,20 +61,21 @@
         <br>
         <br>
         <br>
-        <form action="/webshop/shop/views.py">
+        <form name = 'Change_Amount_Form' method = 'POST', action = {% url 'add_to_cart' product.Product_ID %}>
+			{% csrf_token %}
             <!-- col.// -->
             <div class="col"> 
                 <div class="input-group input-spinner">
                     <div class="input-group-prepend">
                     <button class="btn btn-light" type="button" id="button-plus" onclick="minus('quantity');"> <i class="fa fa-minus"></i> </button>
                     </div>
-                    <input type="text" id="quantity" class="form-control"  value="1">
+                    <input name = 'change_article_amount' type="text" id="quantity" class="form-control"  value="1">
                     <div class="input-group-append">
                     <button class="btn btn-light" type="button" id="button-minus" onclick="plus('quantity');"> <i class="fa fa-plus"></i> </button>
                     </div>
                 </div> <!-- input-group.// -->
-                <a href="./product-detail.html" class="btn  btn-primary"> 
-                    <span class="text">In den Warenkorb</span> <i class="fas fa-shopping-cart"></i>  
+                <button type = 'submit' class="btn  btn-primary"> 
+                    <span class="text">In den Warenkorb</span> <i class="fas fa-shopping-cart"></i></button>  
                 </a>
             </div> <!-- col.// -->
         </form> <!-- search-wrap .end// -->

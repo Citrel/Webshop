@@ -24,6 +24,7 @@ urlpatterns = [
     path('search', views.Search.show_searched_products, name="searching"),
     path('details/<slug:pk>', views.Article.show_information, name='details'),
     path('details/<slug:pk>/like', views.Article.like_product, name='like'),
+    path('details/<slug:pk>/add_to_cart', views.Article.add_to_cart, name = 'add_to_cart'),
     path('categories/<slug:pk>', views.Categories.show_categories, name='categories'),
     path('about_us', views.About_Us.show_abouts, name='about_us'),
     path('imprint', views.Imprint.show_imprint, name='imprint'),

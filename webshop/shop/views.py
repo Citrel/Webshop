@@ -18,8 +18,6 @@ class Homepage:
         categories = Category.objects.all()
         cart_item_count = Cart.objects.filter(Customer_ID=request.user.id).count()
         
-        print(products)
-        
         return render (request, 'index.html', {'products' : products, 'categories' : categories, 'cart_item_count' : cart_item_count})
     
 
@@ -28,12 +26,13 @@ class Article():
     def show_information(request, pk):
         
         cart_item_count = Cart.objects.filter(Customer_ID=request.user.id).count()
+        categories = Category.objects.all()
         
         product = get_object_or_404(Product, pk=pk)
         likes = Product_Likes.objects.filter(Product_ID = pk).count() 
         
         
-        return render(request, 'product_detail.html',{'product' : product, 'likes' : likes, 'cart_item_count' : cart_item_count})
+        return render(request, 'product_detail.html',{'product' : product, 'likes' : likes, 'cart_item_count' : cart_item_count, 'categories' : categories})
     
     def like_product(request, pk):
         
@@ -56,16 +55,28 @@ class Article():
             return redirect('details', pk = pk)
         return render(request,'product_detail.html' , {'is_liked' : is_liked})
     
-    def add_to_cart(request, pk, amount):
+    
+    def add_to_cart(request, pk):
         
-        new_entry, created = Cart.objects.get_or_create(Customer_ID_id = request.user.id, product_key = pk, cart_amount = amount)
-        
-        if not created:
-            new_entry.cart_amount += amount
-        else:
-            new_entry.save()
+        if request.method == 'POST':
+            amount = int(request.POST.get('change_article_amount'))
             
-        return redirect('cart')
+            product_obj = Product.objects.get(Product_ID=pk)
+        
+        if amount > 0:
+            created = Cart.objects.filter(Customer_ID = request.user.id, product_key = product_obj).exists()
+        
+            if not created:
+                new_entry = Cart.objects.create(Customer_ID_id = request.user.id, product_key = product_obj, cart_amount = amount)
+                new_entry.save()
+            else:
+                existing_entry = Cart.objects.get(Customer_ID_id = request.user.id, product_key = product_obj)
+                existing_entry.cart_amount += amount
+                existing_entry.save()
+            
+            return redirect('cart')
+        
+        return render(request, 'cart.html')
     
     
     
@@ -75,12 +86,13 @@ class Categories:
     def show_categories(request, pk):
         
         cart_item_count = Cart.objects.filter(Customer_ID=request.user.id).count()
+        categories = Category.objects.all()
         
         category = get_object_or_404(Category, pk=pk)
         
         product_list = Product.objects.filter(category_id__Category_ID__contains=pk)
         
-        return render(request,'category.html', {'category' : category, 'product_list' : product_list, 'cart_item_count' : cart_item_count})
+        return render(request,'category.html', {'category' : category, 'product_list' : product_list, 'cart_item_count' : cart_item_count, 'categories' : categories})
     
 
 class Search:
@@ -88,6 +100,7 @@ class Search:
         def show_searched_products(request):
             
             cart_item_count = Cart.objects.filter(Customer_ID=request.user.id).count()
+            categories = Category.objects.all()
                         
             if request.method == "GET":
                 query = request.GET.get('search')
@@ -97,13 +110,14 @@ class Search:
                     
                 result = Product.objects.filter(Q(product_name__icontains=query) | Q(product_description__icontains=query))
                 
-                return render(request, 'search.html', {'query' : query, 'result' : result, 'cart_item_count' : cart_item_count})
+                return render(request, 'search.html', {'query' : query, 'result' : result, 'cart_item_count' : cart_item_count, 'categories' : categories})
             
            
 class Cart_View:
 
     def show_cart(request):
         
+        categories = Category.objects.all()
         cart_item_count = Cart.objects.filter(Customer_ID=request.user.id).count()
 
         cart_items = Cart.objects.filter(Customer_ID = request.user.id)
@@ -121,7 +135,7 @@ class Cart_View:
         
         
 
-        return render(request, 'cart.html', {'product': product, 'cart_item_count' : cart_item_count, 'payment_sum' : payment_sum})
+        return render(request, 'cart.html', {'product': product, 'cart_item_count' : cart_item_count, 'payment_sum' : payment_sum, 'categories' : categories})
     
     def increase_cart_amount(request, pk):
         
@@ -165,8 +179,9 @@ class About_Us:
     def show_abouts(request):
         
         cart_item_count = Cart.objects.filter(Customer_ID=request.user.id).count()
+        categories = Category.objects.all()
 
-        return render(request, 'about_us.html', {'cart_item_count' : cart_item_count})
+        return render(request, 'about_us.html', {'cart_item_count' : cart_item_count, 'categories' : categories})
 
 
 class Imprint:
@@ -174,5 +189,6 @@ class Imprint:
     def show_imprint(request):
         
         cart_item_count = Cart.objects.filter(Customer_ID=request.user.id).count()
+        categories = Category.objects.all()
 
-        return render(request, 'imprint.html', {'cart_item_count' : cart_item_count})
+        return render(request, 'imprint.html', {'cart_item_count' : cart_item_count, 'categories' : categories})
