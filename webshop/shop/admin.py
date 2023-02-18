@@ -8,8 +8,9 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('product_name', 'product_description', 'product_image_path', 'price', 'date_last_change', 'delivery_time'
-                    )
+    list_display = ('product_name', 'product_description',
+                    'product_image_path', 'price', 'delivery_time')
+    readonly_fields = ('date_last_change',)
 
 
 admin.site.register(Category, CategoryAdmin)
