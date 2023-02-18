@@ -43,7 +43,13 @@
                 <form name="Change_Amount_Form" method='POST' action={% url 'like' pk=product.Product_ID %} style="grid-row: auto;">
 				    {%csrf_token %}
                         <button class="btn btn-light" type="submit" id="button-like" onclick="like()">
-                            <p style="color: #2de7de; font-size: x-large;" id="button-like-text">&#9825;</p>
+                            <p style="color: #2de7de; font-size: x-large;" id="button-like-text">
+							{% if is_liked is True %}
+							&#9825;
+							{% else %}
+							&#9829;
+							{% endif %}							
+							</p>
                         </button>
                 </form>
             </div>
@@ -62,6 +68,7 @@
         <br>
         <br>
         <form name = 'Change_Amount_Form' method = 'POST', action = {% url 'add_to_cart' product.Product_ID %}>
+			{% csrf_token %}
             <!-- col.// -->
             <div class="col"> 
                 <div class="input-group input-spinner">
