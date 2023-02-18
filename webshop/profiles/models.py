@@ -45,7 +45,7 @@ class Profile(AbstractBaseUser):
     last_name = models.CharField(max_length=50)
     username = models.CharField(max_length=50, unique=True)
     email = models.EmailField(max_length=100, unique=True)
-    phone_number = models.CharField(max_length=50)
+    phone_number = models.CharField(blank=True, max_length=50)
     is_admin = models.BooleanField(default=False)
     # change this to false before shipping
     is_active = models.BooleanField(default=True)
@@ -69,10 +69,10 @@ class Profile(AbstractBaseUser):
 
 class User_Delivery_Address(models.Model):
     user = models.OneToOneField(Profile, on_delete=models.CASCADE)
-    street = models.CharField(blank=True, max_length=100)
-    number = models.CharField(blank=True, max_length=5)
-    city = models.CharField(blank=True, max_length=100)
-    plz = models.CharField(blank=True, max_length=10)
+    delivery_street = models.CharField(blank=True, max_length=100)
+    delivery_house_number = models.CharField(blank=True, max_length=5)
+    delivery_city = models.CharField(blank=True, max_length=100)
+    delivery_plz = models.CharField(blank=True, max_length=10)
 
     def __str__(self):
         return self.user.first_name
@@ -80,10 +80,10 @@ class User_Delivery_Address(models.Model):
 
 class User_Payment_Address(models.Model):
     user = models.OneToOneField(Profile, on_delete=models.CASCADE)
-    street = models.CharField(blank=True, max_length=100)
-    number = models.CharField(blank=True, max_length=5)
-    city = models.CharField(blank=True, max_length=100)
-    plz = models.CharField(blank=True, max_length=10)
+    payment_street = models.CharField(blank=True, max_length=100)
+    payment_house_number = models.CharField(blank=True, max_length=5)
+    payment_city = models.CharField(blank=True, max_length=100)
+    payment_plz = models.CharField(blank=True, max_length=10)
 
     def __str__(self):
         return self.user.first_name
@@ -102,10 +102,13 @@ class User_Credit_Card(models.Model):
         return self.user.first_name
 
 
-class User_Paypal(models.Model):
+class User_PayPal(models.Model):
     user = models.OneToOneField(Profile, on_delete=models.CASCADE)
-    paypal_mail = models.EmailField(max_length=100, unique=True)
-    paypal_password = models.CharField(max_length=100)
+    paypal_mail = models.EmailField(blank=True, max_length=100, unique=True)
+    paypal_password = models.CharField(blank=True, max_length=100)
+
+    def __str__(self):
+        return self.user.first_name
 
 
 class User_Debit(models.Model):
@@ -114,3 +117,6 @@ class User_Debit(models.Model):
     debit_last_name = models.CharField(blank=True, max_length=100)
     iban = models.CharField(blank=True, max_length=22)
     bic = models.CharField(blank=True, max_length=11)
+
+    def __str__(self):
+        return self.user.first_name

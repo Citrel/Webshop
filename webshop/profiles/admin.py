@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Profile, User_Delivery_Address, User_Payment_Address, User_Credit_Card, User_Paypal, User_Debit
+from .models import Profile, User_Delivery_Address, User_Payment_Address, User_Credit_Card, User_PayPal, User_Debit
 
 # Register your models here.
 
@@ -17,11 +17,13 @@ class ProfileAdmin(UserAdmin):
 
 
 class User_Delivery_AddressAdmin(admin.ModelAdmin):
-    list_display = ('user', 'street', 'number', 'city', 'plz')
+    list_display = ('user', 'delivery_street',
+                    'delivery_house_number', 'delivery_city', 'delivery_plz')
 
 
 class User_Payment_AddressAdmin(admin.ModelAdmin):
-    list_display = ('user', 'street', 'number', 'city', 'plz')
+    list_display = ('user', 'payment_street',
+                    'payment_house_number', 'payment_city', 'payment_plz')
 
 
 class User_Credit_CardAdmin(admin.ModelAdmin):
@@ -31,7 +33,7 @@ class User_Credit_CardAdmin(admin.ModelAdmin):
                     'security_code')
 
 
-class User_PaypalAdmin(admin.ModelAdmin):
+class User_PayPalAdmin(admin.ModelAdmin):
     list_display = ('user', 'paypal_mail', 'paypal_password')
 
 
@@ -44,5 +46,5 @@ admin.site.register(Profile, ProfileAdmin)
 admin.site.register(User_Delivery_Address, User_Delivery_AddressAdmin)
 admin.site.register(User_Payment_Address, User_Payment_AddressAdmin)
 admin.site.register(User_Credit_Card, User_Credit_CardAdmin)
-admin.site.register(User_Paypal, User_PaypalAdmin)
+admin.site.register(User_PayPal, User_PayPalAdmin)
 admin.site.register(User_Debit, User_DebitAmin)
