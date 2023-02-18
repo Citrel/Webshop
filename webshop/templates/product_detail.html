@@ -43,7 +43,13 @@
                 <form name="Change_Amount_Form" method='POST' action={% url 'like' pk=product.Product_ID %} style="grid-row: auto;">
 				    {%csrf_token %}
                         <button class="btn btn-light" type="submit" id="button-like" onclick="like()">
-                            <p style="color: #2de7de; font-size: x-large;" id="button-like-text">&#9825;</p>
+                            <p style="color: #2de7de; font-size: x-large;" id="button-like-text">
+							{% if is_liked is True %}
+							&#9829;
+							{% else %}
+							&#9825;
+							{% endif %}							
+							</p>
                         </button>
                 </form>
             </div>
