@@ -28,7 +28,7 @@
 								<figure class="itemside align-items-center">
 									<div class="aside"><img src={% static p.1.product_image_path %} class="img-sm" style="border-radius: 20%;"></div>
 									<figcaption class="info">
-										<a href="#" class="title text-dark">{{ p.1.product_name }}</a>
+										<a href={% url 'detail' p.1.Product_ID %} class="title text-dark">{{ p.1.product_name }}</a>
 									</figcaption>
 								</figure>
 							</td>
@@ -63,7 +63,7 @@
 									<!--<var class="price">{{ p.price_total }}</var>--> 
 									<br>
 									<br>
-									<p class="text"> je {% multiply p.0 p.1.price|floatformat:2  %} </p> 
+									<p class="text"> je {{ p.2|floatformat:2  }} </p> 
 								</div> <!-- price-wrap .// -->
 							</td>
 							<td class="text-right"> 

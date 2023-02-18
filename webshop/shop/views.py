@@ -32,14 +32,12 @@ class Article():
         
         if request.user.is_authenticated:
             created = Product_Likes.objects.filter(Customer_ID_id= request.user.id, Product_ID = likedProduct).exists()
-            print(1)
             if not created:
                 is_liked = False
             else:
                 is_liked = True
             
         
-        print(is_liked)
         return render(request, 'product_detail.html',{'product' : product, 'likes' : likes, 'is_liked' : is_liked , 'cart_item_count' : cart_item_count, 'categories' : categories})
     
     def like_product(request, pk):
