@@ -69,7 +69,7 @@
                         <div class="category-wrap dropdown d-inline-block float-right">
                             <button type="button" class="btn btn-primary dropdown-toggle"
                                 data-toggle="dropdown">
-                                <i class="fa fa-bars"></i> Alle Kategorien
+                                <i class="fa fa-bars"></i>  Kategorien
                             </button>
                             <div class="dropdown-menu">
                                 {% for category in categories %}
@@ -116,7 +116,9 @@
                                     <div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i>
                                     </div>
                                     {% if user.id is not None %}
-                                    <span class="badge badge-pill badge-danger notify">{{ cart_item_count }}</span>
+                                        {% if cart_item_count != 0 %}
+                                            <span class="badge badge-pill badge-danger notify">{{ cart_item_count }}</span>
+                                        {% endif %}
                                     {% endif %}
                                 </a>
                             </div> <!-- widgets-wrap.// -->

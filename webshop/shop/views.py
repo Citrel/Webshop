@@ -101,7 +101,7 @@ class Categories:
 class Search:
 
         def show_searched_products(request):
-            
+                        
             cart_item_count = Cart.objects.filter(Customer_ID=request.user.id).count()
             categories = Category.objects.all()
                         
