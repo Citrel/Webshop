@@ -27,30 +27,38 @@ class Article():
         
         product = get_object_or_404(Product, pk=pk)
         likes = Product_Likes.objects.filter(Product_ID = pk).count() 
+        likedProduct = Product.objects.get(Product_ID = pk)
+        is_liked = False
         
+        if request.user.is_authenticated:
+            created = Product_Likes.objects.filter(Customer_ID_id= request.user.id, Product_ID = likedProduct).exists()
+            print(1)
+            if not created:
+                is_liked = False
+            else:
+                is_liked = True
+            
         
-        return render(request, 'product_detail.html',{'product' : product, 'likes' : likes, 'cart_item_count' : cart_item_count, 'categories' : categories})
+        print(is_liked)
+        return render(request, 'product_detail.html',{'product' : product, 'likes' : likes, 'is_liked' : is_liked , 'cart_item_count' : cart_item_count, 'categories' : categories})
     
     def like_product(request, pk):
         
         
         if request.method == 'POST':
             likedProduct = Product.objects.get(Product_ID = pk)
-            is_liked = True
         
             liked, created = Product_Likes.objects.get_or_create(defaults={'Product_ID': likedProduct}, Customer_ID_id= request.user.id, Product_ID = likedProduct)
         
         
             if not created:
                 liked.delete()
-                is_liked = False
             else:
                 liked.save()
-                is_liked = True
             
         
             return redirect('details', pk = pk)
-        return render(request,'product_detail.html' , {'is_liked' : is_liked})
+        return render(request,'product_detail.html')
     
     
     def add_to_cart(request, pk):
@@ -126,7 +134,8 @@ class Cart_View:
         
         for cart_item in cart_items:
            
-            product.append([cart_item.cart_amount, Product.objects.get(Product_ID__contains = cart_item.product_key.Product_ID), Product.objects.get(Product_ID__contains = cart_item.product_key.Product_ID).price * cart_item.cart_amount])
+            product.append([cart_item.cart_amount, Product.objects.get(Product_ID__contains = cart_item.product_key.Product_ID), 
+                            Product.objects.get(Product_ID__contains = cart_item.product_key.Product_ID).price * cart_item.cart_amount])
             payment_sum += Product.objects.get(Product_ID__contains = cart_item.product_key.Product_ID).price * cart_item.cart_amount
         
         
