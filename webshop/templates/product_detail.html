@@ -42,7 +42,7 @@
             <div class="grid-row" style="grid-area: 1 / 1 / 2 / 2;">
                 {% if user.id is None %}
                 <a href={% url 'login' %} class="btn btn-light" type="text" id="button-like">
-                        <p style="color: #2de7de;" id="button-like-text">&#9829; {{likes}}</p>
+                        <p style="color: #2de7de;" id="button-like-text">&#9825; {{likes}}</p>
                 </a>
                 {% else %}
                     <form name="Change_Amount_Form" method='POST' action={% url 'like' pk=product.Product_ID %} style="grid-row: auto;">
