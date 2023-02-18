@@ -164,8 +164,8 @@ class Cart_View:
     
     def change_cart_amount(request, pk):
         
-        if request.method == 'GET':
-            new_amount = request.GET.get('change_amount')
+        if request.method == 'POST':
+            new_amount = request.POST.get('change_amount')
         
         changing_item = Cart.objects.get(Customer_ID = request.user.id, product_key = pk)
         
