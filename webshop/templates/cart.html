@@ -45,7 +45,7 @@
 													</div>
 													<form method = "POST" action={% url 'change' p.1.Product_ID %}>
 													<br>
-														<input type="text" class="form-control"  value={{ p.0 }} id="{{p.product_name}}">
+														<input name='change_amount' type="text" class="form-control"  value={{ p.0 }} id="{{p.product_name}}">
 													{% csrf_token %}
 													</form>
 													<div class="input-group-append">
