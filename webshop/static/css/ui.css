@@ -30,6 +30,7 @@ a:hover {
 
 .price-wrap {
   letter-spacing: -0.7px;
+  width: max-content;
 }
 
 .content-body {

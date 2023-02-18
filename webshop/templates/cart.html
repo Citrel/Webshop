@@ -60,10 +60,9 @@
 							</td>
 							<td> 
 								<div class="price-wrap"> 
-									<!--<var class="price">{{ p.price_total }}</var>--> 
 									<br>
 									<br>
-									<p class="text"> je {{ p.2|floatformat:2  }} </p> 
+									<p class="text"> je {{ p.2|floatformat:2  }} €</p> 
 								</div> <!-- price-wrap .// -->
 							</td>
 							<td class="text-right"> 
@@ -83,7 +82,7 @@
 					<dl class="dlist-align">
 					<dt>Gesamtpreis:</dt>
 					<dd class="text-right">
-					{{ payment_sum|floatformat:2  }}
+					{{ payment_sum|floatformat:2  }} €
 					</dd>
 					</dl>
 					<dl class="dlist-align">
