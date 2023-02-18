@@ -28,7 +28,7 @@ class Article():
         product = get_object_or_404(Product, pk=pk)
         likes = Product_Likes.objects.filter(Product_ID = pk).count() 
         likedProduct = Product.objects.get(Product_ID = pk)
-        is_liked = False
+        is_liked = True
         
         if request.user.is_authenticated:
             created = Product_Likes.objects.filter(Customer_ID_id= request.user.id, Product_ID = likedProduct).exists()
