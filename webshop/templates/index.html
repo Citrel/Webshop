@@ -27,13 +27,12 @@ Index
     <div class="container">
 
         <header class="section-heading">
-            <a href="./store.html" class="btn btn-outline-primary float-right">See all</a>
             <h3 class="section-title">Bestseller</h3>
         </header><!-- sect-heading -->
 
 
         <div class="row">
-            {% for product in products %}
+            {% for product in bestseller %}
             <div class="col-md-3">
                 <div class="card card-product-grid">
                     <a href={% url 'details' product.Product_ID %} class="img-wrap"> <img src={% static product.product_image_path %}> </a>
@@ -46,6 +45,28 @@ Index
             {% endfor %}
         </div> <!-- row.// -->
 
+        {% for categorie in categories_with_items %}
+            <div class="section-heading">
+                <h3 class="section-title">{{ categorie.0.categorie_name }}</h3>
+                <br>
+                <small>{{ categorie.0.categorie_description }}</small>
+            </div><!-- sect-heading -->
+
+
+            <div class="row">
+                {% for product in categorie.1 %}
+                <div class="col-md-3">
+                    <div class="card card-product-grid">
+                        <a href={% url 'details' product.Product_ID %} class="img-wrap"> <img src={% static product.product_image_path %}> </a>
+                        <figcaption class="info-wrap">
+                            <a href={% url 'details' product.Product_ID %} class="title">{{ product.product_name }}</a>
+                            <div class="price mt-1">{{ product.price|floatformat:2 }}€</div> <!-- price-wrap.// -->
+                        </figcaption>
+                    </div>
+                </div> <!-- col.// -->
+                {% endfor %}
+            </div> <!-- row.// -->
+        {% endfor %}
     </div><!-- container // -->
 </section>
 <!-- ========================= SECTION  END// ========================= -->
