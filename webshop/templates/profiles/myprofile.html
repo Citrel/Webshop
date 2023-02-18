@@ -4,83 +4,143 @@
 
 <!-- ========================= SECTION CONTENT ========================= -->
 <section class="section-conten padding-y bg">
-<div class="container">
-    <div class="row" >
-            {% include 'includes/alerts.html' %}
-        <div class="card" style="margin: 10px;width:30%" >
-            <div style="margin:10px;">
-                <h2>Mein Profil</h2>
-                <p>Vorname:{{user.first_name}}</p>
-                <p>Nachname:{{user.last_name}}</p>
-                <p>Telefonnummer:{{user.phone_number}}</p>
-                <br>
-                <button class="btn btn-outline-primary" href="{% url 'forgot_password' %}">Passwort ändern</button>
-            </div>
-        </div>
+    <div class="container">
+        <form action="" method="POST">
+            <div class="row">
+                {% csrf_token %}
+                {% include 'includes/alerts.html' %}
+                <div class="card" style="margin: 10px;width:30%">
+                    <div style="margin:10px;">
 
-        <div class="card" style="margin: 10px;width:30%">
-            <div style="margin:10px;">
+                        <h2>Mein Profil</h2>
+                        <div class="form-group col-sm-6">
+                            <label>Vorname</label>
+                            {{profile_form.first_name}}
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>Nachname</label>
+                            {{profile_form.last_name}}
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>Telefonnummer</label>
+                            {{profile_form.phone_number}}
+                        </div>
+                        <input type="submit" value="Speichern" class="btn btn-primary"></input>
+                        <br>
+                        <br>
+                        <form action="{% url 'forgot_password' %}">
+                            <button class="btn btn-outline-primary">Passwort ändern</button>
+                        </form>
 
-                <h2>Paypal</h2>
-                <form action="/webshop/shop/views.py" >
-                    {% for field in paypal_form %}
-                    <div class="form-group col-sm-6">
-                        {{ field }}
                     </div>
-                    {% endfor %}
-                    <button type="submit" class="btn btn-primary">Speichern</button>
-                </form>
-
-                <h2>Kreditkarte</h2>
-                <form action="/webshop/shop/views.py" >
-                    {% for field in creditcard_form %}
-                    <div class="form-group col-sm-6">
-                        {{ field }}
-                    </div>
-                    {% endfor %}
-                    <button type="submit" class="btn btn-primary">Speichern</button>
-                </form>
-
-                <h2>Lastschrift</h2>
-                <form action="/webshop/shop/views.py" >
-                    {% for field in debitcard_form %}
-                    <div class="form-group col-sm-6">
-                        {{ field }}
-                    </div>
-                    {% endfor %}
-                    <button type="submit" class="btn btn-primary">Speichern</button>
                 </div>
-            </form>
 
-        </div>
-        <div class="card" style="margin: 10px;width:30%">
-            <div style="margin:10px;">
+                <div class="card" style="margin: 10px;width:30%">
+                    <div style="margin:10px;">
 
-                <h2>Lieferaddresse</h2>
-                <form action="/webshop/shop/views.py" >
-                    {% for field in delivery_address_form %}
-                    <div class="form-group col-sm-6">
-                        {{ field }}
+                        <h2>PayPal</h2>
+                        <div class="form-group col-sm-6">
+                            <label>E-mail</label>
+                            {{user_paypal_form.mail}}
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>Passwort</label>
+                            {{user_paypal_form.password}}
+                        </div>
+
+
+                        <h2>Kreditkarte</h2>
+                        <div class="form-group col-sm-6">
+                            <label>Vorname</label>
+                            {{user_credit_card_form.owner_first_name}}
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>Nachname</label>
+                            {{user_credit_card_form.owner_last_name}}
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>Kartennummer</label>
+                            {{user_credit_card_form.card_number}}
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>Ablaufdatum MM/YY</label>
+                            {{user_credit_card_form.expiration_date_month}}
+                        </div>
+                        <div class="form-group col-sm-6">
+                            {{user_credit_card_form.expiration_date_year}}
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>Sicherheitscode</label>
+                            {{user_credit_card_form.security_code}}
+                        </div>
+
+
+                        <h2>Lastschrift</h2>
+                        <div class="form-group col-sm-6">
+                            <label>Vorname</label>
+                            {{user_debit_form.debit_first_name}}
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>Nachname</label>
+                            {{user_debit_form.debit_last_name}}
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>IBAN</label>
+                            {{user_debit_form.iban}}
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>BIC</label>
+                            {{user_debit_form.bic}}
+                        </div>
+
                     </div>
-                    {% endfor %}
-                    <button type="submit" class="btn btn-primary">Speichern</button>
-                </form>
+                </div>
 
-                <h2>Rechnungsaddresse</h2>
-                <form action="/webshop/shop/views.py" >
-                    {% for field in billing_address_form %}
-                    <div class="form-group col-sm-6">
-                        {{ field }}
+                <div class="card" style="margin: 10px;width:30%">
+                    <div style="margin:10px;">
+
+                        <h2>Lieferadresse</h2>
+                        <div class="form-group col-sm-6">
+                            <label>Straße</label>
+                            {{user_delivery_address_form.delivery_street}}
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>Hausnummer</label>
+                            {{user_delivery_address_form.delivery_house_number}}
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>Stadt</label>
+                            {{user_delivery_address_form.delivery_city}}
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>PLZ</label>
+                            {{user_delivery_address_form.delivery_plz}}
+                        </div>
+
+
+                        <h2>Rechnungsadresse</h2>
+                        <div class="form-group col-sm-6">
+                            <label>Straße</label>
+                            {{user_payment_address_form.payment_street}}
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>Hausnummer</label>
+                            {{user_payment_address_form.payment_house_number}}
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>Stadt</label>
+                            {{user_payment_address_form.payment_city}}
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>PLZ</label>
+                            {{user_payment_address_form.payment_plz}}
+                        </div>
+
                     </div>
-                    {% endfor %}
-                    <button type="submit" class="btn btn-primary">Speichern</button>
-                </form>
+                </div>
             </div>
-        </div>
-
-        </div>
+        </form>
     </div>
-</div>
 </section>
 <!-- ========================= SECTION CONTENT END// ========================= -->
 
