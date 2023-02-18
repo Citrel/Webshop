@@ -63,7 +63,7 @@
 									<!--<var class="price">{{ p.price_total }}</var>--> 
 									<br>
 									<br>
-									<p class="text"> je {{ p.1.price }} </p> 
+									<p class="text"> je {{ p.1.price|floatformat:2  }} </p> 
 								</div> <!-- price-wrap .// -->
 							</td>
 							<td class="text-right"> 
@@ -77,12 +77,13 @@
 				</table>
 			</div> <!-- card.// -->
 		</aside>
+		<aside>
 			<div class="card">
 				<div class="card-body">
 					<dl class="dlist-align">
 					<dt>Gesamtpreis:</dt>
 					<dd class="text-right">
-					{{ payment_sum }}
+					{{ payment_sum|floatformat:2  }}
 					</dd>
 					</dl>
 					<dl class="dlist-align">

@@ -1,10 +1,34 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
+{% block title %}
+<title>Bestellen</title>
+{% endblock %}
 
 
 {% block content %}
 
-
+<div class="row">
+    <main class="col-md-8">
+        {% for p in product %}
+            <article class="card mb-4">
+                <div class="card-body">
+                    <h4 class="card-title mb-4">Gute Auswahl!</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <figure class="itemside  mb-4">
+                                <div class="aside"><img src={% static p.1.product_image_path %} class="border img-sm" style="border-radius: 20%;"></div>
+                                <figcaption class="info">
+                                    <p> {{p.1.product_name}} </p>
+                                    <span class="text-muted"> {{p.0}}x = {{p.1.price|floatformat:2 }} </span>
+                                </figcaption>
+                            </figure>
+                        </div> <!-- col.// -->
+                    </div> <!-- row.// -->
+                </div> <!-- card-body.// -->
+            </article> <!-- card.// -->
+        {% endfor %}
+        <a href="" class="btn btn-primary btn-block">Jetzt bestellen</a>
+    </main>
+</div>
 {% endblock %}
