@@ -8,6 +8,9 @@
 
 {% block content %}
 <div class="container" style="margin-top:10px; margin-bottom:300px;">
+	{% if user.id is None %}
+		<p class="alert alert-success">Registriere dich oder melde dich an, um den Inhalt des Warenkorbs sehen zu können.</p>
+	{% endif %}
 	<div class="row">
 		<aside class="col-lg-9">
 			<div class="card container">
@@ -61,8 +64,8 @@
 							<td> 
 								<div class="price-wrap"> 
 									<br>
-									<br>
-									<p class="text"> je {{ p.2|floatformat:2  }} €</p> 
+									<p class="text">    {{ p.2|floatformat:2  }} €</p> 
+									<small class="text"> je {{ p.1.price|floatformat:2  }} €</p> 
 								</div> <!-- price-wrap .// -->
 							</td>
 							<td class="text-right"> 
@@ -104,86 +107,7 @@
 </div>
 
 
-<div class="row">
-	<aside class="col-lg-9">
-<div class="card">
-<table class="table table-borderless table-shopping-cart">
-<thead class="text-muted">
-<tr class="small text-uppercase">
-  <th scope="col">Produkt</th>
-  <th scope="col" width="120">Menge</th>
-  <th scope="col" width="120">Preis</th>
-  <th scope="col" class="text-right" width="200"> </th>
-</tr>
-</thead>
-<tbody>
-{% for p in product %}
-	<tr>
-		<td>
-			<figure class="itemside align-items-center">
-				<div class="aside"><img src={% static p.1.product_image_path %} class="img-sm"></div>
-				<figcaption class="info">
-					<a href="#" class="title text-dark">{{ p.1.product_name }}</a>
-				</figcaption>
-			</figure>
-		</td>
-		<td> 
-			<!-- col.// -->
-						<div class="col"> 
-							<div class="input-group input-spinner">
-								<div class="input-group-prepend">
-								<button class="btn btn-light" type="submit" id="button-plus" value="{{p.product_name}}" onclick="minus(self.value);"> <i class="fa fa-minus"></i> </button>
-								</div>
-								<input type="text" class="form-control"  value={{ p.0 }} id="{{p.product_name}}">
-								<div class="input-group-append">
-								<button class="btn btn-light" type="submit" id="button-minus" value="{{p.product_name}}" onclick="plus(self.value)"> <i class="fa fa-plus"></i> </button>
-								</div>
-							</div> <!-- input-group.// -->
-						</div> <!-- col.// -->
-		</td>
-		<td> 
-			<div class="price-wrap"> 
-				<!--<var class="price">{{ p.price_total }}</var>--> 
-				<p class="text"> je {{ p.1.price }} </p> 
-			</div> <!-- price-wrap .// -->
-		</td>
-		<td class="text-right"> 
-		<a href="" class="btn btn-danger"> Remove</a>
-		</td>
-	</tr>
-{% endfor %}
-</tbody>
-</table>
-</div> <!-- card.// -->
 
-	</aside> <!-- col.// -->
-	<aside class="col-lg-3">
-
-		<div class="card">
-		<div class="card-body">
-			<dl class="dlist-align">
-			  <dt>Gesamtpreis:</dt>
-			  <dd class="text-right">
-			  {{ payment_sum }}
-			  </dd>
-			</dl>
-			<dl class="dlist-align">
-			  <dt>inkl. MwSt</dt>
-			</dl>
-			<hr>
-			<!-- TODO urls -->
-			<a href="" class="btn btn-primary btn-block"> Checkout </a>
-			<a href={% url 'index' %} class="btn btn-light btn-block">Continue Shopping</a>
-		</div> <!-- card-body.// -->
-		</div> <!-- card.// -->
-
-		</aside> <!-- col.// -->
-
-
-	</div> <!-- row.// -->
-
-</div> <!-- container .//  -->
-</section>
 
 
 

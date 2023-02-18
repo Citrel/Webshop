@@ -1414,7 +1414,7 @@ a[class*=card]:hover .title {
 }
 
 form {
-  width: fit-content !important;
+  width: fit-content ;
 }
 
 /*# sourceMappingURL=ui.css.map */

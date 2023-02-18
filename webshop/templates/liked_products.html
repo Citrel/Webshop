@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+<title>&#9829;-Produkt</title>
+{% endblock %}
+
+{% block content %}
+<section class="section-name padding-y-sm">
+    <div class="container">
+
+        <header class="section-heading">
+            <h3 class="section-title">&#9829;-Produkte</h3>
+            <small>Entscheidend besser als alles andere!</small>
+        </header><!-- sect-heading -->
+
+
+        <div class="row">
+            {% for product in liked_products %}
+            <div class="col-md-3">
+                <div class="card card-product-grid">
+                    <a href={% url 'details' product.Product_ID %} class="img-wrap"> <img src={% static product.product_image_path %}> </a>
+                    <figcaption class="info-wrap">
+                        <a href={% url 'details' product.Product_ID %} class="title">{{ product.product_name }}</a>
+                        <div class="price mt-1">{{ product.price|floatformat:2 }}€</div> <!-- price-wrap.// -->
+                    </figcaption>
+                </div>
+            </div> <!-- col.// -->
+            {% endfor %}
+        </div> <!-- row.// -->
+    
+    </div>
+</section>
+{% endblock %}

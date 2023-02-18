@@ -69,7 +69,7 @@
                         <div class="category-wrap dropdown d-inline-block float-right">
                             <button type="button" class="btn btn-primary dropdown-toggle"
                                 data-toggle="dropdown">
-                                <i class="fa fa-bars"></i>  Kategorien
+                                <i class="fa fa-bars"></i>  Unsere Kategorien
                             </button>
                             <div class="dropdown-menu">
                                 {% for category in categories %}
@@ -83,7 +83,7 @@
                     <div class="col-lg  col-md-6 col-sm-12 col">
                         <form name='Search_Form' method='GET' action={% url 'searching' %}>
                             <div class="input-group w-100">
-                                <input type="text" name='search' class="form-control" style="width:60%; border: none;"
+                                <input type="text" name='search' class="form-control" style="width:70% !important; border: none;"
                                     placeholder="Suche" />
                                 <div class="input-group-append">
                                     <button class="btn btn-primary" type="submit">
@@ -93,6 +93,14 @@
                             </div>
                         </form> <!-- search-wrap .end// -->
                     </div> <!-- col.// -->
+                    <div class="col-lg">
+                        <!--TODO Link-->
+                        {% if user.id is None %}
+                            <a href={% url 'login' %} class="btn btn-primary" style="color:white; font-size:larger;">&#9829;</a>
+                        {% else %}
+                            <a href="" class="btn btn-primary" style="color:white; font-size:larger;">&#9829;</a>
+                        {% endif %}
+                    </div>
                     <div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
                         <div class="d-flex justify-content-end mb-3 mb-lg-0">
                             {% if user.id is None %}
