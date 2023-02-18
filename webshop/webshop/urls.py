@@ -23,10 +23,15 @@ urlpatterns = [
     path('', views.Homepage.show_products, name='index'),
     path('search', views.Search.show_searched_products, name="searching"),
     path('details/<slug:pk>', views.Article.show_information, name='details'),
-    path('details/<slug:pk>', views.Article.like_product, name='like'),
+    path('details/<slug:pk>/like', views.Article.like_product, name='like'),
+    path('details/<slug:pk>/add_to_cart', views.Article.add_to_cart, name = 'add_to_cart'),
     path('categories/<slug:pk>', views.Categories.show_categories, name='categories'),
     path('about_us', views.About_Us.show_abouts, name='about_us'),
     path('imprint', views.Imprint.show_imprint, name='imprint'),
     path('cart', views.Cart_View.show_cart, name = 'cart'),
+    path('cart/<slug:pk>/increase', views.Cart_View.increase_cart_amount, name='increase'),
+    path('cart/<slug:pk>/decrease', views.Cart_View.decrease_cart_amount, name='decrease'),
+    path('cart/<slug:pk>/change', views.Cart_View.change_cart_amount, name='change'),
+    path('cart/<slug:pk>/delete', views.Cart_View.delete_from_cart, name='delete'),
     path('profiles/', include('profiles.urls'))
 ]

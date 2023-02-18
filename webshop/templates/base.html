@@ -67,9 +67,9 @@
                     </div>
                     <div class="col-lg col-sm col-md col-6 flex-grow-0">
                         <div class="category-wrap dropdown d-inline-block float-right">
-                            <button type="button" class="btn btn-outline-primary dropdown-toggle"
+                            <button type="button" class="btn btn-primary dropdown-toggle"
                                 data-toggle="dropdown">
-                                <i class="fa fa-bars"></i> Alle Kategorien
+                                <i class="fa fa-bars"></i>  Kategorien
                             </button>
                             <div class="dropdown-menu">
                                 {% for category in categories %}
@@ -83,11 +83,10 @@
                     <div class="col-lg  col-md-6 col-sm-12 col">
                         <form name='Search_Form' method='GET' action={% url 'searching' %}>
                             <div class="input-group w-100">
-                                {%csrf_token%}
-                                <input type="text" name='search' class="form-control" style="width:60%;"
+                                <input type="text" name='search' class="form-control" style="width:60%; border: none;"
                                     placeholder="Suche" />
                                 <div class="input-group-append">
-                                    <button class="btn btn-outline-primary" type="submit">
+                                    <button class="btn btn-primary" type="submit">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </div>
@@ -117,7 +116,9 @@
                                     <div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i>
                                     </div>
                                     {% if user.id is not None %}
-                                    <span class="badge badge-pill badge-danger notify">{{ cart_item_count }}</span>
+                                        {% if cart_item_count != 0 %}
+                                            <span class="badge badge-pill badge-danger notify">{{ cart_item_count }}</span>
+                                        {% endif %}
                                     {% endif %}
                                 </a>
                             </div> <!-- widgets-wrap.// -->
@@ -134,7 +135,7 @@
 
 
     <!-- ========================= FOOTER ========================= -->
-    <footer class="section-footer border-top">
+    <footer class="section-footer" >
         <div class="container">
             <section class="footer-bottom border-top row">
                 <div class="col-md-2">
