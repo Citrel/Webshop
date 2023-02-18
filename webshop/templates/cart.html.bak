@@ -28,7 +28,7 @@
 								<figure class="itemside align-items-center">
 									<div class="aside"><img src={% static p.1.product_image_path %} class="img-sm" style="border-radius: 20%;"></div>
 									<figcaption class="info">
-										<a href={% url 'detail' p.1.Product_ID %} class="title text-dark">{{ p.1.product_name }}</a>
+										<a href={% url 'details' p.1.Product_ID %} class="title text-dark">{{ p.1.product_name }}</a>
 									</figcaption>
 								</figure>
 							</td>
