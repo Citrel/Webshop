@@ -53,7 +53,7 @@
 													<br>
 														{% csrf_token %}
 													<button class="btn btn-light" type="submit" id="button-minus" value="{{p.product_name}}" onclick="plus(self.value)"> <i class="fa fa-plus"></i> </button>
-													</form
+													</form>
 													</div>
 												</div> <!-- input-group.// -->
 											</div> <!-- col.// -->
@@ -63,12 +63,12 @@
 									<!--<var class="price">{{ p.price_total }}</var>--> 
 									<br>
 									<br>
-									<p class="text"> je {{ p.1.price }} </p> 
+									<p class="text"> je {% multiply p.0 p.1.price|floatformat:2  %} </p> 
 								</div> <!-- price-wrap .// -->
 							</td>
 							<td class="text-right"> 
 								<br>
-							<a href="" class="btn btn-danger">Entfernen</a>
+							<a href={% url 'delete' p.1.Product_ID %} class="btn btn-danger">Entfernen</a>
 							</td>
 						</tr>
 					</div>
@@ -76,13 +76,14 @@
 					</tbody>
 				</table>
 			</div> <!-- card.// -->
-
+		</aside>
+		<aside>
 			<div class="card">
 				<div class="card-body">
 					<dl class="dlist-align">
 					<dt>Gesamtpreis:</dt>
 					<dd class="text-right">
-					{{ payment_sum }}
+					{{ payment_sum|floatformat:2  }}
 					</dd>
 					</dl>
 					<dl class="dlist-align">

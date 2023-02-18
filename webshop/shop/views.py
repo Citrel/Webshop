@@ -1,12 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from .models import *
-from profiles.models import Profile
 from .forms import *
 from django.db.models import Q, Sum, Count
-from django.http import Http404
 from django import template
-from django.contrib.auth.models import User
 
 
 
@@ -129,7 +126,7 @@ class Cart_View:
         
         for cart_item in cart_items:
            
-            product.append([cart_item.cart_amount, Product.objects.get(Product_ID__contains = cart_item.product_key.Product_ID)])
+            product.append([cart_item.cart_amount, Product.objects.get(Product_ID__contains = cart_item.product_key.Product_ID), Product.objects.get(Product_ID__contains = cart_item.product_key.Product_ID).price * cart_item.cart_amount])
             payment_sum += Product.objects.get(Product_ID__contains = cart_item.product_key.Product_ID).price * cart_item.cart_amount
         
         
@@ -178,6 +175,7 @@ class Cart_View:
         delete_obj.delete()
         
         return redirect('cart')
+    
     
 
 
