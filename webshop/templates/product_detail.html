@@ -40,24 +40,28 @@
         <div class="grid" style="display: grid; grid-template-columns: repeat(2, 1fr);
             grid-template-rows: 1fr; grid-column-gap: px; grid-row-gap: 20px;width: 120px;">
             <div class="grid-row" style="grid-area: 1 / 1 / 2 / 2;">
-                <form name="Change_Amount_Form" method='POST' action={% url 'like' pk=product.Product_ID %} style="grid-row: auto;">
-				    {%csrf_token %}
-                        <button class="btn btn-light" type="submit" id="button-like" onclick="like()">
-                            <p style="color: #2de7de; font-size: x-large;" id="button-like-text">
-							{% if is_liked is True %}
-							&#9829;
-							{% else %}
-							&#9825;
-							{% endif %}							
-							</p>
-                        </button>
-                </form>
+                {% if user.id is None %}
+                <a href={% url 'login' %} class="btn btn-light" type="text" id="button-like">
+                        <p style="color: #2de7de;" id="button-like-text">&#9829; {{likes}}</p>
+                </a>
+                {% else %}
+                    <form name="Change_Amount_Form" method='POST' action={% url 'like' pk=product.Product_ID %} style="grid-row: auto;">
+                        {%csrf_token %}
+                            <button class="btn btn-light" type="submit" id="button-like" onclick="reload">
+                                {% if is_liked %}
+                                    <p style="color: #2de7de;" id="button-like-text">&#9829; {{likes}}</p>
+                                {% else %}
+                                    <p style="color: #2de7de;" id="button-like-text">&#9825; {{likes}}</p>
+                                {% endif %}
+                            </button>
+                    </form>
+                {% endif %}
             </div>
-            <div class="grid-row" style ="grid-area: 1 / 2 / 2 / 3;">
+            <!--<div class="grid-row" style ="grid-area: 1 / 2 / 2 / 3;">
                 <div class="btn btn-light">
                     <p style="color: #2de7de;font-size: x-large;" id="button-like-likes">{{likes}}</p>
                 </div>
-            </div>
+            </div>-->
         </div>
         <p>Gefällt dir unser Produkt?</p>
 

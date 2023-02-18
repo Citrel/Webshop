@@ -25,13 +25,5 @@ function minus(name)
 
 function like()
 {
-    heart = document.getElementById('button-like-text').innerHTML;
-
-    if(heart == "&#9825;")
-    {
-        document.getElementById('button-like-text').innerHTML = "&#9829;";
-    } else 
-    {
-        document.getElementById('button-like-text').innerHTML = "&#9825;";
-    }
+   location.reload();
 }
