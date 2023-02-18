@@ -104,7 +104,7 @@ class User_Credit_Card(models.Model):
 
 class User_PayPal(models.Model):
     user = models.OneToOneField(Profile, on_delete=models.CASCADE)
-    paypal_mail = models.EmailField(blank=True, max_length=100, unique=True)
+    paypal_mail = models.EmailField(blank=True, max_length=100)
     paypal_password = models.CharField(blank=True, max_length=100)
 
     def __str__(self):
