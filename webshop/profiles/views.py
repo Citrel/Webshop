@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect
-from .forms import RegistrationForm
-from .models import Profile
+from django.shortcuts import render, redirect, get_object_or_404
+from .forms import RegistrationForm, ProfileForm, User_Delivery_AddressForm, User_Payment_AddressForm, User_Credit_CardForm, User_PayPalForm, User_DebitForm
+from .models import Profile, User_Delivery_Address, User_Payment_Address, User_Credit_Card, User_PayPal, User_Debit
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
 
@@ -27,6 +27,32 @@ def register(request):
                 first_name=first_name, last_name=last_name, email=email, username=username, password=password)
             user.phone_number = phone_number
             user.save()
+
+            # CREATE USER DELIVERY ADDRESS
+            user_delivery_address = User_Delivery_Address()
+            user_delivery_address.user_id = user.id
+            user_delivery_address.save()
+
+            # CREATE USER PAYMENT ADDRESS
+            user_payment_address = User_Payment_Address()
+            user_payment_address.user_id = user.id
+            user_payment_address.save()
+
+            # CREATE USER CREDIT CARD
+            user_credit_card = User_Credit_Card()
+            user_credit_card.user_id = user.id
+            user_credit_card.save()
+
+            # CREATE USER PAYPAL
+            user_paypal = User_PayPal()
+            user_paypal.user_id = user.id
+            user_paypal.save()
+
+            # CREATE USER DEBIT
+            user_debit = User_Debit()
+            user_debit.user_id = user.id
+            user_debit.save()
+
             # USER ACTIVATION EMAIL
             current_site = get_current_site(request)
             mail_subject = 'Konto Aktivieren'
@@ -69,8 +95,58 @@ def logout(request):
 
 @login_required(login_url='login')
 def myprofile(request):
-
-    return render(request, 'profiles/myprofile.html')
+    delivery_address = get_object_or_404(
+        User_Delivery_Address, user=request.user)
+    payment_address = get_object_or_404(
+        User_Payment_Address, user=request.user)
+    credit_card = get_object_or_404(
+        User_Credit_Card, user=request.user)
+    paypal = get_object_or_404(
+        User_PayPal, user=request.user)
+    debit = get_object_or_404(
+        User_Debit, user=request.user)
+    if request.method == 'POST':
+        profile_form = ProfileForm(request.POST, instance=request.user)
+        user_delivery_address_form = User_Delivery_AddressForm(
+            request.POST, instance=delivery_address)
+        user_payment_address_form = User_Payment_AddressForm(
+            request.POST, instance=payment_address)
+        user_credit_card_form = User_Credit_CardForm(
+            request.POST, instance=credit_card)
+        user_paypal_form = User_PayPalForm(
+            request.POST, instance=paypal)
+        user_debit_form = User_DebitForm(
+            request.POST, instance=debit)
+        if profile_form.is_valid() and user_delivery_address_form.is_valid() and user_payment_address_form.is_valid() and user_credit_card_form.is_valid() and user_paypal_form.is_valid() and user_debit_form.is_valid():
+            profile_form.save()
+            user_delivery_address_form.save()
+            user_payment_address_form.save()
+            user_credit_card_form.save()
+            user_paypal_form.save()
+            user_debit_form.save()
+            messages.success(request, 'Profil wurde aktualisiert')
+            return redirect('myprofile')
+    else:
+        profile_form = ProfileForm(instance=request.user)
+        user_delivery_address_form = User_Delivery_AddressForm(
+            instance=delivery_address)
+        user_payment_address_form = User_Payment_AddressForm(
+            instance=payment_address)
+        user_credit_card_form = User_Credit_CardForm(
+            instance=credit_card)
+        user_paypal_form = User_PayPalForm(
+            instance=paypal)
+        user_debit_form = User_DebitForm(
+            instance=debit)
+    context = {
+        'profile_form': profile_form,
+        'user_delivery_address_form': user_delivery_address_form,
+        'user_payment_address_form': user_payment_address_form,
+        'user_credit_card_form': user_credit_card_form,
+        'user_paypal_form': user_paypal_form,
+        'user_debit_form': user_debit_form
+    }
+    return render(request, 'profiles/myprofile.html', context)
 
 
 def activate(request, uidb64, token):
