@@ -41,13 +41,13 @@
             grid-template-rows: 1fr; grid-column-gap: px; grid-row-gap: 20px;width: 120px;">
             <div class="grid-row" style="grid-area: 1 / 1 / 2 / 2;">
                 {% if user.id is None %}
-                <button href={% url 'login' %} class="btn btn-light" type="text" id="button-like">
+                <a href={% url 'login' %} class="btn btn-light" type="text" id="button-like">
                         <p style="color: #2de7de;" id="button-like-text">&#9829; {{likes}}</p>
-                </button>
+                </a>
                 {% else %}
                     <form name="Change_Amount_Form" method='POST' action={% url 'like' pk=product.Product_ID %} style="grid-row: auto;">
                         {%csrf_token %}
-                            <button class="btn btn-light" type="submit" id="button-like">
+                            <button class="btn btn-light" type="submit" id="button-like" onclick="reload">
                                 {% if is_liked %}
                                     <p style="color: #2de7de;" id="button-like-text">&#9829; {{likes}}</p>
                                 {% else %}
