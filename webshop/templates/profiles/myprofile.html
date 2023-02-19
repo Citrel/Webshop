@@ -37,7 +37,10 @@
                         <form action="{% url 'forgot_password' %}">
                             <button class="btn btn-outline-primary">Passwort ändern</button>
                         </form>
-
+                        <div>
+                            <br>
+                            <a class="btn btn-outline-primary" href={% static url 'order_history '%} style="height: max-content;">Meine Bestellungen</a>
+                        </div>
                     </div>
                 </div>
 
@@ -144,6 +147,7 @@
 
                     </div>
                 </div>
+
             </div>
         </form>
     </div>
