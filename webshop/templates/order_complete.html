@@ -1,11 +1,72 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
+<title> Checkout </title>
 
 
 {% block content %}
+<head>
+  
+    <style>
+        .container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
 
-<img src={% static 'images/banners/1.png' %} class="img-fluid rounded">
+        .text {
+            flex-basis: 50%;
+            padding: 20px;
+        }
 
+        .image {
+            flex-basis: 50%;
+            text-align: center;
+        }
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .products {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<!-- TODO - Schriftart-->
+<body>
+    <div class="container">
+        <div class="text">
+            <h1>Test Checkout</h1>
+            <pre>Sehr geehrter Kunde,
+
+vielen Dank für Ihre Bestellung bei der Enten Company! Wir freuen uns, dass Sie sich für unsere Produkte entschieden haben
+und sind uns sicher, dass Sie mit Ihrer Bestellung zufrieden sein werden.
+
+Ihre Bestellung wird von unserem Team sorgfältig verpackt und an Sie verschickt. Wir bemühen uns, den Versand so schnell
+wie möglich abzuwickeln, damit Sie Ihre Produkte bald in den Händen halten können.
+
+Falls Sie während des Versands oder bei der Lieferung Fragen haben, können Sie sich jederzeit an unseren Kundenservice wenden.
+
+Wir stehen Ihnen gerne zur Verfügung und helfen Ihnen weiter.
+
+Nochmals vielen Dank für Ihre Bestellung bei der Enten Company. Wir hoffen, dass Sie in Zukunft erneut bei uns einkaufen werden.
+
+Mit freundlichen Grüßen,
+Das Team der Enten Company
+                 </pre>
+            <!--  Hier tolle weitere Produkte - aber keine Ahnung wie
+                <div class="products">
+          <h2>Weitere Produkte:</h2>
+
+      </div>
+                -->
+        </div>
+        <div class="image">
+            <img src={% static '/images/checkout.png' %}>
+        </div>
+    </div>
+</body>
 {% endblock %}
