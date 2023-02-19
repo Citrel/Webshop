@@ -356,8 +356,22 @@ output {
 }
 
 summary {
-  display: list-item;
-  cursor: pointer;
+	position: relative;
+	cursor: pointer;
+	padding: 1em .5em;
+	list-style: none; 
+}
+details summary::-webkit-details-marker {
+  display:none;
+}
+	
+details summary:hover {
+  background-color: #f2f5f9;
+}
+
+details {
+	border-bottom: 1px solid #b5bfd9;
+
 }
 
 template {

@@ -11,13 +11,64 @@
 
     {% for order in order_history %}
     <div class="card">
-        <div class="row">
-            
-        </div>
-        <p>{{ order.Order_ID }}</p>
-        <p>{{ order.Order_ID }}</p>
+        <details>
+            <summary>
+
+                <table class="table table-borderless table-shopping-cart">
+
+                    <thead class="text-muted">
+                        <tr class="small text-uppercase" style="color:gray;">
+                            <th scope="col">Bestellnummer</th>
+                            <th scope="col" width="120">Preis</th>
+                            <th scope="col" width="120">Zahlungsstatus</th>
+                            <th scope="col" class="text-right" width="200">Datum</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        
+                        <tr>
+                            <td>
+                                <p>{{ order.0.Order_ID }}</p>
+                            </td>
+                            <td>
+                                <p>{{ order.1|floatformat:2 }}</p>
+                            </td>
+                            <td>
+                                {% if order.0.payed: %}
+                                    <p>ja</p>
+                                {% else %}
+                                    <p>nein</p>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <p>{{ order.0.order_date }}</p>
+                            </td>
+                        </tr>
+                        
+                    </tbody>
+        
+                </table>
+
+            </summary>
+            <div class="row">
+                {% for product in order.2 %}
+                <div class="col-md-3">
+                    <div class="card card-product-grid">
+                        <a href={% url 'details' product.0.Product_ID %} class="img-wrap"> <img src={% static product.0.product_image_path %}> </a>
+                        <figcaption class="info-wrap">
+                            <a href={% url 'details' product.0.Product_ID %} class="title">{{ product.0.product_name }}</a>
+                            <div class="price mt-1">{{ product.0.price|floatformat:2 }}€</div> <!-- price-wrap.// -->
+                        </figcaption>
+                    </div>
+                </div> <!-- col.// -->
+                {% endfor %}
+            </div> <!-- row.// -->
+
+        </details>
     </div>
     {% endfor %}
+
     
 </div>
 {% endblock %}
