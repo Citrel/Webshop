@@ -7,11 +7,17 @@
 {% endblock %}
 
 {% block content %}
+<div class="container">
 
     {% for order in order_history %}
-        <div class="card">
-
+    <div class="card">
+        <div class="row">
+            
         </div>
+        <p>{{ order.Order_ID }}</p>
+        <p>{{ order.Order_ID }}</p>
+    </div>
     {% endfor %}
-
+    
+</div>
 {% endblock %}
