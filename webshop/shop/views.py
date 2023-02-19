@@ -42,7 +42,7 @@ class Homepage:
         liked_products = []
         user_likes = Product_Likes.objects.filter(Customer_ID = request.user.id)
         for user_like in user_likes:
-            liked_products.append([Product.objects.get(Product_ID__contains = user_like.Product_ID.Product_ID)])
+            liked_products.append([Product.objects.get(Product_ID = user_like.Product_ID.Product_ID)])
         
         return render(request, 'liked_products.html', {'cart_item_count' : cart_item_count, 'categories' : categories, 'liked_products' : liked_products})
         
