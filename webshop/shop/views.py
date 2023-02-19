@@ -225,6 +225,16 @@ class Order_Views:
 
         order_items = Cart.objects.filter(Customer_ID = request.user.id)
         
+        customer_payment_adress = User_Payment_Address.objects.get(user = request.user.id)
+        
+        customer_delivery_adress = User_Delivery_Address.objects.get(user = request.user.id)
+        
+        your_credit_card = User_Credit_Card.objects.get(user = request.user.id)
+        
+        your_debit_card = User_Debit.objects.get(user = request.user.id)
+        
+        your_paypal = User_PayPal.objects.get(user = request.user.id)
+        
 
                 
         product = []
@@ -238,28 +248,10 @@ class Order_Views:
         
         
 
-        return render(request, 'process_order.html', {'product': product, 'cart_item_count' : cart_item_count, 'categories' : categories})
-    
-    
-    def show_order_information(request):
-        
-        categories = Category.objects.all()
-        cart_item_count = Cart.objects.filter(Customer_ID=request.user.id).count()
-        
-        customer_payment_adress = User_Payment_Address.objects.get(user = request.user.id)
-        
-        customer_delivery_adress = User_Delivery_Address.objects.get(user = request.user.id)
-        
-        your_credit_card = User_Credit_Card.objects.get(user = request.user.id)
-        
-        your_debit_card = User_Debit.objects.get(user = request.user.id)
-        
-        your_paypal = User_PayPal.objects.get(user = request.user.id)
-        
-        
-        return render(request, 'process_payment_information.html', {'cart_item_count' : cart_item_count, 'categories' : categories,
-                                                                    'customer_payment_adress' : customer_payment_adress, 'customer_delivery_adress' : customer_delivery_adress,
+        return render(request, 'process_order.html', {'product': product, 'cart_item_count' : cart_item_count, 'categories' : categories,
+                                                      'customer_payment_adress' : customer_payment_adress, 'customer_delivery_adress' : customer_delivery_adress,
                                                                     'your_credit_card' : your_credit_card, 'your_debit_card' : your_debit_card, 'your_paypal' : your_paypal})
+    
     
     
     def choose_payment_info(request, pk):
