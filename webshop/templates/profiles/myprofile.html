@@ -37,7 +37,10 @@
                         <form action="{% url 'forgot_password' %}">
                             <button class="btn btn-outline-primary">Passwort ändern</button>
                         </form>
-
+                        <div>
+                            <br>
+                            <a class="btn btn-outline-primary" href={% static url 'order_history '%} style="height: max-content;">Meine Bestellungen</a>
+                        </div>
                     </div>
                 </div>
 
@@ -47,11 +50,11 @@
                         <h2>PayPal</h2>
                         <div class="form-group ">
                             <label>E-mail</label>
-                            {{user_paypal_form.mail}}
+                            {{user_paypal_form.paypal_mail}}
                         </div>
                         <div class="form-group ">
                             <label>Passwort</label>
-                            {{user_paypal_form.password}}
+                            {{user_paypal_form.paypal_password}}
                         </div>
 
 
@@ -144,6 +147,7 @@
 
                     </div>
                 </div>
+
             </div>
         </form>
     </div>
