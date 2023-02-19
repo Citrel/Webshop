@@ -103,10 +103,13 @@ class Article():
             if not created:
                 new_entry = Cart.objects.create(Customer_ID_id = request.user.id, product_key = product_obj, cart_amount = amount)
                 new_entry.save()
+                print('Zu Cart hinzugefügt: ', new_entry)
             else:
                 existing_entry = Cart.objects.get(Customer_ID_id = request.user.id, product_key = product_obj)
                 existing_entry.cart_amount += amount
                 existing_entry.save()
+                
+        
             
             return redirect('cart')
         
@@ -163,13 +166,14 @@ class Cart_View:
         
         for cart_item in cart_items:
            
-            product.append([cart_item.cart_amount, Product.objects.get(Product_ID__contains = cart_item.product_key.Product_ID), 
-                            Product.objects.get(Product_ID__contains = cart_item.product_key.Product_ID).price * cart_item.cart_amount])
-            payment_sum += Product.objects.get(Product_ID__contains = cart_item.product_key.Product_ID).price * cart_item.cart_amount
+            product.append([cart_item.cart_amount, Product.objects.get(Product_ID = cart_item.product_key.Product_ID), 
+                            Product.objects.get(Product_ID = cart_item.product_key.Product_ID).price * cart_item.cart_amount])
+            payment_sum += Product.objects.get(Product_ID = cart_item.product_key.Product_ID).price * cart_item.cart_amount
         
         
         
-
+        print(product)
+        
         return render(request, 'cart.html', {'product': product, 'cart_item_count' : cart_item_count, 'payment_sum' : payment_sum, 'categories' : categories})
     
     def increase_cart_amount(request, pk):
