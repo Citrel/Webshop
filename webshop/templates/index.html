@@ -25,9 +25,10 @@ Index
 <!-- ========================= SECTION  ========================= -->
 <section class="section-name padding-y-sm">
     <div class="container">
-
         <header class="section-heading">
-            <h3 class="section-title">Bestseller</h3>
+            <h3 class="section-title">Unsere Empfehlung </h3>
+            <small>Das sind die Lieblingsprodukte des Shop-Teams. Sie bestechen durch einzigartigen Charakter und Charme.</small>
+            <hr>
         </header><!-- sect-heading -->
 
 
@@ -48,8 +49,8 @@ Index
         {% for category in categories_with_items %}
             <div class="section-heading">
                 <h3 class="section-title">{{ category.0.category_name }}</h3>
-                <br>
                 <small>{{ category.0.category_description }}</small>
+                <hr>
             </div><!-- sect-heading -->
 
 

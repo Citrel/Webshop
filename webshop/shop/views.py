@@ -163,10 +163,13 @@ class Cart_View:
         
         for cart_item in cart_items:
            
-            product.append([cart_item.cart_amount, Product.objects.get(Product_ID__contains = cart_item.product_key.Product_ID), 
-                            Product.objects.get(Product_ID__contains = cart_item.product_key.Product_ID).price * cart_item.cart_amount])
-            payment_sum += Product.objects.get(Product_ID__contains = cart_item.product_key.Product_ID).price * cart_item.cart_amount
-        
+            print("Cart_amount", cart_item.cart_amount)
+            print("get-print:", cart_item.product_key.Product_ID)
+
+            product_id = cart_item.product_key.Product_ID
+            product.append([cart_item.cart_amount, Product.objects.get(Product_ID__contains = product_id), 
+                            Product.objects.get(Product_ID__contains = product_id).price * cart_item.cart_amount])
+            payment_sum += Product.objects.get(Product_ID__contains = product_id).price * cart_item.cart_amount
         
         
 
