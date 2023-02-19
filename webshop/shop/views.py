@@ -4,6 +4,7 @@ from .models import *
 from .forms import *
 from django.db.models import Q, Sum, Count
 from django import template
+from profiles.models import *
 
 
 
@@ -162,8 +163,6 @@ class Cart_View:
         
         for cart_item in cart_items:
            
-            print("Cart_amount", cart_item.cart_amount)
-            print("get-print:", cart_item.product_key.Product_ID)
 
             product_id = cart_item.product_key.Product_ID
             product.append([cart_item.cart_amount, Product.objects.get(Product_ID= product_id), 
@@ -217,8 +216,108 @@ class Cart_View:
         return redirect('cart')
     
     
+class Order_Views:
+    
+    def show_process_order(request):
+        
+        categories = Category.objects.all()
+        cart_item_count = Cart.objects.filter(Customer_ID=request.user.id).count()
 
+        order_items = Cart.objects.filter(Customer_ID = request.user.id)
+        
 
+                
+        product = []
+        
+        for order_item in order_items:
+           
+
+            product_id = order_item.product_key.Product_ID
+            product.append([order_item.cart_amount, Product.objects.get(Product_ID= product_id), 
+                            Product.objects.get(Product_ID = product_id).price * order_item.cart_amount])
+        
+        
+
+        return render(request, 'process_order.html', {'product': product, 'cart_item_count' : cart_item_count, 'categories' : categories})
+    
+    
+    def show_order_information(request):
+        
+        categories = Category.objects.all()
+        cart_item_count = Cart.objects.filter(Customer_ID=request.user.id).count()
+        
+        customer_payment_adress = User_Payment_Address.objects.get(user = request.user.id)
+        
+        customer_delivery_adress = User_Delivery_Address.objects.get(user = request.user.id)
+        
+        your_credit_card = User_Credit_Card.objects.get(user = request.user.id)
+        
+        your_debit_card = User_Debit.objects.get(user = request.user.id)
+        
+        your_paypal = User_PayPal.objects.get(user = request.user.id)
+        
+        
+        return render(request, 'process_payment_information.html', {'cart_item_count' : cart_item_count, 'categories' : categories,
+                                                                    'customer_payment_adress' : customer_payment_adress, 'customer_delivery_adress' : customer_delivery_adress,
+                                                                    'your_credit_card' : your_credit_card, 'your_debit_card' : your_debit_card, 'your_paypal' : your_paypal})
+    
+    
+    def choose_payment_info(request, pk):
+        
+        your_credit_card = User_Credit_Card.objects.get(user = request.user.id)
+        
+        your_debit_card = User_Debit.objects.get(user = request.user.id)
+        
+        your_paypal = User_PayPal.objects.get(user = request.user.id)
+        
+        if Payment_Method.objects.filter(user = request.user.id).exists() == False:
+            
+            if pk == your_credit_card.id:
+                credit_payment = Payment_Method.objects.create(method_name = 'Kredit Karte', method_fee = 0.02, user = request.user.id)
+                credit_payment.save()
+            
+            elif pk == your_debit_card.id:
+                debit_payment = Payment_Method.objects.create(method_name = 'Lastschrift', method_fee = 0.02, user = request.user.id)
+                debit_payment.save()
+        
+            elif pk == your_paypal.id:
+                paypal_payment = Payment_Method.objects.create(method_name = 'Paypal', method_fee = 0.0249, user = request.user.id)
+                paypal_payment.save()
+        else:
+            
+            if pk == your_credit_card.id:
+                credit_payment = Payment_Method.objects.get(user = request.user.id)
+                credit_payment.method_name = 'Kredit Karte'
+                credit_payment.method_fee = 0.02
+            
+            elif pk == your_debit_card.id:
+                debit_payment = Payment_Method.objects.get(user = request.user.id)
+                debit_payment.method_name = 'Lastschrift'
+                debit_payment.method_fee = 0.02
+        
+            elif pk == your_paypal.id:
+                paypal_payment = Payment_Method.objects.get(user = request.user.id)
+                paypal_payment.method_name = 'Paypal'
+                paypal_payment.method_fee = 0.0249
+            
+            
+        return redirect('order_information')
+    
+    
+    def show_checkout(request):
+        
+        categories = Category.objects.all()
+        cart_item_count = Cart.objects.filter(Customer_ID=request.user.id).count()
+        
+        payment_info = Payment_Method.objects.get(user = request.user.id)
+        delivery_adress = User_Delivery_Address.objects.get(user = request.user.id)
+        payment_adress = User_Payment_Address.objects.get(user = request.user.id)
+        
+        new_order = Order.objects.create(user = request.user.id, payment_method_id = payment_info.Payment_Method_ID, payed = False, delivery = deli)
+        
+        return render(request, 'order_complete.html', {'cart_item_count' : cart_item_count, 'categories' : categories})
+        
+        
 class About_Us:
 
     def show_abouts(request):
