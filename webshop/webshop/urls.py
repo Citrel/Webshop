@@ -30,6 +30,7 @@ urlpatterns = [
     path('about_us', views.About_Us.show_abouts, name='about_us'),
     path('imprint', views.Imprint.show_imprint, name='imprint'),
     path('cart', views.Cart_View.show_cart, name = 'cart'),
+    path('AGB', views.AGB.show_agbs, name = 'AGB'),
     path('cart/<slug:pk>/increase', views.Cart_View.increase_cart_amount, name='increase'),
     path('cart/<slug:pk>/decrease', views.Cart_View.decrease_cart_amount, name='decrease'),
     path('cart/<slug:pk>/change', views.Cart_View.change_cart_amount, name='change'),
