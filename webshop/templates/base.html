@@ -98,7 +98,7 @@
                         {% if user.id is None %}
                             <a href={% url 'login' %} class="btn btn-primary" style="color:white; font-size:larger;">&#9829;</a>
                         {% else %}
-                            <a href="" class="btn btn-primary" style="color:white; font-size:larger;">&#9829;</a>
+                            <a href={% url 'products_liked' %} class="btn btn-primary" style="color:white; font-size:larger;">&#9829;</a>
                         {% endif %}
                     </div>
                     <div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">

@@ -45,16 +45,16 @@ Index
             {% endfor %}
         </div> <!-- row.// -->
 
-        {% for categorie in categories_with_items %}
+        {% for category in categories_with_items %}
             <div class="section-heading">
-                <h3 class="section-title">{{ categorie.0.categorie_name }}</h3>
+                <h3 class="section-title">{{ category.0.category_name }}</h3>
                 <br>
-                <small>{{ categorie.0.categorie_description }}</small>
+                <small>{{ category.0.category_description }}</small>
             </div><!-- sect-heading -->
 
 
             <div class="row">
-                {% for product in categorie.1 %}
+                {% for product in category.1 %}
                 <div class="col-md-3">
                     <div class="card card-product-grid">
                         <a href={% url 'details' product.Product_ID %} class="img-wrap"> <img src={% static product.product_image_path %}> </a>

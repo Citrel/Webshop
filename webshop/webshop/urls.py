@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.Homepage.show_products, name='index'),
     path('search', views.Search.show_searched_products, name="searching"),
+    path('liked', views.Homepage.show_liked_products, name='products_liked'), 
     path('details/<slug:pk>', views.Article.show_information, name='details'),
     path('details/<slug:pk>/like', views.Article.like_product, name='like'),
     path('details/<slug:pk>/add_to_cart', views.Article.add_to_cart, name = 'add_to_cart'),

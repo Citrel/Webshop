@@ -25,6 +25,7 @@ class Product(models.Model):
     price = models.FloatField()
     date_last_change = models.DateField(auto_now=True)
     delivery_time = models.PositiveIntegerField(min)
+    Selected = models.BooleanField(default = False)
 
 
 class Order(models.Model):

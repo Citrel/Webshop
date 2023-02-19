@@ -10,12 +10,43 @@ from django import template
 class Homepage:
 
     def show_products(request):
-
+        
+        
         products = Product.objects.all()
+        
+        bestseller = Product.objects.filter(Selected = True)
+        
+        categories_with_items = []
+        product_items = []
+        
         categories = Category.objects.all()
         cart_item_count = Cart.objects.filter(Customer_ID=request.user.id).count()
         
-        return render (request, 'index.html', {'products' : products, 'categories' : categories, 'cart_item_count' : cart_item_count})
+        for category in categories:
+            
+            product_items = Product.objects.filter(category_id = category.Category_ID)
+            
+            categories_with_items.append([category, product_items])
+        
+        print(categories_with_items)
+        
+        return render (request, 'index.html', {'bestseller' : bestseller, 'products' : products, 'categories' : categories, 'cart_item_count' : cart_item_count,
+                                                      'categories_with_items' : categories_with_items, 'product_items' : product_items})
+        
+        
+    def show_liked_products(request):
+        
+        categories = Category.objects.all()
+        cart_item_count = Cart.objects.filter(Customer_ID=request.user.id).count()
+        
+        liked_products = []
+        user_likes = Product_Likes.objects.filter(Customer_ID = request.user.id)
+        for user_like in user_likes:
+            liked_products.append([Product.objects.get(Product_ID__contains = user_like.Product_ID.Product_ID)])
+        
+        return render(request, 'liked_products.html', {'cart_item_count' : cart_item_count, 'categories' : categories, 'liked_products' : liked_products})
+        
+    
     
 
 class Article():
