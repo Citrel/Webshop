@@ -233,7 +233,7 @@ class AGB:
         cart_item_count = Cart.objects.filter(Customer_ID=request.user.id).count()
         categories = Category.objects.all()
 
-        return render(request, 'about_us.html', {'cart_item_count' : cart_item_count, 'categories' : categories})
+        return render(request, 'AGBs.html', {'cart_item_count' : cart_item_count, 'categories' : categories})
 
 
 class Imprint:
