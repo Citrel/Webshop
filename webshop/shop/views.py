@@ -28,7 +28,6 @@ class Homepage:
             
             categories_with_items.append([category, product_items])
         
-        print(categories_with_items)
         
         return render (request, 'index.html', {'bestseller' : bestseller, 'products' : products, 'categories' : categories, 'cart_item_count' : cart_item_count,
                                                       'categories_with_items' : categories_with_items, 'product_items' : product_items})
@@ -42,7 +41,7 @@ class Homepage:
         liked_products = []
         user_likes = Product_Likes.objects.filter(Customer_ID = request.user.id)
         for user_like in user_likes:
-            liked_products.append([Product.objects.get(Product_ID__contains = user_like.Product_ID.Product_ID)])
+            liked_products.append([Product.objects.get(Product_ID = user_like.Product_ID.Product_ID)])
         
         return render(request, 'liked_products.html', {'cart_item_count' : cart_item_count, 'categories' : categories, 'liked_products' : liked_products})
         
@@ -167,9 +166,9 @@ class Cart_View:
             print("get-print:", cart_item.product_key.Product_ID)
 
             product_id = cart_item.product_key.Product_ID
-            product.append([cart_item.cart_amount, Product.objects.get(Product_ID__contains = product_id), 
-                            Product.objects.get(Product_ID__contains = product_id).price * cart_item.cart_amount])
-            payment_sum += Product.objects.get(Product_ID__contains = product_id).price * cart_item.cart_amount
+            product.append([cart_item.cart_amount, Product.objects.get(Product_ID= product_id), 
+                            Product.objects.get(Product_ID = product_id).price * cart_item.cart_amount])
+            payment_sum += Product.objects.get(Product_ID = product_id).price * cart_item.cart_amount
         
         
 
