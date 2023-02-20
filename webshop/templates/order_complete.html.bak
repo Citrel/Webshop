@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<title> Checkout </title>
+
+
+{% block content %}
+<head>
+  
+    <style>
+        .container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .text {
+            flex-basis: 50%;
+            padding: 20px;
+        }
+
+        .image {
+            flex-basis: 50%;
+            text-align: center;
+        }
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .products {
+           text-align: center;
+        }
+    </style>
+</head>
+<!-- TODO - Schriftart-->
+<body>
+    <div class="container">
+        <div class="text">
+            <h1>Test Checkout</h1>
+            <pre>Sehr geehrter Kunde,
+
+vielen Dank für Ihre Bestellung bei der Enten Company! Wir freuen uns, dass Sie sich für unsere Produkte entschieden haben
+und sind uns sicher, dass Sie mit Ihrer Bestellung zufrieden sein werden.
+
+Ihre Bestellung wird von unserem Team sorgfältig verpackt und an Sie verschickt. Wir bemühen uns, den Versand so schnell
+wie möglich abzuwickeln, damit Sie Ihre Produkte bald in den Händen halten können.
+
+Falls Sie während des Versands oder bei der Lieferung Fragen haben, können Sie sich jederzeit an unseren Kundenservice wenden.
+
+Wir stehen Ihnen gerne zur Verfügung und helfen Ihnen weiter.
+
+Nochmals vielen Dank für Ihre Bestellung bei der Enten Company. Wir hoffen, dass Sie in Zukunft erneut bei uns einkaufen werden.
+
+Mit freundlichen Grüßen,
+Das Team der Enten Company
+                 </pre>
+        </div>
+        <div class="image">
+            <img src={% static '/images/checkout.png' %}>
+        </div>
+    </div>
+    <div class="products">
+            {% for product in bestseller %}
+            <div class="col-md-3">
+                <div class="card card-product-grid">
+                    <a href={% url 'details' product.Product_ID %} class="img-wrap"> <img src={% static product.product_image_path %}> </a>
+                    <figcaption class="info-wrap">
+                        <a href={% url 'details' product.Product_ID %} class="title">{{ product.product_name }}</a>
+                        <div class="price mt-1">{{ product.price|floatformat:2 }}€</div> <!-- price-wrap.// -->
+                    </figcaption>
+                </div>
+            </div> <!-- col.// -->
+            {% endfor %}
+        </div> <!-- row.// -->
+    <!--Text über unsere tollen Bestseller-->
+</body>
+{% endblock %}
