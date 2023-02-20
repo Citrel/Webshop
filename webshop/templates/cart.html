@@ -92,8 +92,11 @@
 					<dt>inkl. MwSt</dt>
 					</dl>
 					<hr>
-					<!-- TODO urls -->
+					{% if user.id is None %}
+					<a href={% url 'login' %} class="btn btn-primary btn-block"> Checkout </a>
+					{% else %}
 					<a href={% url 'order' %} class="btn btn-primary btn-block"> Checkout </a>
+					{% endif %}
 					<a href={% url 'index' %} class="btn btn-light btn-block">Continue Shopping</a>
 				</div> <!-- card-body.// -->
 			</div> <!-- card.// -->

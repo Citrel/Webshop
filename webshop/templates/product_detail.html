@@ -84,9 +84,14 @@
                     <button class="btn btn-light" type="button" id="button-minus" onclick="plus('quantity');"> <i class="fa fa-plus"></i> </button>
                     </div>
                 </div> <!-- input-group.// -->
+                {% if user.id is None %}
+                <a href={% url 'login' %} type = 'text' class="btn  btn-primary"> 
+                    <span class="text">In den Warenkorb</span> <i class="fas fa-shopping-cart"></i>
+                </a>
+                {% else %}
                 <button type = 'submit' class="btn  btn-primary"> 
                     <span class="text">In den Warenkorb</span> <i class="fas fa-shopping-cart"></i></button>  
-                </a>
+                {% endif %}
             </div> <!-- col.// -->
         </form> <!-- search-wrap .end// -->
     </div>

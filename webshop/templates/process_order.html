@@ -13,7 +13,7 @@
     <form class="container row" action="" method="POST" style="justify-content: space-evenly;">
         {% include 'includes/alerts.html' %}
         {% csrf_token %}
-            <aside class="card" style="width: 30%">
+            <aside class="card" style="width: 40%">
                     <div style="margin:10px; width: initial;">
 
                         <h2>Meine Kundendaten</h2>
@@ -34,66 +34,7 @@
                     </div>
                 </aside>
 
-                <aside class="card" style="width: 30%">
-                    <div style="margin:10px; width: initial;">
-                        <h2>PayPal</h2>
-                        <div class="form-group ">
-                            <label>E-mail</label>
-                            {{user_paypal_form.paypal_mail}}
-                        </div>
-                        <div class="form-group ">
-                            <label>Passwort</label>
-                            {{user_paypal_form.paypal_password}}
-                        </div>
-
-
-                        <h2>Kreditkarte</h2>
-                        <div class="form-group ">
-                            <label>Vorname</label>
-                            {{user_credit_card_form.owner_first_name}}
-                        </div>
-                        <div class="form-group ">
-                            <label>Nachname</label>
-                            {{user_credit_card_form.owner_last_name}}
-                        </div>
-                        <div class="form-group ">
-                            <label>Kartennummer</label>
-                            {{user_credit_card_form.card_number}}
-                        </div>
-                        <div class="form-group ">
-                            <label>Ablaufdatum MM/YY</label>
-                            {{user_credit_card_form.expiration_date_month}}
-                        </div>
-                        <div class="form-group ">
-                            {{user_credit_card_form.expiration_date_year}}
-                        </div>
-                        <div class="form-group ">
-                            <label>Sicherheitscode</label>
-                            {{user_credit_card_form.security_code}}
-                        </div>
-
-
-                        <h2>Lastschrift</h2>
-                        <div class="form-group ">
-                            <label>Vorname</label>
-                            {{user_debit_form.debit_first_name}}
-                        </div>
-                        <div class="form-group ">
-                            <label>Nachname</label>
-                            {{user_debit_form.debit_last_name}}
-                        </div>
-                        <div class="form-group ">
-                            <label>IBAN</label>
-                            {{user_debit_form.iban}}
-                        </div>
-                        <div class="form-group ">
-                            <label>BIC</label>
-                            {{user_debit_form.bic}}
-                        </div>
-                    </div>
-                </aside>
-
-                <aside class="card" style="width: 30%">
+                <aside class="card" style="width: 40%">
                     <div style="margin:10px; width: initial;">
                         <h2>Lieferadresse</h2>
                         <div class="form-group ">
