@@ -351,7 +351,7 @@ class Order_Views:
                 paypal_payment.save()
         
             
-        return redirect('order_information')
+        return redirect('payment_view')
     
     
     def checkout(request):
