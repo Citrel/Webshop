@@ -14,7 +14,7 @@
         {% include 'includes/alerts.html' %}
         {% csrf_token %}
             <aside class="card" style="width: 30%">
-                    <div style="margin:10px; width:fit-content;">
+                    <div style="margin:10px; width: initial;">
 
                         <h2>Meine Kundendaten</h2>
                         <div class="form-group ">
@@ -35,15 +35,15 @@
                 </aside>
 
                 <aside class="card" style="width: 30%">
-                    <div style="margin:10px; width:fit-content;">
+                    <div style="margin:10px; width: initial;">
                         <h2>PayPal</h2>
                         <div class="form-group ">
                             <label>E-mail</label>
-                            {{your_paypal.paypal_mail}}
+                            {{user_paypal_form.paypal_mail}}
                         </div>
                         <div class="form-group ">
                             <label>Passwort</label>
-                            {{your_paypal.paypal_password}}
+                            {{user_paypal_form.paypal_password}}
                         </div>
 
 
@@ -94,7 +94,7 @@
                 </aside>
 
                 <aside class="card" style="width: 30%">
-                    <div style="margin:10px; width:fit-content;">
+                    <div style="margin:10px; width: initial;">
                         <h2>Lieferadresse</h2>
                         <div class="form-group ">
                             <label>Straße</label>
@@ -140,10 +140,11 @@
 
     
     <div class="row" style="justify-content: space-evenly; margin-bottom: 20px;">
-        <h4 class="card-title mb-4">Gute Auswahl!</h4>
         <main class="col-md-8">
             <article class="card mb-4">
                 <div class="card-body">
+                    <h2 class="card-title mb-4">Gute Auswahl!</h2>
+                    <hr>
                     <div class="row">
                         {% for p in product %}
                             <div class="col-md-8">
@@ -158,12 +159,16 @@
                                 </figure>
                                 <br>
                             </div> <!-- col.// -->
-                        {% endfor %}
-                    </div> <!-- row.// -->
-                    <hr>
-                </div> <!-- card-body.// -->
+                            {% endfor %}
+                        </div> <!-- row.// -->
+                    </div> <!-- card-body.// -->
+                    <div class="container">
+                        <hr>
+                        <b>Gesamtsumme: {{ payment_sum }} €</b>
+                        <br>
+                    </div>
             </article> <!-- card.// -->
-            <a href="" class="btn btn-primary btn-block">Jetzt bestellen</a>
+            <a href={% url 'choose_payment' %} class="btn btn-primary btn-block">Jetzt bestellen</a>
         </main>
     </div>
 </div>
