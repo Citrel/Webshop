@@ -256,9 +256,6 @@ class Order_Views:
             profile_form = ProfileForm(instance=request.user)
             user_delivery_address_form = User_Delivery_AddressForm(instance=delivery_address)
             user_payment_address_form = User_Payment_AddressForm(instance=payment_address)
-            user_credit_card_form = User_Credit_CardForm(instance=credit_card)
-            user_paypal_form = User_PayPalForm(instance=paypal)
-            user_debit_form = User_DebitForm(instance=debit)
         
         order_items = Cart.objects.filter(Customer_ID = request.user.id)
         product = []
