@@ -248,7 +248,6 @@ class Order_Views:
         paypal = get_object_or_404(User_PayPal, user=request.user)
         debit = get_object_or_404(User_Debit, user=request.user)
         if request.method == 'POST':
-            profile_form = ProfileForm(request.POST, instance=request.user)
             user_delivery_address_form = User_Delivery_AddressForm(request.POST, instance=delivery_address)
             user_payment_address_form = User_Payment_AddressForm(request.POST, instance=payment_address)
             user_credit_card_form = User_Credit_CardForm(request.POST, instance=credit_card)
