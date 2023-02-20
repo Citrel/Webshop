@@ -371,11 +371,12 @@ class Order_Views:
         for order_item in order_items:
 
             new_entry = Products_per_Order.objects.create(Order_ID = new_order.Order_ID, Product_ID = order_item.product_key, order_amount = order_item.cart_amount, product_price_at_order_time = order_item.product_key.price)
-            new_entry.save
+            new_entry.save()
             
         order_items.delete()
+        bestseller = Product.objects.filter(selected = True)
         
-        return render(request, 'order_complete.html', {'cart_item_count' : cart_item_count, 'categories' : categories})
+        return render(request, 'order_complete.html', {'cart_item_count' : cart_item_count, 'categories' : categories, 'bestseller' : bestseller})
         
         
 class About_Us:

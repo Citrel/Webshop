@@ -5,38 +5,8 @@
 
 
 {% block content %}
-<head>
-  
-    <style>
-        .container {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-        }
-
-        .text {
-            flex-basis: 50%;
-            padding: 20px;
-        }
-
-        .image {
-            flex-basis: 50%;
-            text-align: center;
-        }
-
-        img {
-            max-width: 100%;
-            max-height: 100%;
-        }
-
-        .products {
-           text-align: center;
-        }
-    </style>
-</head>
-<!-- TODO - Schriftart-->
 <body>
-    <div class="container">
+    <div class="container" style="display: flex; flex-direction: row; align-items: center;">
         <div class="text">
             <h1>Test Checkout</h1>
             <pre>Sehr geehrter Kunde,
@@ -55,25 +25,26 @@ Nochmals vielen Dank für Ihre Bestellung bei der Enten Company. Wir hoffen, das
 
 Mit freundlichen Grüßen,
 Das Team der Enten Company
-                 </pre>
+             </pre>
         </div>
-        <div class="image">
-            <img src={% static '/images/checkout.png' %}>
-        </div>
+            <aside style="flex-basis:50%; text-align: center;">
+                <img src={% static '/images/checkout.png' %}>
+            </aside>
     </div>
+    
     <div class="products">
-            {% for product in bestseller %}
-            <div class="col-md-3">
-                <div class="card card-product-grid">
-                    <a href={% url 'details' product.Product_ID %} class="img-wrap"> <img src={% static product.product_image_path %}> </a>
-                    <figcaption class="info-wrap">
-                        <a href={% url 'details' product.Product_ID %} class="title">{{ product.product_name }}</a>
-                        <div class="price mt-1">{{ product.price|floatformat:2 }}€</div> <!-- price-wrap.// -->
-                    </figcaption>
-                </div>
-            </div> <!-- col.// -->
-            {% endfor %}
-        </div> <!-- row.// -->
-    <!--Text über unsere tollen Bestseller-->
+        {% for product in bestseller %}
+        <div class="col-md-3">
+            <div class="card card-product-grid">
+                <a href={% url 'details' product.Product_ID %} class="img-wrap"> <img src={% static product.product_image_path %}> </a>
+                <figcaption class="info-wrap">
+                    <a href={% url 'details' product.Product_ID %} class="title">{{ product.product_name }}</a>
+                    <div class="price mt-1">{{ product.price|floatformat:2 }}€</div> <!-- price-wrap.// -->
+                </figcaption>
+            </div>
+        </div> <!-- col.// -->
+        {% endfor %}
+    </div> <!-- row.// -->
+    <!--evtl Text über unsere tollen Bestseller-->
 </body>
-{% endblock %}
+    {% endblock %}
