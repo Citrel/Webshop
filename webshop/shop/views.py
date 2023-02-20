@@ -62,7 +62,7 @@ class Homepage:
         
         
         
-        return render(request, 'order_history.html', {'cart_item_count' : cart_item_count, 'categories' : categories})
+        return render(request, 'order_history.html', {'cart_item_count' : cart_item_count, 'categories' : categories, 'orders_with_products' : orders_with_products})
         
         
     
@@ -283,11 +283,24 @@ class Order_Views:
     
     def show_payment_info(request):
         
-        your_credit_card = User_Credit_Card.objects.get(user = request.user.id)
-        
-        your_debit_card = User_Debit.objects.get(user = request.user.id)
-        
-        your_paypal = User_PayPal.objects.get(user = request.user.id)
+        credit_card = get_object_or_404(User_Credit_Card, user=request.user)
+        paypal = get_object_or_404(User_PayPal, user=request.user)
+        debit = get_object_or_404(User_Debit, user=request.user)
+        if request.method == 'POST':
+            user_credit_card_form = User_Credit_CardForm(request.POST, instance=credit_card)
+            user_paypal_form = User_PayPalForm(request.POST, instance=paypal)
+            user_debit_form = User_DebitForm(request.POST, instance=debit)
+            if user_credit_card_form.is_valid() and user_paypal_form.is_valid() and user_debit_form.is_valid():
+                user_credit_card_form.save()
+                user_paypal_form.save()
+                user_debit_form.save()
+                messages.success(request, 'Daten wurden aktualisiert')
+                return redirect('payment_view')
+        else:
+            user_credit_card_form = User_Credit_CardForm(instance=credit_card)
+            user_paypal_form = User_PayPalForm(instance=paypal)
+            user_debit_form = User_DebitForm(instance=debit)
+            
         
         categories = Category.objects.all()
         cart_item_count = Cart.objects.filter(Customer_ID=request.user.id).count()
@@ -297,8 +310,18 @@ class Order_Views:
     
             product_id = order_item.product_key.Product_ID
             payment_sum += Product.objects.get(Product_ID = product_id).price * order_item.cart_amount
+            
+        context = {
+            'payment_sum' : payment_sum,
+            'categories' : categories,
+            'cart_item_count' : cart_item_count,
+            'user_credit_card_form': user_credit_card_form,
+            'user_paypal_form': user_paypal_form,
+            'user_debit_form': user_debit_form
+            }
+            
         
-        return render(request,'process_payment_information.html' , {'cart_item_count' : cart_item_count, 'categories' : categories,  'your_credit_card' : your_credit_card, 'your_debit_card' : your_debit_card, 'your_paypal' : your_paypal})
+        return render(request,'process_payment_information.html' , context)
         
         
    
