@@ -3,6 +3,7 @@ from .forms import RegistrationForm, ProfileForm, User_Delivery_AddressForm, Use
 from .models import Profile, User_Delivery_Address, User_Payment_Address, User_Credit_Card, User_PayPal, User_Debit
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
+from shop.models import *
 
 # VERIFICATION
 from django.contrib.sites.shortcuts import get_current_site
@@ -72,6 +73,8 @@ def register(request):
 
 
 def login(request):
+    categories = Category.objects.all()
+    cart_item_count = Cart.objects.filter(Customer_ID=request.user.id).count()
     if request.method == 'POST':
         email = request.POST['email']
         password = request.POST['password']
@@ -83,7 +86,7 @@ def login(request):
         else:
             messages.error(request, 'Email oder Passwort ist falsch!')
             return redirect('login')
-    return render(request, 'profiles/login.html')
+    return render(request, 'profiles/login.html', {'categories' : categories, 'cart_item_count' : cart_item_count})
 
 
 @login_required(login_url='login')
@@ -95,6 +98,9 @@ def logout(request):
 
 @login_required(login_url='login')
 def myprofile(request):
+    
+    categories = Category.objects.all()
+    cart_item_count = Cart.objects.filter(Customer_ID=request.user.id).count()
     delivery_address = get_object_or_404(
         User_Delivery_Address, user=request.user)
     payment_address = get_object_or_404(
@@ -140,6 +146,8 @@ def myprofile(request):
             instance=debit)
     context = {
         'profile_form': profile_form,
+        'categories' : categories,
+        'cart_item_count' : cart_item_count,
         'user_delivery_address_form': user_delivery_address_form,
         'user_payment_address_form': user_payment_address_form,
         'user_credit_card_form': user_credit_card_form,

@@ -1,10 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
+from django.contrib import messages
 from .models import *
 from .forms import *
 from django.db.models import Q, Sum, Count
 from django import template
 from profiles.models import *
+from profiles.forms import *
 
 
 
@@ -240,30 +242,60 @@ class Order_Views:
         categories = Category.objects.all()
         cart_item_count = Cart.objects.filter(Customer_ID=request.user.id).count()
 
+        delivery_address = get_object_or_404(User_Delivery_Address, user=request.user)
+        payment_address = get_object_or_404(User_Payment_Address, user=request.user)
+        credit_card = get_object_or_404(User_Credit_Card, user=request.user)
+        paypal = get_object_or_404(User_PayPal, user=request.user)
+        debit = get_object_or_404(User_Debit, user=request.user)
+        if request.method == 'POST':
+            profile_form = ProfileForm(request.POST, instance=request.user)
+            user_delivery_address_form = User_Delivery_AddressForm(request.POST, instance=delivery_address)
+            user_payment_address_form = User_Payment_AddressForm(request.POST, instance=payment_address)
+            user_credit_card_form = User_Credit_CardForm(request.POST, instance=credit_card)
+            user_paypal_form = User_PayPalForm(request.POST, instance=paypal)
+            user_debit_form = User_DebitForm(request.POST, instance=debit)
+        if profile_form.is_valid() and user_delivery_address_form.is_valid() and user_payment_address_form.is_valid() and user_credit_card_form.is_valid() and user_paypal_form.is_valid() and user_debit_form.is_valid():
+            profile_form.save()
+            user_delivery_address_form.save()
+            user_payment_address_form.save()
+            user_credit_card_form.save()
+            user_paypal_form.save()
+            user_debit_form.save()
+            messages.success(request, 'Daten wurden aktualisiert')
+            return redirect('order')
+        else:
+            profile_form = ProfileForm(instance=request.user)
+            user_delivery_address_form = User_Delivery_AddressForm(instance=delivery_address)
+            user_payment_address_form = User_Payment_AddressForm(instance=payment_address)
+            user_credit_card_form = User_Credit_CardForm(instance=credit_card)
+            user_paypal_form = User_PayPalForm(instance=paypal)
+            user_debit_form = User_DebitForm(instance=debit)
+        
         order_items = Cart.objects.filter(Customer_ID = request.user.id)
-        
-        customer_payment_adress = User_Payment_Address.objects.get(user = request.user.id)
-        
-        customer_delivery_adress = User_Delivery_Address.objects.get(user = request.user.id)
-        
-        your_credit_card = User_Credit_Card.objects.get(user = request.user.id)
-        
-        your_debit_card = User_Debit.objects.get(user = request.user.id)
-        
-        your_paypal = User_PayPal.objects.get(user = request.user.id)
-           
         product = []
+        payment_sum = 0
         
         for order_item in order_items:
 
             product_id = order_item.product_key.Product_ID
             product.append([order_item.cart_amount, Product.objects.get(Product_ID= product_id), 
                             Product.objects.get(Product_ID = product_id).price * order_item.cart_amount])
-
-
-        return render(request, 'process_order.html', {'product': product, 'cart_item_count' : cart_item_count, 'categories' : categories,
-                                                      'customer_payment_adress' : customer_payment_adress, 'customer_delivery_adress' : customer_delivery_adress,
-                                                                    'your_credit_card' : your_credit_card, 'your_debit_card' : your_debit_card, 'your_paypal' : your_paypal})
+            payment_sum += Product.objects.get(Product_ID = product_id).price * order_item.cart_amount
+            
+        context = {
+            'product' : product,
+            'payment_sum' : payment_sum,
+            'categories' : categories,
+            'cart_item_count' : cart_item_count,
+            'profile_form': profile_form,
+            'user_delivery_address_form': user_delivery_address_form,
+            'user_payment_address_form': user_payment_address_form,
+            'user_credit_card_form': user_credit_card_form,
+            'user_paypal_form': user_paypal_form,
+            'user_debit_form': user_debit_form
+            }
+            
+        return render(request, 'process_order.html', context)
     
     
     def show_payment_info(request):
