@@ -244,21 +244,12 @@ class Order_Views:
 
         delivery_address = get_object_or_404(User_Delivery_Address, user=request.user)
         payment_address = get_object_or_404(User_Payment_Address, user=request.user)
-        credit_card = get_object_or_404(User_Credit_Card, user=request.user)
-        paypal = get_object_or_404(User_PayPal, user=request.user)
-        debit = get_object_or_404(User_Debit, user=request.user)
         if request.method == 'POST':
             user_delivery_address_form = User_Delivery_AddressForm(request.POST, instance=delivery_address)
             user_payment_address_form = User_Payment_AddressForm(request.POST, instance=payment_address)
-            user_credit_card_form = User_Credit_CardForm(request.POST, instance=credit_card)
-            user_paypal_form = User_PayPalForm(request.POST, instance=paypal)
-            user_debit_form = User_DebitForm(request.POST, instance=debit)
-            if  user_delivery_address_form.is_valid() and user_payment_address_form.is_valid() and user_credit_card_form.is_valid() and user_paypal_form.is_valid() and user_debit_form.is_valid():
+            if  user_delivery_address_form.is_valid() and user_payment_address_form.is_valid():
                 user_delivery_address_form.save()
                 user_payment_address_form.save()
-                user_credit_card_form.save()
-                user_paypal_form.save()
-                user_debit_form.save()
                 messages.success(request, 'Daten wurden aktualisiert')
                 return redirect('order')
         else:
@@ -288,9 +279,6 @@ class Order_Views:
             'profile_form': profile_form,
             'user_delivery_address_form': user_delivery_address_form,
             'user_payment_address_form': user_payment_address_form,
-            'user_credit_card_form': user_credit_card_form,
-            'user_paypal_form': user_paypal_form,
-            'user_debit_form': user_debit_form
             }
             
         return render(request, 'process_order.html', context)
@@ -306,12 +294,19 @@ class Order_Views:
         
         categories = Category.objects.all()
         cart_item_count = Cart.objects.filter(Customer_ID=request.user.id).count()
+        order_items = Cart.objects.filter(Customer_ID = request.user.id)
+        payment_sum = 0
+        for order_item in order_items:
+    
+            product_id = order_item.product_key.Product_ID
+            payment_sum += Product.objects.get(Product_ID = product_id).price * order_item.cart_amount
         
         return render(request,'process_payment_information.html' , {'cart_item_count' : cart_item_count, 'categories' : categories,  'your_credit_card' : your_credit_card, 'your_debit_card' : your_debit_card, 'your_paypal' : your_paypal})
         
         
+   
     
-    def choose_payment_info(request, pk):
+    def checkout(request, pk):
         
         your_credit_card = User_Credit_Card.objects.get(user = request.user.id)
         
@@ -349,12 +344,6 @@ class Order_Views:
             elif pk == your_paypal.id:
                 paypal_payment = Payment_Method.objects.create(method_name = 'Paypal', method_fee = 0.0249, user = request.user.id)
                 paypal_payment.save()
-        
-            
-        return redirect('payment_view')
-    
-    
-    def checkout(request):
         
         categories = Category.objects.all()
         cart_item_count = Cart.objects.filter(Customer_ID=request.user.id).count()
