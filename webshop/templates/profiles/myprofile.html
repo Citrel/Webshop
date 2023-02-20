@@ -10,146 +10,138 @@
 
 <!-- ========================= SECTION CONTENT ========================= -->
 <section class="section-content">
-    <div class="container" style="margin-top: 30px; margin-bottom: 30px;">
-        <form action="" method="POST">
+    <div class="container" style="margin-top: 20px; margin-bottom: 20px;">
+        <h1 style="text-align: center;">Meine Bestellinformationen</h1>
+        <hr> <br>
+        <form class="container row" action="" method="POST" style="justify-content: space-evenly;">
             {% include 'includes/alerts.html' %}
-            <div class="container row" style="flex-wrap: nowrap;">
-                {% csrf_token %}
-                <div class="card col-md-4" style="margin:5px; width:30%; flex: none !important;">
-                    <div style="margin:10px; width:fit-content;">
-
-                        <h2>Mein Profil</h2>
-                        <div class="form-group ">
-                            <label>Vorname</label>
-                            {{profile_form.first_name}}
-                        </div>
-                        <div class="form-group ">
-                            <label>Nachname</label>
-                            {{profile_form.last_name}}
-                        </div>
-                        <div class="form-group ">
-                            <label>Telefonnummer</label>
-                            {{profile_form.phone_number}}
-                        </div>
-                        <input type="submit" value="Speichern" class="btn btn-primary"></input>
-                        <br>
-                        <br>
-                        <form action="{% url 'forgot_password' %}">
-                            <button class="btn btn-outline-primary">Passwort ändern</button>
-                        </form>
-                        <div>
+            {% csrf_token %}
+                <aside class="card" style="width: 30%">
+                        <div style="margin:10px; width:fit-content;">
+    
+                            <h2>Meine Kundendaten</h2>
+                            <div class="form-group ">
+                                <label>Vorname</label>
+                                {{profile_form.first_name}}
+                            </div>
+                            <div class="form-group ">
+                                <label>Nachname</label>
+                                {{profile_form.last_name}}
+                            </div>
+                            <div class="form-group ">
+                                <label>Telefonnummer</label>
+                                {{profile_form.phone_number}}
+                            </div>
+                            <input type="submit" value="Speichern" class="btn btn-primary"></input>
                             <br>
-                            <!--<a class="btn btn-outline-primary" href= style="height: max-content;">Meine Bestellungen</a>-->
+                            <br>
+                            <a href="{% url 'forgot_password' %}" class="btn btn-outline-primary">Passwort ändern</a>
                         </div>
-                    </div>
+                    </aside>
+    
+                    <aside class="card" style="width: 30%">
+                        <div style="margin:10px; width:fit-content;">
+                            <h2>PayPal</h2>
+                            <div class="form-group ">
+                                <label>E-mail</label>
+                                {{user_paypal_form.paypal_mail}}
+                            </div>
+                            <div class="form-group ">
+                                <label>Passwort</label>
+                                {{user_paypal_form.paypal_password}}
+                            </div>
+    
+    
+                            <h2>Kreditkarte</h2>
+                            <div class="form-group ">
+                                <label>Vorname</label>
+                                {{user_credit_card_form.owner_first_name}}
+                            </div>
+                            <div class="form-group ">
+                                <label>Nachname</label>
+                                {{user_credit_card_form.owner_last_name}}
+                            </div>
+                            <div class="form-group ">
+                                <label>Kartennummer</label>
+                                {{user_credit_card_form.card_number}}
+                            </div>
+                            <div class="form-group ">
+                                <label>Ablaufdatum MM/YY</label>
+                                {{user_credit_card_form.expiration_date_month}}
+                            </div>
+                            <div class="form-group ">
+                                {{user_credit_card_form.expiration_date_year}}
+                            </div>
+                            <div class="form-group ">
+                                <label>Sicherheitscode</label>
+                                {{user_credit_card_form.security_code}}
+                            </div>
+    
+    
+                            <h2>Lastschrift</h2>
+                            <div class="form-group ">
+                                <label>Vorname</label>
+                                {{user_debit_form.debit_first_name}}
+                            </div>
+                            <div class="form-group ">
+                                <label>Nachname</label>
+                                {{user_debit_form.debit_last_name}}
+                            </div>
+                            <div class="form-group ">
+                                <label>IBAN</label>
+                                {{user_debit_form.iban}}
+                            </div>
+                            <div class="form-group ">
+                                <label>BIC</label>
+                                {{user_debit_form.bic}}
+                            </div>
+                        </div>
+                    </aside>
+    
+                    <aside class="card" style="width: 30%">
+                        <div style="margin:10px; width:fit-content;">
+                            <h2>Lieferadresse</h2>
+                            <div class="form-group ">
+                                <label>Straße</label>
+                                {{user_delivery_address_form.delivery_street}}
+                            </div>
+                            <div class="form-group ">
+                                <label>Hausnummer</label>
+                                {{user_delivery_address_form.delivery_house_number}}
+                            </div>
+                            <div class="form-group ">
+                                <label>Stadt</label>
+                                {{user_delivery_address_form.delivery_city}}
+                            </div>
+                            <div class="form-group ">
+                                <label>PLZ</label>
+                                {{user_delivery_address_form.delivery_plz}}
+                            </div>
+    
+    
+                            <h2>Rechnungsadresse</h2>
+                            <div class="form-group ">
+                                <label>Straße</label>
+                                {{user_payment_address_form.payment_street}}
+                            </div>
+                            <div class="form-group ">
+                                <label>Hausnummer</label>
+                                {{user_payment_address_form.payment_house_number}}
+                            </div>
+                            <div class="form-group ">
+                                <label>Stadt</label>
+                                {{user_payment_address_form.payment_city}}
+                            </div>
+                            <div class="form-group ">
+                                <label>PLZ</label>
+                                {{user_payment_address_form.payment_plz}}
+                            </div>
+                        </div>
+                    </aside>
+    
                 </div>
-
-                <div class="card col-md-4" style="margin:5px;">
-                    <div style="margin:10px;">
-
-                        <h2>PayPal</h2>
-                        <div class="form-group ">
-                            <label>E-mail</label>
-                            {{user_paypal_form.paypal_mail}}
-                        </div>
-                        <div class="form-group ">
-                            <label>Passwort</label>
-                            {{user_paypal_form.paypal_password}}
-                        </div>
-
-
-                        <h2>Kreditkarte</h2>
-                        <div class="form-group ">
-                            <label>Vorname</label>
-                            {{user_credit_card_form.owner_first_name}}
-                        </div>
-                        <div class="form-group ">
-                            <label>Nachname</label>
-                            {{user_credit_card_form.owner_last_name}}
-                        </div>
-                        <div class="form-group ">
-                            <label>Kartennummer</label>
-                            {{user_credit_card_form.card_number}}
-                        </div>
-                        <div class="form-group ">
-                            <label>Ablaufdatum MM/YY</label>
-                            {{user_credit_card_form.expiration_date_month}}
-                        </div>
-                        <div class="form-group ">
-                            {{user_credit_card_form.expiration_date_year}}
-                        </div>
-                        <div class="form-group ">
-                            <label>Sicherheitscode</label>
-                            {{user_credit_card_form.security_code}}
-                        </div>
-
-
-                        <h2>Lastschrift</h2>
-                        <div class="form-group ">
-                            <label>Vorname</label>
-                            {{user_debit_form.debit_first_name}}
-                        </div>
-                        <div class="form-group ">
-                            <label>Nachname</label>
-                            {{user_debit_form.debit_last_name}}
-                        </div>
-                        <div class="form-group ">
-                            <label>IBAN</label>
-                            {{user_debit_form.iban}}
-                        </div>
-                        <div class="form-group ">
-                            <label>BIC</label>
-                            {{user_debit_form.bic}}
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="card col-md-5" style="margin:5px;width: fit-content;">
-                    <div style="margin:10px; width: fit-content;">
-
-                        <h2>Lieferadresse</h2>
-                        <div class="form-group ">
-                            <label>Straße</label>
-                            {{user_delivery_address_form.delivery_street}}
-                        </div>
-                        <div class="form-group ">
-                            <label>Hausnummer</label>
-                            {{user_delivery_address_form.delivery_house_number}}
-                        </div>
-                        <div class="form-group ">
-                            <label>Stadt</label>
-                            {{user_delivery_address_form.delivery_city}}
-                        </div>
-                        <div class="form-group ">
-                            <label>PLZ</label>
-                            {{user_delivery_address_form.delivery_plz}}
-                        </div>
-
-
-                        <h2>Rechnungsadresse</h2>
-                        <div class="form-group ">
-                            <label>Straße</label>
-                            {{user_payment_address_form.payment_street}}
-                        </div>
-                        <div class="form-group ">
-                            <label>Hausnummer</label>
-                            {{user_payment_address_form.payment_house_number}}
-                        </div>
-                        <div class="form-group ">
-                            <label>Stadt</label>
-                            {{user_payment_address_form.payment_city}}
-                        </div>
-                        <div class="form-group ">
-                            <label>PLZ</label>
-                            {{user_payment_address_form.payment_plz}}
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </section>
 <!-- ========================= SECTION CONTENT END// ========================= -->
