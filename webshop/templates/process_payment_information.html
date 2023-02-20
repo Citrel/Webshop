@@ -7,86 +7,100 @@
 
 
 {% block content %}
-<div class="container">
-    <aside class="col-lg-9">
-        <article class="accordion" id="accordion_pay">
-            <div class="card">
+<div class="container" style="margin-top: 20px; margin-bottom: 20px;" >
+    <div class="row" style="justify-content: center;">
+        <aside class="col-lg-9">
+            <article class="accordion" id="accordion_pay">
+                <div class="card">
+                    <header class="card-header">
+                        <img src={% static './images/misc/payment-paypal.png' %} class="float-right" height="24"> 
+                        <label class="form-check collapsed" data-toggle="collapse" data-target="#pay_paynet">
+                            <input class="form-check-input" name="payment-option" checked type="radio" value="option2">
+                            <h6 class="form-check-label"> 
+                                Paypal 
+                            </h6>
+                        </label>
+                    </header>
+                    <div id="pay_paynet" class="collapse show" data-parent="#accordion_pay">
+                    <div class="card-body">
+                        <p class="alert alert-success">Verbinde dich mit deinem PayPal Account. Du wirst an PayPal weitergeleitet, um deine Informationen zu bestätigen.</p>
+                        <p class="text-center">
+                            <a href="#"><img src={% static './images/misc/btn-paypal.png' %} height="32"></a>
+                            <br><br>
+                        </p>
+                    </div> <!-- card body .// -->
+                    </div> <!-- collapse .// -->
+                </div> <!-- card.// -->
+                <div class="card">
                 <header class="card-header">
-                    <img src="./images/misc/payment-paypal.png" class="float-right" height="24"> 
-                    <label class="form-check collapsed" data-toggle="collapse" data-target="#pay_paynet">
-                        <input class="form-check-input" name="payment-option" checked type="radio" value="option2">
-                        <h6 class="form-check-label"> 
-                            Paypal 
-                        </h6>
+                    <img src={% static './images/misc/payment-card.png' %} class="float-right" height="24">  
+                    <label class="form-check" data-toggle="collapse" data-target="#pay_payme">
+                        <input class="form-check-input" name="payment-option" type="radio" value="option2">
+                        <h6 class="form-check-label"> Kreditkarte </h6>
                     </label>
                 </header>
-                <div id="pay_paynet" class="collapse show" data-parent="#accordion_pay">
-                <div class="card-body">
-                    <p class="alert alert-success">Verbinde dich mit deinem PayPal Account. Du wirst an PayPal weitergeleitet, um deine Informationen zu bestätigen.</p>
-                    <p class="text-center">
-                        <a href="#"><img src="./images/misc/btn-paypal.png" height="32"></a>
-                        <br><br>
-                    </p>
-                </div> <!-- card body .// -->
+                <div id="pay_payme" class="collapse" data-parent="#accordion_pay">
+                    <div class="card-body">
+                        <p class="alert alert-success">Bitte füge hier deine Zahlungsinformationen ein und bestätige sie.</p>
+                        <form class="form-inline">
+                            <input type="text" class="form-control mr-2" placeholder="xxxx-xxxx-xxxx-xxxx" name="">
+                            <input type="text" class="form-control mr-2" style="width: 100px"  placeholder="dd/yy" name="">
+                            <input type="number" maxlength="3" class="form-control mr-2"  style="width: 100px"  placeholder="cvc" name="">
+                            <button class="btn btn btn-success">Bestätigen</button>
+                        </form>
+                        <br>
+                    </div> <!-- card body .// -->
                 </div> <!-- collapse .// -->
-            </div> <!-- card.// -->
-            <div class="card">
-            <header class="card-header">
-                <img src="./images/misc/payment-card.png" class="float-right" height="24">  
-                <label class="form-check" data-toggle="collapse" data-target="#pay_payme">
-                    <input class="form-check-input" name="payment-option" type="radio" value="option2">
-                    <h6 class="form-check-label"> Kreditkarte </h6>
-                </label>
-            </header>
-            <div id="pay_payme" class="collapse" data-parent="#accordion_pay">
-                <div class="card-body">
-                    <p class="alert alert-success">Bitte füge hier deine Zahlungsinformationen ein und bestätige sie.</p>
-                    <form class="form-inline">
-                        <input type="text" class="form-control mr-2" placeholder="xxxx-xxxx-xxxx-xxxx" name="">
-                        <input type="text" class="form-control mr-2" style="width: 100px"  placeholder="dd/yy" name="">
-                        <input type="number" maxlength="3" class="form-control mr-2"  style="width: 100px"  placeholder="cvc" name="">
-                        <button class="btn btn btn-success">Bestätigen</button>
-                    </form>
-                </div> <!-- card body .// -->
-            </div> <!-- collapse .// -->
-            </div> <!-- card.// -->
-            <header class="card-header">
-                <img src="./images/misc/payment-card.png" class="float-right" height="24">  
-                <label class="form-check" data-toggle="collapse" data-target="#pay_payme">
-                    <input class="form-check-input" name="payment-option" type="radio" value="option2">
-                    <h6 class="form-check-label"> Lastschrift </h6>
-                </label>
-            </header>
-            <div id="pay_payme" class="collapse" data-parent="#accordion_pay">
-                <div class="card-body">
-                    <p class="alert alert-success">Bitte füge hier deine Zahlungsinformationen ein und bestätige sie.</p>
-                    <form class="form-inline">
-                        <input type="text" class="form-control mr-2" placeholder="xxxx-xxxx-xxxx-xxxx" name="">
-                        <input type="text" class="form-control mr-2" style="width: 100px"  placeholder="dd/yy" name="">
-                        <input type="number" maxlength="3" class="form-control mr-2"  style="width: 100px"  placeholder="cvc" name="">
-                        <button class="btn btn btn-success">Bestätigen</button>
-                    </form>
-                </div> <!-- card body .// -->
-            </div> <!-- collapse .// -->
-            </div> <!-- card.// -->
-            
-        </article> 
-    </aside>
-    <aside class="col-lg-9">
-        <div class="card">
-            <div class="card-body">
-                <dl class="dlist-align">
-                    <dt>Gesamtpreis inkl. MwSt:</dt>
-                    <dd class="text-right">{{ payment_sum|floatformat:2 }}</dd>
-                </dl>
-                <hr>
-                <p class="text-center mb-3">
-                    <img src="./images/misc/payments.png" height="26">
-                </p>
-                <a href="./place-order.html" class="btn btn-primary btn-block"> Jetzt kaufen </a>
+                </div> <!-- card.// -->
+                <div class="card">
+                    <header class="card-header">
+                        <img src={% static './images/misc/payment-card-debit.png' %} class="float-right" height="24">  
+                        <label class="form-check" data-toggle="collapse" data-target="#pay_payla">
+                            <input class="form-check-input" name="payment-option" type="radio" value="option3">
+                            <h6 class="form-check-label"> Lastschrift </h6>
+                        </label>
+                    </header>
+                    <div id="pay_payla" class="collapse" data-parent="#accordion_pay">
+                        <div class="card-body">
+                            <p class="alert alert-success">Bitte füge hier deine Zahlungsinformationen ein und bestätige sie.</p>
+                            <form class="form-inline">
+                                <input type="text" class="form-control mr-2" placeholder="xxxx-xxxx-xxxx-xxxx" name="">
+                                <input type="text" class="form-control mr-2" style="width: 100px"  placeholder="dd/yy" name="">
+                                <input type="number" maxlength="3" class="form-control mr-2"  style="width: 100px"  placeholder="cvc" name="">
+                                <button class="btn btn btn-success">Bestätigen</button>
+                            </form>
+                            <br>
+                        </div> <!-- card body .// -->
+                    </div> <!-- collapse .// -->
+                    </div> <!-- card.// -->
                 
-            </div> <!-- card-body.// -->
-        </div> <!-- card.// -->
-    </aside>
+            </article> 
+        </aside>
+
+        <aside >
+            <div class="card">
+                <div class="card-body">
+                    <dl class="dlist-align">
+                        <dt>Gesamtpreis inkl. MwSt:</dt>
+                        <dd class="text-right">{{ payment_sum|floatformat:2 }}</dd>
+                    </dl>
+                    <hr>
+                    <p class="text-center mb-3">
+                        <img src={% static './images/misc/payments.png' %} height="26">
+                    </p>
+                    <a href={% url 'checkout' %} class="btn btn-primary btn-block"> Jetzt kaufen </a>
+                    
+                </div> <!-- card-body.// -->
+            </div> <!-- card.// -->
+        </aside>
+
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 </div>
 {% endblock %}
