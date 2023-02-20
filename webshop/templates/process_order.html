@@ -147,14 +147,14 @@
                     <hr>
                     <div class="row">
                         {% for p in product %}
-                            <div class="col-md-8">
-                                <figure class="itemside  col-md-8">
+                            <div style="width:100%;">
+                                <figure class="itemside" style="width:100%;">
                                     <div class="aside"><img src={% static p.1.product_image_path %} class="border img-sm" style="border-radius: 20%;"></div>
-                                    <figcaption class="info">
+                                    <figcaption class="info" style="width:100%;">
                                         <b style="color: gray;"> {{p.1.product_name}} </b>
                                         <br>
-                                        <p> {{p.2|floatformat:2 }} €</p>
-                                        <p> {{p.0}}x = {{p.1.price|floatformat:2 }} €</p>
+                                        <p style="text-align: right;"> {{p.2|floatformat:2 }} €</p>
+                                        <p style="text-align: right;"> {{p.0}}x = {{p.1.price|floatformat:2 }} €</p>
                                     </figcaption>
                                 </figure>
                                 <br>
@@ -164,11 +164,12 @@
                     </div> <!-- card-body.// -->
                     <div class="container">
                         <hr>
-                        <b>Gesamtsumme: {{ payment_sum }} €</b>
+                        <b>Gesamtsumme inkl. MwSt.: </b><b style="float:right;"> {{ payment_sum }} €</b>
+                        <br>
                         <br>
                     </div>
             </article> <!-- card.// -->
-            <a href={% url 'choose_payment' %} class="btn btn-primary btn-block">Jetzt bestellen</a>
+            <a href={% url 'payment_view' %} class="btn btn-primary btn-block">Jetzt bestellen</a>
         </main>
     </div>
 </div>
