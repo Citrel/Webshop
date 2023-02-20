@@ -253,14 +253,14 @@ class Order_Views:
             user_credit_card_form = User_Credit_CardForm(request.POST, instance=credit_card)
             user_paypal_form = User_PayPalForm(request.POST, instance=paypal)
             user_debit_form = User_DebitForm(request.POST, instance=debit)
-        if  user_delivery_address_form.is_valid() and user_payment_address_form.is_valid() and user_credit_card_form.is_valid() and user_paypal_form.is_valid() and user_debit_form.is_valid():
-            user_delivery_address_form.save()
-            user_payment_address_form.save()
-            user_credit_card_form.save()
-            user_paypal_form.save()
-            user_debit_form.save()
-            messages.success(request, 'Daten wurden aktualisiert')
-            return redirect('order')
+            if  user_delivery_address_form.is_valid() and user_payment_address_form.is_valid() and user_credit_card_form.is_valid() and user_paypal_form.is_valid() and user_debit_form.is_valid():
+                user_delivery_address_form.save()
+                user_payment_address_form.save()
+                user_credit_card_form.save()
+                user_paypal_form.save()
+                user_debit_form.save()
+                messages.success(request, 'Daten wurden aktualisiert')
+                return redirect('order')
         else:
             profile_form = ProfileForm(instance=request.user)
             user_delivery_address_form = User_Delivery_AddressForm(instance=delivery_address)
