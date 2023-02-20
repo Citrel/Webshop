@@ -30,8 +30,7 @@
         }
 
         .products {
-            margin-top: 20px;
-            text-align: center;
+           text-align: center;
         }
     </style>
 </head>
@@ -42,31 +41,39 @@
             <h1>Test Checkout</h1>
             <pre>Sehr geehrter Kunde,
 
-vielen Dank für Ihre Bestellung bei der Enten Company! Wir freuen uns, dass Sie sich für unsere Produkte entschieden haben
+vielen Dank fÃ¼r Ihre Bestellung bei der Enten Company! Wir freuen uns, dass Sie sich fÃ¼r unsere Produkte entschieden haben
 und sind uns sicher, dass Sie mit Ihrer Bestellung zufrieden sein werden.
 
-Ihre Bestellung wird von unserem Team sorgfältig verpackt und an Sie verschickt. Wir bemühen uns, den Versand so schnell
-wie möglich abzuwickeln, damit Sie Ihre Produkte bald in den Händen halten können.
+Ihre Bestellung wird von unserem Team sorgfÃ¤ltig verpackt und an Sie verschickt. Wir bemÃ¼hen uns, den Versand so schnell
+wie mÃ¶glich abzuwickeln, damit Sie Ihre Produkte bald in den HÃ¤nden halten kÃ¶nnen.
 
-Falls Sie während des Versands oder bei der Lieferung Fragen haben, können Sie sich jederzeit an unseren Kundenservice wenden.
+Falls Sie wÃ¤hrend des Versands oder bei der Lieferung Fragen haben, kÃ¶nnen Sie sich jederzeit an unseren Kundenservice wenden.
 
-Wir stehen Ihnen gerne zur Verfügung und helfen Ihnen weiter.
+Wir stehen Ihnen gerne zur VerfÃ¼gung und helfen Ihnen weiter.
 
-Nochmals vielen Dank für Ihre Bestellung bei der Enten Company. Wir hoffen, dass Sie in Zukunft erneut bei uns einkaufen werden.
+Nochmals vielen Dank fÃ¼r Ihre Bestellung bei der Enten Company. Wir hoffen, dass Sie in Zukunft erneut bei uns einkaufen werden.
 
-Mit freundlichen Grüßen,
+Mit freundlichen GrÃ¼ÃŸen,
 Das Team der Enten Company
                  </pre>
-            <!--  Hier tolle weitere Produkte - aber keine Ahnung wie
-                <div class="products">
-          <h2>Weitere Produkte:</h2>
-
-      </div>
-                -->
         </div>
         <div class="image">
             <img src={% static '/images/checkout.png' %}>
         </div>
     </div>
+    <div class="products">
+            {% for product in bestseller %}
+            <div class="col-md-3">
+                <div class="card card-product-grid">
+                    <a href={% url 'details' product.Product_ID %} class="img-wrap"> <img src={% static product.product_image_path %}> </a>
+                    <figcaption class="info-wrap">
+                        <a href={% url 'details' product.Product_ID %} class="title">{{ product.product_name }}</a>
+                        <div class="price mt-1">{{ product.price|floatformat:2 }}â‚¬</div> <!-- price-wrap.// -->
+                    </figcaption>
+                </div>
+            </div> <!-- col.// -->
+            {% endfor %}
+        </div> <!-- row.// -->
+    <!--Text Ã¼ber unsere tollen Bestseller-->
 </body>
 {% endblock %}
