@@ -361,17 +361,17 @@ class Order_Views:
 
             if int(pk) == your_credit_card.pk:
                 print("Kredit")
-                credit_payment = Payment_Method.objects.create(method_name = 'Kredit Karte', method_fee = 0.02, user = request.user.id)
+                credit_payment = Payment_Method.objects.create(method_name = 'Kredit Karte', method_fee = 0.02, user_id = request.user.id)
                 credit_payment.save()
             
             elif int(pk) == your_debit_card.pk:
                 print("Debit")
-                debit_payment = Payment_Method.objects.create(method_name = 'Lastschrift', method_fee = 0.02, user = request.user.id)
+                debit_payment = Payment_Method.objects.create(method_name = 'Lastschrift', method_fee = 0.02, user_id = request.user.id)
                 debit_payment.save()
         
             elif int(pk) == your_paypal.pk:
                 print("Paypal")
-                paypal_payment = Payment_Method.objects.create(method_name = 'Paypal', method_fee = 0.0249, user = request.user.id)
+                paypal_payment = Payment_Method.objects.create(method_name = 'Paypal', method_fee = 0.0249, user_id = request.user.id)
                 paypal_payment.save()
         
         categories = Category.objects.all()
@@ -381,18 +381,18 @@ class Order_Views:
         delivery_adress = User_Delivery_Address.objects.get(user = request.user.id)
         payment_adress = User_Payment_Address.objects.get(user = request.user.id)
         
-        new_order = Order.objects.create(user = request.user.id, payment_method_id = payment_info.Payment_Method_ID,payment_adress_id = payment_adress.id , payed = False, delivery = delivery_adress.id)
+        new_order = Order.objects.create(user_id = request.user.id, payment_method_id_id = payment_info.Payment_Method_ID, payment_address_id_id = payment_adress.pk , payed = False, delivery_id = delivery_adress.pk)
         new_order.save()
         
         order_items = Cart.objects.filter(Customer_ID = request.user.id)
         
         for order_item in order_items:
 
-            new_entry = Products_per_Order.objects.create(Order_ID = new_order.Order_ID, Product_ID = order_item.product_key, order_amount = order_item.cart_amount, product_price_at_order_time = order_item.product_key.price)
+            new_entry = Products_per_Order.objects.create(Order_ID_id = new_order.Order_ID, Product_ID = order_item.product_key, order_amount = order_item.cart_amount, product_price_at_order_time = order_item.product_key.price)
             new_entry.save()
             
         order_items.delete()
-        bestseller = Product.objects.filter(selected = True)
+        bestseller = Product.objects.filter(Selected = True)
         
         return render(request, 'order_complete.html', {'cart_item_count' : cart_item_count, 'categories' : categories, 'bestseller' : bestseller})
         
