@@ -336,18 +336,25 @@ class Order_Views:
         
         if Payment_Method.objects.filter(user = request.user.id).exists() == True:
             print("True")
+            print(pk)
+            print(type(pk))
+            print(your_paypal.pk)
+            print(type(your_paypal.pk))
             
             if int(pk) == your_credit_card.pk:
+                print("already credit")
                 credit_payment = Payment_Method.objects.get(user = request.user.id)
                 credit_payment.method_name = 'Kredit Karte'
                 credit_payment.method_fee = 0.02
             
             elif int(pk) == your_debit_card.pk:
+                print("already debit")
                 debit_payment = Payment_Method.objects.get(user = request.user.id)
                 debit_payment.method_name = 'Lastschrift'
                 debit_payment.method_fee = 0.02
         
             elif int(pk) == your_paypal.pk:
+                print("already paypal")
                 paypal_payment = Payment_Method.objects.get(user = request.user.id)
                 paypal_payment.method_name = 'Paypal'
                 paypal_payment.method_fee = 0.0249
