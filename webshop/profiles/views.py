@@ -218,7 +218,7 @@ def reset_password_validate(request, uidb64, token):
 def reset_password(request):
     if request.method == 'POST':
         password = request.POST['password']
-        confirm_password = request.POST['condirm_password']
+        confirm_password = request.POST['confirm_password']
 
         if password == confirm_password:
             uid = request.session.get('uid')
@@ -226,6 +226,7 @@ def reset_password(request):
             user.set_password(password)
             user.save()
             messages.success(request, 'Passwort wurde zurückgesetzt.')
+            return redirect('login')
         else:
             messages.error(request, 'Passwörter sind nicht identisch.')
             return redirect('reset_password')

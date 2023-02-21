@@ -7,7 +7,7 @@ from django.db.models import Q, Sum, Count
 from django import template
 from profiles.models import *
 from profiles.forms import *
-
+from django.contrib.auth.decorators import login_required
 
 
 class Homepage:
@@ -34,7 +34,7 @@ class Homepage:
         return render (request, 'index.html', {'bestseller' : bestseller, 'products' : products, 'categories' : categories, 'cart_item_count' : cart_item_count,
                                                       'categories_with_items' : categories_with_items, 'product_items' : product_items})
         
-        
+    @login_required(login_url='login')   
     def show_liked_products(request):
         
         categories = Category.objects.all()
@@ -47,6 +47,7 @@ class Homepage:
         
         return render(request, 'liked_products.html', {'cart_item_count' : cart_item_count, 'categories' : categories, 'liked_products' : liked_products})
     
+    @login_required(login_url='login')
     def show_order_history(request):
         
         categories = Category.objects.all()
@@ -90,6 +91,8 @@ class Article():
         
         return render(request, 'product_detail.html',{'product' : product, 'likes' : likes, 'is_liked' : is_liked , 'cart_item_count' : cart_item_count, 'categories' : categories})
     
+    
+    @login_required(login_url='login')
     def like_product(request, pk):
         
         
@@ -108,7 +111,7 @@ class Article():
             return redirect('details', pk = pk)
         return render(request,'product_detail.html')
     
-    
+    @login_required(login_url='login')
     def add_to_cart(request, pk):
         
         if request.method == 'POST':
@@ -167,7 +170,8 @@ class Search:
             
            
 class Cart_View:
-
+    
+    @login_required(login_url='login')
     def show_cart(request):
         
         categories = Category.objects.all()
@@ -237,6 +241,7 @@ class Cart_View:
     
 class Order_Views:
     
+    @login_required(login_url='login')
     def show_process_order(request):
         
         categories = Category.objects.all()
@@ -280,7 +285,7 @@ class Order_Views:
             
         return render(request, 'process_order.html', context)
     
-    
+    @login_required(login_url='login')
     def show_payment_info(request):
         
         credit_card = get_object_or_404(User_Credit_Card, user=request.user)
@@ -325,7 +330,7 @@ class Order_Views:
         
         
    
-    
+    @login_required(login_url='login')
     def checkout(request, pk):
         
         

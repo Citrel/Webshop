@@ -9,7 +9,7 @@
 {% block content %}
 <div class="container">
 
-    {% for order in order_history %}
+    {% for order in orders_with_items %}
     <div class="card">
         <details>
             <summary>
