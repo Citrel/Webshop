@@ -127,9 +127,9 @@ class Article():
                 existing_entry.cart_amount += amount
                 existing_entry.save()
             
-            return redirect('cart')
+            return redirect('index')
         
-        return render(request, 'cart.html')
+        return render(request, 'index.html')
     
     
     
