@@ -328,63 +328,11 @@ class Order_Views:
     
     def checkout(request, pk):
         
-        your_credit_card = User_Credit_Card.objects.get(user = request.user.id)
-        
-        your_debit_card = User_Debit.objects.get(user = request.user.id)
-        
-        your_paypal = User_PayPal.objects.get(user = request.user.id)
-        
-        if Payment_Method.objects.filter(user = request.user.id).exists() == True:
-            print("True")
-            print(pk)
-            print(type(pk))
-            print(your_paypal.pk)
-            print(type(your_paypal.pk))
-            
-            if int(pk) == your_credit_card.pk:
-                print("already credit")
-                credit_payment = Payment_Method.objects.get(user = request.user.id)
-                credit_payment.method_name = 'Kredit Karte'
-                credit_payment.method_fee = 0.02
-            
-            elif int(pk) == your_debit_card.pk:
-                print("already debit")
-                debit_payment = Payment_Method.objects.get(user = request.user.id)
-                debit_payment.method_name = 'Lastschrift'
-                debit_payment.method_fee = 0.02
-        
-            elif int(pk) == your_paypal.pk:
-                print("already paypal")
-                paypal_payment = Payment_Method.objects.get(user = request.user.id)
-                paypal_payment.method_name = 'Paypal'
-                paypal_payment.method_fee = 0.0249
-            
-        else:
-            print("False")
-            print(pk)
-            print(type(pk))
-            print(your_paypal.pk)
-            print(type(your_paypal.pk))
-
-            if int(pk) == your_credit_card.pk:
-                print("Kredit")
-                credit_payment = Payment_Method.objects.create(method_name = 'Kredit Karte', method_fee = 0.02, user_id = request.user.id)
-                credit_payment.save()
-            
-            elif int(pk) == your_debit_card.pk:
-                print("Debit")
-                debit_payment = Payment_Method.objects.create(method_name = 'Lastschrift', method_fee = 0.02, user_id = request.user.id)
-                debit_payment.save()
-        
-            elif int(pk) == your_paypal.pk:
-                print("Paypal")
-                paypal_payment = Payment_Method.objects.create(method_name = 'Paypal', method_fee = 0.0249, user_id = request.user.id)
-                paypal_payment.save()
         
         categories = Category.objects.all()
         cart_item_count = Cart.objects.filter(Customer_ID=request.user.id).count()
-        
-        payment_info = Payment_Method.objects.get(user = request.user.id)
+        pk=int(pk)
+        payment_info = Payment_Method.objects.get(Payment_Method_ID = pk)
         delivery_adress = User_Delivery_Address.objects.get(user = request.user.id)
         payment_adress = User_Payment_Address.objects.get(user = request.user.id)
         
