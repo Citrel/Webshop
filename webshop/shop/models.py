@@ -12,7 +12,6 @@ class Category(models.Model):
 
 class Payment_Method(models.Model):
     Payment_Method_ID = models.BigAutoField(primary_key=True)
-    user = models.ForeignKey(Profile, on_delete = models.CASCADE, default = None)
     method_name = models.CharField(max_length=100)
     method_fee = models.FloatField()
 
