@@ -335,33 +335,42 @@ class Order_Views:
         your_paypal = User_PayPal.objects.get(user = request.user.id)
         
         if Payment_Method.objects.filter(user = request.user.id).exists() == True:
+            print("True")
             
-            if pk == your_credit_card.id:
+            if int(pk) == your_credit_card.pk:
                 credit_payment = Payment_Method.objects.get(user = request.user.id)
                 credit_payment.method_name = 'Kredit Karte'
                 credit_payment.method_fee = 0.02
             
-            elif pk == your_debit_card.id:
+            elif int(pk) == your_debit_card.pk:
                 debit_payment = Payment_Method.objects.get(user = request.user.id)
                 debit_payment.method_name = 'Lastschrift'
                 debit_payment.method_fee = 0.02
         
-            elif pk == your_paypal.id:
+            elif int(pk) == your_paypal.pk:
                 paypal_payment = Payment_Method.objects.get(user = request.user.id)
                 paypal_payment.method_name = 'Paypal'
                 paypal_payment.method_fee = 0.0249
             
         else:
-            
-            if pk == your_credit_card.id:
+            print("False")
+            print(pk)
+            print(type(pk))
+            print(your_paypal.pk)
+            print(type(your_paypal.pk))
+
+            if int(pk) == your_credit_card.pk:
+                print("Kredit")
                 credit_payment = Payment_Method.objects.create(method_name = 'Kredit Karte', method_fee = 0.02, user = request.user.id)
                 credit_payment.save()
             
-            elif pk == your_debit_card.id:
+            elif int(pk) == your_debit_card.pk:
+                print("Debit")
                 debit_payment = Payment_Method.objects.create(method_name = 'Lastschrift', method_fee = 0.02, user = request.user.id)
                 debit_payment.save()
         
-            elif pk == your_paypal.id:
+            elif int(pk) == your_paypal.pk:
+                print("Paypal")
                 paypal_payment = Payment_Method.objects.create(method_name = 'Paypal', method_fee = 0.0249, user = request.user.id)
                 paypal_payment.save()
         
