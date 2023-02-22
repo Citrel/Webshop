@@ -5,8 +5,8 @@
 
 
 {% block content %}
-<body>
-    <div class="container" style="display: flex; flex-direction: row; align-items: center;">
+
+    <div class="container" style="display: flex; flex-direction: row;">
         <div class="text">
             <h1>Test Checkout</h1>
             <pre>Sehr geehrter Kunde,
@@ -27,24 +27,34 @@ Mit freundlichen Grüßen,
 Das Team der Enten Company
              </pre>
         </div>
-            <aside style="flex-basis:50%; text-align: center;">
-                <img src={% static '/images/checkout.png' %}>
-            </aside>
+        <aside style="flex-basis:50%; text-align: center;">
+            <img src={% static '/images/checkout.png' %}>
+        </aside>
     </div>
-    
-    <div class="products">
-        {% for product in bestseller %}
-        <div class="col-md-3">
-            <div class="card card-product-grid">
-                <a href={% url 'details' product.Product_ID %} class="img-wrap"> <img src={% static product.product_image_path %}> </a>
-                <figcaption class="info-wrap">
-                    <a href={% url 'details' product.Product_ID %} class="title">{{ product.product_name }}</a>
-                    <div class="price mt-1">{{ product.price|floatformat:2 }}€</div> <!-- price-wrap.// -->
-                </figcaption>
+
+    <section class="section-name padding-y-sm">
+        <div class="container">
+            <header class="section-heading">
+                <h3 class="section-title">Unsere Empfehlung </h3>
+                <small>Das sind die Lieblingsprodukte des Shop-Teams. Sie bestechen durch einzigartigen Charakter und Charme.</small>
+                <hr>
+            </header><!-- sect-heading -->
+            <div class="row">
+                {% for product in bestseller %}
+                <div class="col-md-3">
+                    <div class="card card-product-grid">
+                        <a href={% url 'details' product.Product_ID %} class="img-wrap"> <img src={% static product.product_image_path %}> </a>
+                        <figcaption class="info-wrap">
+                            <a href={% url 'details' product.Product_ID %} class="title">{{ product.product_name }}</a>
+                            <div class="price mt-1">{{ product.price|floatformat:2 }}€</div> <!-- price-wrap.// -->
+                        </figcaption>
+                    </div>
+                </div> <!-- col.// -->
+                {% endfor %}
+            </div> <!-- row.// -->
+            <!--evtl Text über unsere tollen Bestseller-->
             </div>
-        </div> <!-- col.// -->
-        {% endfor %}
-    </div> <!-- row.// -->
-    <!--evtl Text über unsere tollen Bestseller-->
-</body>
+    </section>
+    <!-- ========================= SECTION  END// ========================= -->
+
     {% endblock %}
