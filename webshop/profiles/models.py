@@ -72,7 +72,7 @@ class User_Delivery_Address(models.Model):
     delivery_street = models.CharField(blank=True, max_length=100)
     delivery_house_number = models.CharField(blank=True, max_length=5)
     delivery_city = models.CharField(blank=True, max_length=100)
-    delivery_plz = models.CharField(blank=True, max_length=10)
+    delivery_zip_code = models.CharField(blank=True, max_length=10)
 
     def __str__(self):
         return self.user.first_name
@@ -83,7 +83,7 @@ class User_Payment_Address(models.Model):
     payment_street = models.CharField(blank=True, max_length=100)
     payment_house_number = models.CharField(blank=True, max_length=5)
     payment_city = models.CharField(blank=True, max_length=100)
-    payment_plz = models.CharField(blank=True, max_length=10)
+    payment_zip_code = models.CharField(blank=True, max_length=10)
 
     def __str__(self):
         return self.user.first_name
