@@ -18,12 +18,12 @@ class ProfileAdmin(UserAdmin):
 
 class User_Delivery_AddressAdmin(admin.ModelAdmin):
     list_display = ('user', 'delivery_street',
-                    'delivery_house_number', 'delivery_city', 'delivery_plz')
+                    'delivery_house_number', 'delivery_city', 'delivery_zip_code')
 
 
 class User_Payment_AddressAdmin(admin.ModelAdmin):
     list_display = ('user', 'payment_street',
-                    'payment_house_number', 'payment_city', 'payment_plz')
+                    'payment_house_number', 'payment_city', 'payment_zip_code')
 
 
 class User_Credit_CardAdmin(admin.ModelAdmin):

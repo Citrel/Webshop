@@ -49,7 +49,7 @@ class User_Delivery_AddressForm(forms.ModelForm):
     class Meta:
         model = User_Delivery_Address
         fields = ('delivery_street', 'delivery_house_number',
-                  'delivery_city', 'delivery_plz')
+                  'delivery_city', 'delivery_zip_code')
 
     def __init__(self, *args, **kwargs):
         super(User_Delivery_AddressForm, self).__init__(*args, **kwargs)
@@ -61,7 +61,7 @@ class User_Payment_AddressForm(forms.ModelForm):
     class Meta:
         model = User_Payment_Address
         fields = ('payment_street', 'payment_house_number',
-                  'payment_city', 'payment_plz')
+                  'payment_city', 'payment_zip_code')
 
     def __init__(self, *args, **kwargs):
         super(User_Payment_AddressForm, self).__init__(*args, **kwargs)
