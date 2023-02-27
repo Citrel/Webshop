@@ -29,6 +29,7 @@ jobs:
       working-directory: ./webshop
       run: |
         python manage.py test
+        python manage.py check
 
   flake8-lint:
 
