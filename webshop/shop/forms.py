@@ -33,7 +33,7 @@ class Debitcard_Payment_Form(forms.Form):
 
 class Billing_Address_Form(forms.Form):
     billing_address_plz = forms.TextInput(attrs={
-                                          'placeholder': ' {{ billing_address.plz }} '})
+                                          'placeholder': ' {{ billing_address.zip_code }} '})
     billing_address_city = forms.TextInput(
         attrs={'placeholder': ' {{ billing_address.city }} '})
     billing_address_street = forms.TextInput(
@@ -44,7 +44,7 @@ class Billing_Address_Form(forms.Form):
 
 class Payment_Address_Form(forms.Form):
     payment_address_plz = forms.TextInput(attrs={
-                                          'placeholder': ' {{ payment_address.plz }} '})
+                                          'placeholder': ' {{ payment_address.zip_code }} '})
     payment_address_city = forms.TextInput(
         attrs={'placeholder': ' {{ payment_address.city }} '})
     payment_address_street = forms.TextInput(

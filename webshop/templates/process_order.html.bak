@@ -51,7 +51,7 @@
                         </div>
                         <div class="form-group ">
                             <label>PLZ</label>
-                            {{user_delivery_address_form.delivery_zip_code}}
+                            {{user_delivery_address_form.delivery_plz}}
                         </div>
 
 
@@ -70,7 +70,7 @@
                         </div>
                         <div class="form-group ">
                             <label>PLZ</label>
-                            {{user_payment_address_form.payment_zip_code}}
+                            {{user_payment_address_form.payment_plz}}
                         </div>
                     </div>
                 </aside>

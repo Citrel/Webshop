@@ -246,7 +246,7 @@ class Order_Views:
         if request.method == 'POST':
             user_delivery_address_form = User_Delivery_AddressForm(request.POST, instance=delivery_address)
             user_payment_address_form = User_Payment_AddressForm(request.POST, instance=payment_address)
-            if  user_delivery_address_form.is_valid() and user_payment_address_form.is_valid() and delivery_address.delivery_street != '' and delivery_address.delivery_house_number != '' and delivery_address.delivery_city != '' and delivery_address.delivery_plz != '':
+            if  user_delivery_address_form.is_valid() and user_payment_address_form.is_valid():
                 user_delivery_address_form.save()
                 user_payment_address_form.save()
                 messages.success(request, 'Daten wurden aktualisiert')
