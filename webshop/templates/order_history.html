@@ -32,10 +32,10 @@
                                 <p>{{ order.0.Order_ID }}</p>
                             </td>
                             <td>
-                                <p>{{ order.1.product_price_at_order_time|floatformat:2 }}</p>
+                                <p>{{ order.2|floatformat:2 }}</p>
                             </td>
                             <td>
-                                {% if order.0.payed: %}
+                                {% if order.0.payed %}
                                     <p>ja</p>
                                 {% else %}
                                     <p>nein</p>
@@ -52,13 +52,13 @@
 
             </summary>
             <div class="row">
-                {% for product in order.1.Product_ID %}
+                {% for product in order.1 %}
                 <div class="col-md-3">
                     <div class="card card-product-grid">
-                        <a href={% url 'details' product.0.Product_ID %} class="img-wrap"> <img src={% static product.0.product_image_path %}> </a>
+                        <a href={% url 'details' product.Product_ID %} class="img-wrap"> <img src={% static product.product_image_path %}> </a>
                         <figcaption class="info-wrap">
-                            <a href={% url 'details' product.0.Product_ID %} class="title">{{ product.0.product_name }}</a>
-                            <div class="price mt-1">{{ product.0.price|floatformat:2 }}€</div> <!-- price-wrap.// -->
+                            <a href={% url 'details' product.Product_ID %} class="title">{{ product.product_name }}</a>
+                            <div class="price mt-1">{{ product.price|floatformat:2 }}€</div> <!-- price-wrap.// -->
                         </figcaption>
                     </div>
                 </div> <!-- col.// -->

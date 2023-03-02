@@ -36,9 +36,6 @@
                             <br>
                             <br>
                             <a href="{% url 'forgot_password' %}" class="btn btn-outline-primary">Passwort ändern</a>
-							<br>
-							<br>
-							<a href={% url 'history' %}    class=„btn btn-primary-color“>Bestellungsverlauf</a>
                         </div>
                     </aside>
     

@@ -55,12 +55,18 @@ class Homepage:
         
         your_orders = Order.objects.filter(user = request.user.id)
         orders_with_products = []
+        products_in_order = []
+        price_total = 0
         
         for your_order in your_orders:
             
             order_products = Products_per_Order.objects.filter(Order_ID = your_order.Order_ID)
-            orders_with_products.append(your_order, order_products)
-        
+            for order_product in order_products:
+                products_in_order.append(Product.objects.get(Product_ID = order_product.Product_ID.Product_ID))
+                print(products_in_order)
+                price_total += order_product.product_price_at_order_time * order_product.order_amount
+                
+            orders_with_products.append([your_order, products_in_order, price_total])
         
         
         return render(request, 'order_history.html', {'cart_item_count' : cart_item_count, 'categories' : categories, 'orders_with_products' : orders_with_products})
