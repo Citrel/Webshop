@@ -78,15 +78,10 @@ class Article():
         
         product = get_object_or_404(Product, pk=pk)
         likes = Product_Likes.objects.filter(Product_ID = pk).count() 
-        likedProduct = Product.objects.get(Product_ID = pk)
         is_liked = False
         
         if request.user.is_authenticated:
-            created = Product_Likes.objects.filter(Customer_ID_id= request.user.id, Product_ID = likedProduct).exists()
-            if not created:
-                is_liked = False
-            else:
-                is_liked = True
+            is_liked = Product_Likes.objects.filter(Customer_ID_id= request.user.id, Product_ID = product).exists()
             
         
         return render(request, 'product_detail.html',{'product' : product, 'likes' : likes, 'is_liked' : is_liked , 'cart_item_count' : cart_item_count, 'categories' : categories})
@@ -99,7 +94,7 @@ class Article():
         if request.method == 'POST':
             likedProduct = Product.objects.get(Product_ID = pk)
         
-            liked, created = Product_Likes.objects.get_or_create(defaults={'Product_ID': likedProduct}, Customer_ID_id= request.user.id, Product_ID = likedProduct)
+            liked, created = Product_Likes.objects.get_or_create(Customer_ID_id= request.user.id, Product_ID = likedProduct)
         
         
             if not created:
@@ -108,8 +103,7 @@ class Article():
                 liked.save()
             
         
-            return redirect('details', pk = pk)
-        return render(request,'product_detail.html')
+        return redirect('details', pk = pk)
     
     @login_required(login_url='login')
     def add_to_cart(request, pk):
