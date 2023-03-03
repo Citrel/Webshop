@@ -86,7 +86,7 @@ def login(request):
         else:
             messages.error(request, 'Email oder Passwort ist falsch!')
             return redirect('login')
-    return render(request, 'profiles/login.html', {'categories' : categories, 'cart_item_count' : cart_item_count})
+    return render(request, 'profiles/login.html', {'categories': categories, 'cart_item_count': cart_item_count})
 
 
 @login_required(login_url='login')
@@ -98,7 +98,7 @@ def logout(request):
 
 @login_required(login_url='login')
 def myprofile(request):
-    
+
     categories = Category.objects.all()
     cart_item_count = Cart.objects.filter(Customer_ID=request.user.id).count()
     delivery_address = get_object_or_404(
@@ -146,8 +146,8 @@ def myprofile(request):
             instance=debit)
     context = {
         'profile_form': profile_form,
-        'categories' : categories,
-        'cart_item_count' : cart_item_count,
+        'categories': categories,
+        'cart_item_count': cart_item_count,
         'user_delivery_address_form': user_delivery_address_form,
         'user_payment_address_form': user_payment_address_form,
         'user_credit_card_form': user_credit_card_form,

@@ -5,6 +5,7 @@ class Search_Form(forms.Form):
     searched_word = forms.TextInput(
         attrs={'style': 'width:60%;', 'placeholder': 'Suchen'})
 
+
 class Change_Amount_Form(forms.Form):
     amount = forms.TextInput()
 
