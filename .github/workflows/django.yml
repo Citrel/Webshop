@@ -2,13 +2,12 @@ name: Django CI
 
 on:
   push:
-    branches: [ "codespace-citrel-cautious-space-bassoon-r47gxv66x9j2pg9r" ]
+    branches: ["codespace-citrel-cautious-space-bassoon-r47gxv66x9j2pg9r"]
   pull_request:
-    branches: [ "codespace-citrel-cautious-space-bassoon-r47gxv66x9j2pg9r" ]
+    branches: ["codespace-citrel-cautious-space-bassoon-r47gxv66x9j2pg9r"]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 4
@@ -16,35 +15,33 @@ jobs:
         python-version: [3.11]
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install Dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-    - name: Run Tests
-      working-directory: ./webshop
-      run: |
-        python manage.py test
-        python manage.py check
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run Tests
+        working-directory: ./webshop
+        run: |
+          python manage.py test
+          python manage.py check
 
   flake8-lint:
-
     runs-on: ubuntu-latest
     name: Lint
 
     steps:
-    - name: Check out source repository
-      uses: actions/checkout@v3
-    - name: Set up Python environment
-      uses: actions/setup-python@v4
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: flake8 lint
-      uses: py-actions/flake8@v2
-      with:
-        ignore: "E501"
-        ignore: "F405"
+      - name: Check out source repository
+        uses: actions/checkout@v3
+      - name: Set up Python environment
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: flake8 lint
+        uses: py-actions/flake8@v2
+        with:
+          ignore: "E501, F405"
