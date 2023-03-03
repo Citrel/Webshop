@@ -1,12 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse
 from django.contrib import messages
-from .models import *
-from .forms import *
-from django.db.models import Q, Sum, Count
-from django import template
-from profiles.models import *
-from profiles.forms import *
+from .models import Category, Payment_Method, Product, Order, Products_per_Order, Cart, Product_Likes
+from django.db.models import Q
+from profiles.models import User_Delivery_Address, User_Payment_Address, User_Credit_Card, User_PayPal, User_Debit
+from profiles.forms import ProfileForm, User_Delivery_AddressForm, User_Payment_AddressForm, User_Credit_CardForm, User_PayPalForm, User_DebitForm
 from django.contrib.auth.decorators import login_required
 
 
