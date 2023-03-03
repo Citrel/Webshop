@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .models import *
+from .models import Profile, User_Credit_Card, User_PayPal, User_Debit
 
 
 class UserTestCase(TestCase):
@@ -8,19 +8,6 @@ class UserTestCase(TestCase):
                                username="Tester", email="Tester@testmail.com",
                                phone_number="02171353244", is_admin=True,
                                is_active=True, is_staff=True, is_superadmin=True)
-
-# AFTER MIGRATION
-#    def test_user_delivery_address(self):
-#        address = User_Delivery_Address.objects.create(user=Profile.objects.get(username="Tester"),
-#                                                       delivery_street="TestStraße", delivery_house_number="99",
-#                                                       delivery_city="TestStadt", delivery_zip_code="53225")
-#        self.assertEqual(address.__str__(), "Testname")
-
-#    def test_user_payment_address(self):
-#        address = User_Payment_Address.objects.create(user=Profile.objects.get(username="Tester"),
-#                                                      delivery_street="ZahlStraße", delivery_house_number="99",
-#                                                      delivery_city="TestStadt", delivery_zip_code="53225")
-#        self.assertEqual(address.__str__(), "Testname")
 
     def test_user_credit_card(self):
         creditcard = User_Credit_Card.objects.create(user=Profile.objects.get(username="Tester"),

@@ -3,7 +3,7 @@ from .forms import RegistrationForm, ProfileForm, User_Delivery_AddressForm, Use
 from .models import Profile, User_Delivery_Address, User_Payment_Address, User_Credit_Card, User_PayPal, User_Debit
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
-from shop.models import *
+from shop.models import Category, Cart
 
 # VERIFICATION
 from django.contrib.sites.shortcuts import get_current_site
