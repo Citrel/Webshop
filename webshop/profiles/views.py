@@ -66,7 +66,7 @@ def register(request):
             to_email = email
             send_email = EmailMessage(mail_subject, message, to=[to_email])
             send_email.send()
-            return redirect('/profiles/login/?command=verification&email='+email)
+            return redirect('/profiles/login/?command=verification&email=' + email)
     else:
         form = RegistrationForm()
     return render(request, 'profiles/register.html', context={'form': form})
