@@ -19,7 +19,8 @@ from shop import views
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('entenzugriff/', admin.site.urls),
+    path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
     path('', views.Homepage.show_products, name='index'),
     path('search', views.Search.show_searched_products, name="searching"),
     path('liked', views.Homepage.show_liked_products, name='products_liked'),
